@@ -49,12 +49,24 @@
                 (div.mymy -> div인데 클래스가 mymy)
 
                 */
+
+            /* 요소의 초기화 
+            - 기존에 기본셋팅값중 마진/패딩 초기화 */
+            html,
+            body,
+            h1,
+            h2 {
+                margin: 0;
+                padding: 0;
+            }
+
             /* 레이아웃 박스 공통 디자인 */
             .bx {
                 /* 크기 : w800 -> 가로크기 */
                 width: 800px;
                 /* 외곽선 bd */
-                border: 4px double darkblue;
+                border: 4px dotted #bf3715;;
+                /* border: 4px double darkblue; */
                 /* 패딩 p */
                 padding: 20px;
                 /* 마진 : 마영오로 쓰면 중앙으로 이동 */
@@ -69,6 +81,9 @@
                 */
                 /* 텍스트 중앙 tac */
                 text-align: center;
+
+                /* 둥근모서리 */
+                border-radius: 15px;
             }
 
             /* 메인이미지 */
