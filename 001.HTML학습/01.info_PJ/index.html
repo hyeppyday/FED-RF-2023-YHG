@@ -8,6 +8,22 @@
         <!-- css인터널 코딩영역 -->
         <style>
             /* css영역내 주석문 */
+
+            /* 웹폰트 CDN(content delivery network) */
+            @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Hahmlet:wght@100&family=Song+Myung&display=swap");
+
+            /* 
+                웹폰트 font-family 이름
+                font-family: 'Black Han Sans', sans-serif;
+                font-family: 'Song Myung', serif;
+                font-family: 'Hahmlet', serif;
+            */
+
+            /* 
+                @import url(주소)
+                -외부 css를 불러올때 사용하는 형식
+                -외부 css 파일을 하나로 합칠때 많이 사용
+                */
             /* 
                 [모든 요소 공통 디자인요소 : 박스모델 ]
                 1. 크기 : width 가로, height 세로
@@ -62,12 +78,66 @@
             }
             /* 1. 상단영역 */
             #top {
-                background-color: lightblue;
+                background-color: rgb(227, 230, 173);
+            }
+
+            /* 타이틀 */
+            #top h1 {
+                color: #469fd7;
+                font-size: 40px;
+                font-weight: normal; /* 글자두께 기본 */
+                font-family: "Song Myung", "궁서";
+                /* font-family 글씨체
+                    값- 콤마로 구분하여 우선순위 적용함(상위체가 없으면 하위체를 적용, 그것도 없으면 브라우저 기본체로 표시됨) */
+
+                /*  text-shadow : 글자 그림자
+                    값 - x축 y축 블러 색 
+                    -> 콤마로 다중 그림자 사용 가능*/
+                text-shadow: 2px 2px 2px #0000005c;
+            }
+
+            /* 메뉴링크 */
+            #gnb a {
+                text-decoration: none; /* td */
+                color: #39ae39b2; /*  */
+                font-size: 20px; /* fz */
+                font-family: "Black Han Sans", "굴림"; /* ff */
+                vertical-align: -4px; /* va-4 */
+            }
+
+            /* vertical-align : 인라인요소간 세로정렬 값
+            -top/bottom/middle/baseline 수치
+            */
+            /* 가상클래스 : hover 마우스오버시 */
+            /*  a+a는 앞에 a요소가 있는 형제 a요소를 선택
+                결과적으로 첫번째 a요소가 선택되지 않는다 */
+            #gnb a + a:hover {
+                color: hotpink;
+                /* 글자데코 : 윗줄 물결모양 */
+                text-decoration: overline;
+                text-decoration-style: wavy;
+            }
+
+            /* 로고 이미지 */
+            #gnb img {
+                vertical-align: middle;
             }
 
             /* 2. 메인영역 */
             #cont {
                 margin: 20px auto;
+            }
+
+            /* 3. 하단영역 */
+            #info {
+                background-color: #d8ed6e81;
+            }
+
+            /* 회사주소 */
+            #info address {
+                /* 기본글자 이탤릭 스타일 없애기 */
+                font-style: normal;
+                font-family: "Hahmlet";
             }
         </style>
     </head>
@@ -81,7 +151,7 @@
             <nav id="gnb">
                 <a href="">
                     <!-- 상대경로 -->
-                    <img src="./images/네이버로고.png" style="width: 50px" alt="네이버로고" />
+                    <img src="./images/네이버로고.png" style="width: 30px" alt="네이버로고" />
                     <!-- style속성으로 css를 셋팅하는 방법은 인라인 코딩방식 -->
                     <!-- 절대상대경로 -->
                     <!-- <img src="/001.HTML학습/01.info_PJ/images/네이버로고.png" alt="네이버로고" /> -->
@@ -90,11 +160,8 @@
                         src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png
                     " alt="다음로고" /> -->
                 </a>
-                <a href="sub1.html">정치</a>
-                <a href="sub2.html">경제</a>
-                <a href="sub3.html">사회</a>
-                <a href="sub4.html">IT/과학</a>
-                <a href="sub5.html">TV/연예</a>
+                <a href="sub1.html">정치</a> | <a href="sub2.html">경제</a> | <a href="sub3.html">사회</a> |
+                <a href="sub4.html">IT/과학</a> | <a href="sub5.html">TV/연예</a> |
             </nav>
         </header>
         <!-- 2. 메인영역 : 컨텐츠 -->
@@ -109,6 +176,21 @@
             </address>
         </footer>
         <!-- 
+
+            [ 웹표준이란? ]
+            - 모든 브라우저에서 하나의 소스로 동일한 디스플레이 및 기능이 작동하도록 정한 웹 코딩의 표준안이다
+
+            [ 웹접근성이란? ]
+            - 평등의 원칙. 즉, 장애인 차별금지법에 따라 이미지(alt속성), 동영상(자막) 등에 설명을 추가하여 정보제공에 차별이 없도록 하는 것
+
+            [ img요소 : 이미지 연결요소 ]
+            - 필수속성
+            1) src :이미지경로
+            (source)
+            2) alt :이미지 설명(웹접근성)
+            (alternative text - 대체텍스트)
+
+
         [ 레이아웃을 위한 블록요소 ]
         div : 영역을 나누고 묶어주는 요소
         
