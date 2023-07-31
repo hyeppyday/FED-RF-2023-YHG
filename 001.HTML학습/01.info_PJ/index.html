@@ -78,7 +78,7 @@
             }
             /* 1. 상단영역 */
             #top {
-                background-color: rgb(227, 230, 173);
+                background-color: rgb(245 240 184);
             }
 
             /* 타이틀 */
@@ -130,7 +130,7 @@
 
             /* 3. 하단영역 */
             #info {
-                background-color: #d8ed6e81;
+                background-color: #c99ed781;
             }
 
             /* 회사주소 */
@@ -138,6 +138,19 @@
                 /* 기본글자 이탤릭 스타일 없애기 */
                 font-style: normal;
                 font-family: "Hahmlet";
+            }
+
+            /* 대표자 span */
+            span.utxt {
+                text-decoration: underline;
+                text-decoration-style: dotted;
+                text-decoration-color: purple;
+            }
+            /* 종속선택자로 같은 이름의 클래스 인데 다른 디자인으로 변경하여 셋팅하기 */
+            b.utxt {
+                text-decoration: underline;
+                text-decoration-style: double;
+                text-decoration-color: red;
             }
         </style>
     </head>
@@ -171,8 +184,8 @@
         <!-- 3. 하단영역 : 회사정보 -->
         <footer id="info" class="bx">
             <address>
-                서울시 강남구 역삼동 119 대호B 8F <br />대표: hye <br />
-                전화: 010-2222-3333
+                서울시 강남구 역삼동 119 대호B 8F <br />대표: <span class="utxt">Hyeppy</span> <br />
+                전화: <b class="utxt">010-2222-3333</b>
             </address>
         </footer>
         <!-- 
