@@ -3,3 +3,15 @@
 
 /* 공통외부CSS 합치기 */
 @import url(./common.css);
+
+.stit{
+    color: #59d359;
+    font-size: 20px;
+     font-family: 'Hahmlet', serif;
+     font-weight: bold;
+    text-align: center;
+    
+}
+figure.afig{
+    margin: 0 auto;
+}
