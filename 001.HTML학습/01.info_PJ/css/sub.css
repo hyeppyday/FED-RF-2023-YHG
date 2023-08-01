@@ -120,12 +120,15 @@
     display: inline-block;
     width: 70px;
     height: 70px;
-    border: 1px solid darkcyan;
+    border: 1px solid white;
     border-radius: 50%;
     text-align: center;
-    background-color: rgba(118, 225, 229, 0.353);
+    background-color: #b4d0ff;
     /* 줄간격으로 세로 글자 중앙 = 높이값과 같음 */
     line-height: 70px;
+    /* 가로 정렬 중앙 */
+    text-align: center;
+    font-size: 15px;
 
     /* a요소 기본 글자색변경, 밑줄없애기 */
     color: #000;
@@ -133,11 +136,10 @@
 }
 
 /* 마우스 오버시 변경 */
-.alink a:hover{
-    color: palevioletred;
-    background-color: plum;
-    box-shadow: 0 0 10px 5px sandybrown;
-
+.alink a:hover {
+    color: #ffeb3b;
+    background-color: #9298fe;
+    box-shadow: 0 0 10px 5px #3f51b5;
 }
 
 /* IT/과학 배경이미지 */
