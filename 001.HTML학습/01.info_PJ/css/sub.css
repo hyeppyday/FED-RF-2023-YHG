@@ -4,14 +4,16 @@
 /* 공통외부CSS 합치기 */
 @import url(./common.css);
 
-.stit{
-    color: #59d359;
+.stit {
+    color: #429b42;
     font-size: 20px;
-     font-family: 'Hahmlet', serif;
-     font-weight: bold;
+    font-family: "Hahmlet", serif;
+    font-weight: bold;
     text-align: center;
-    
+    background-color: #00c30033;
+   border-radius: 12px;
 }
-figure.afig{
-    margin: 0 auto;
+
+.afig {
+    text-align: center;
 }
