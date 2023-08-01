@@ -94,9 +94,8 @@
     /* 줄간격 lh */
     line-height: 1.56;
     /* 글자 라인간 간격을 조정함
-        숫자만 쓰면 글자크기의 배수로 적용됨(단위쓰면 단위로 적용) */
-    
-
+        숫자만 쓰면 글자크기의 배수로 적용됨(단위쓰면 단위로 적용)
+        -> 줄간격의 응용은 버튼 등의 글자를 세로 중앙에 오게 할 때 박스 높이값만큼 준다. */
 }
 
 /* 유튜브 동영상 박스 */
@@ -112,20 +111,34 @@
 
 /* 기사 원문 */
 
-.alink{
+.alink {
     text-align: right;
-
 }
 
-.alink a{width: 70px;
-height: 70px;
-border: 1px solid darkcyan;
-border-radius: 50%;
-display: inline-block;
-text-align: center;
-line-height: 5;
-background-color: rgba(118, 225, 229, 0.353);}
+.alink a {
+    /* 디자인 적용을 하기 위해 display를 inline-block으로 변경 */
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border: 1px solid darkcyan;
+    border-radius: 50%;
+    text-align: center;
+    background-color: rgba(118, 225, 229, 0.353);
+    /* 줄간격으로 세로 글자 중앙 = 높이값과 같음 */
+    line-height: 70px;
 
+    /* a요소 기본 글자색변경, 밑줄없애기 */
+    color: #000;
+    text-decoration: none;
+}
+
+/* 마우스 오버시 변경 */
+.alink a:hover{
+    color: palevioletred;
+    background-color: plum;
+    box-shadow: 0 0 10px 5px sandybrown;
+
+}
 
 /* IT/과학 배경이미지 */
 .st4 {
