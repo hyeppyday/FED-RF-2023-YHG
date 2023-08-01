@@ -5,7 +5,9 @@
 @import url(./common.css);
 
 /* 서브페이지 공통 글자설정 */
-#cont{font-family: 'Gowun Dodum', sans-serif;}
+#cont {
+    font-family: "Gowun Dodum", sans-serif;
+}
 
 /* 서브타이틀 */
 .stit {
@@ -18,9 +20,8 @@
     border-radius: 12px;
     margin-bottom: 10px;
 
-    
     /* outline : 1px solid red */
-    
+
     /* [outline 요소]
     
         box 모델의 필수 속성은 아니지만 박스의 외곽선을 표현해주며 박스자체에 크기에 영향을 주지 않음
@@ -30,8 +31,8 @@
         
         
         /* 배경넣기 : 한번에 쓰기 */
-        /*  background: url(../images/article4.jpg) no-repeat center/cover; */
-        /* background : 색이반고윙/크; (색상 이미지 반복여부 고정 위치/크기)  */
+    /*  background: url(../images/article4.jpg) no-repeat center/cover; */
+    /* background : 색이반고윙/크; (색상 이미지 반복여부 고정 위치/크기)  */
 
     /* 배경넣기 : 속성별쓰기 */
 
@@ -41,7 +42,7 @@
     /*  background-position: center; */
     /* 배경크기 : 가로 세로 (cover - 박스채우기) */
     /*   background-size: cover; */
-    
+
     /* 박스그림자 */
     box-shadow: 4px 4px 4px #00000033;
     /*
@@ -61,30 +62,70 @@
 /* 이미지는 기본 비율을 가지고 있어서
     가로, 세로중 한쪽만 크기를 주면 나머지 방향은 자짐으로 비율을 유지함
     가로세로를 다 주면 비율이 깨짐 */
-    
-    /* 기사 타이틀 */
-    .atit{font-size: 30px;}
-    /*  기사 이미지 박스*/
-    .afig{margin-bottom: 20px;}
-    .afig img{width: 100%;}
-    /* 기사 이미지 설명 */
-    .afig figcaption{
-        font-size: 17px;
-        text-align: center;
-        color: #5f5f5f;
-    }
 
-    /* 기사 문단 */
-    .acont p{
-        font-size: 17px;
-        color: #303038;
+/* 기사 타이틀 */
+.atit {
+    font-size: 30px;
+}
+/*  기사 이미지 박스*/
+.afig {
+    margin-bottom: 20px;
+}
+.afig img {
+    width: 100%;
+}
+/* 기사 이미지 설명 */
+.afig figcaption {
+    font-size: 17px;
+    text-align: center;
+    color: #5f5f5f;
+}
+
+/* 기사 문단 */
+.acont p {
+    font-size: 17px;
+    color: #303038;
     /* 자간 : ls */
     letter-spacing: 1px;
     /* 단어간격 : ws */
     word-spacing: 1px;
     /* 양쪽정렬  */
     text-align: justify;
-    }
+    /* 줄간격 lh */
+    line-height: 1.56;
+    /* 글자 라인간 간격을 조정함
+        숫자만 쓰면 글자크기의 배수로 적용됨(단위쓰면 단위로 적용) */
+    
+
+}
+
+/* 유튜브 동영상 박스 */
+.mvbx {
+    height: 550px;
+}
+/* div와 같은 block 요소는 width 설정을 하지 않으면 width:auto 로 자동설정됨 이는 싸고 있는 박스 컨텐트 영역을 자동으로 채워준다. */
+.mvbx iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* 기사 원문 */
+
+.alink{
+    text-align: right;
+
+}
+
+.alink a{width: 70px;
+height: 70px;
+border: 1px solid darkcyan;
+border-radius: 50%;
+display: inline-block;
+text-align: center;
+line-height: 5;
+background-color: rgba(118, 225, 229, 0.353);}
+
 
 /* IT/과학 배경이미지 */
 .st4 {
