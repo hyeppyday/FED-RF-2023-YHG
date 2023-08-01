@@ -4,13 +4,15 @@
             /* css영역내 주석문 */
 
             /* 웹폰트 CDN(content delivery network) */
-            @import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Hahmlet:wght@100&family=Song+Myung&display=swap");
+           
+  @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&family=Hahmlet:wght@100&family=Song+Myung&display=swap');
 
             /* 
                 웹폰트 font-family 이름
                 font-family: 'Black Han Sans', sans-serif;
                 font-family: 'Song Myung', serif;
                 font-family: 'Hahmlet', serif;
+                font-family: 'Gowun Dodum', sans-serif;
             */
 
             /* 
@@ -53,7 +55,7 @@
             html,
             body,
             h1,
-            h2 {
+            h2, figure {
                 margin: 0;
                 padding: 0;
             }

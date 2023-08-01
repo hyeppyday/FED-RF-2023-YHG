@@ -34,11 +34,11 @@
         <!-- 2. 메인영역 : 컨텐츠 -->
         <main id="cont" class="bx">
             <!-- 2-1. 서브타이틀 -->
-            <h2 class="stit">IT/과학 뉴스</h2>
+            <h2 class="stit st4">IT/과학 뉴스</h2>
 
             <!-- 2-2. 언론사로고 -->
-            <div class="prlogo"></div>
-            <img src="./images/prlogo4.png" alt="아이뉴스24"  width="100px"/>
+            <div class="prlogo">
+            <img src="./images/prlogo4.png" alt="아이뉴스24"  /></div>
             <!-- 2-3. 기사제목 -->
             <h3 class="atit">[지금은 기후위기-영상] 찬란한 슬픔의 남·북극…"지구를 살려 주세요!"</h3>
             <!-- 2-4. 기사사진 -->
@@ -46,7 +46,7 @@
                 <!-- 이미지 -->
                 <img
                     src="./images/article4.jpg"
-                    alt="북극곰 가족이 녹고 있는 얼음 위에 위태롭게 서 있다."
+                    alt="북극곰 가족이 녹고 있는 얼음 위에 위태롭게 서 있다." width="700px"
                    
                 />
                 <!-- 이미지설명 -->
@@ -76,14 +76,28 @@
                     북극곰 가족을 촬영한 <mark>‘지구를 살려주세요!’</mark>(주형민 극지연구소 차세대 쇄빙연구선 건조사업단장 촬영)가
                     차지했다.
                 </p>
-
+                <!-- 유튜브 동영상박스 -->
+                <div class="mvbx" style="width: 700px; height: 450px; margin: 0px auto; ">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/bVMlUarekuE" title="[지금은 기후위기] 찬란한 슬픔의 남·북극" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
                 <p>
                     줄어드는 얼음 위에 북극곰 가족이 모여 있는 위태로운 모습을 담았다. 북극곰은 개체 수가 계속
                     줄어들면서 지구 가열화가 가속화하면 끝내 북극에서 생존할 수 없는 상황에 처할 수 있다는 경고음까지
                     나오고 있다.
                 
                 </p>
-                <img src="./images/article4-1.jpg" alt="" style="display: block; margin: 0px auto;"/>
+                <figure class="afig">
+                    <!-- 이미지 -->
+                    <img
+                        src="./images/article4-1.jpg"
+                        alt="세종과학기지에서 일몰과 함께 젠투펭귄이 카메라에 포착됐다." width="700px"
+                       
+                    />
+                    <!-- 이미지설명 -->
+                    <figcaption><small>세종과학기지에서 일몰과 함께 젠투펭귄이 카메라에 포착됐다. [사진=극지연구소 최동건]
+                    </small></figcaption>
+                </figure>
+    
                 
                 <p>
                     남극의 상징인 펭귄도 북극곰 운명과 크게 다르지 않다. 지구 가열화로 먹이 활동이 여의치 않으면서
@@ -117,6 +131,17 @@
                     >기사원문</a
                 >
             </h5>
+
+            <hr>
+            <!-- 구분선 요소 hr : horizontal -->
+            <!-- 주해영역 -->
+            <article class="desc">
+                <h5>주해</h5>
+
+                <div>①남극은 지구의 최남단의 대륙으로, 한가운데 남극점이 있다. 남극 대륙은 거의 대부분 남극권 이남에 자리 잡고 있으며, 주변에는 남극지구와 남극해가 있다. 면적은 약 1,400만 km²로서 아시아, 아메리카, 아프리카에 이어 세계에서 4번째로 큰 대륙이다.<br>
+                    ②북극은 지구 북극점 근처의 지역이다. 북극점을 '북극'으로 부르기도 한다. 북극은 북극해뿐만 아니라 러시아, 시베리아, 알래스카, 캐나다, 그린란드, 아이슬란드, 스칸디나비아를 포함한다. 남극과 마찬가지로 북극에도 대한민국을 포함한 여러 나라가 연구 기지를 설치하였다.
+                </div>
+            </article>
         </main>
 
         <!-- 3. 하단영역 : 회사정보 -->
@@ -152,9 +177,14 @@
             6. 삽입된 글자표시
             <ins>- 삽입된 텍스트(inserted text)
                 -> text-decoration : underline
-                
+
+            7. 첨자표시
             <sub>- 아래 첨자 텍스트
+                - 약간 아래쪽 작은 글자(subscript text)
+                - 병행표시글자(영문,한문 등)
             <sup>- 위첨자 텍스트
+                - 약간 위쪽 작은글자(superscript text)
+                - 주석표시숫자(숫자와 설명을 연결한다)
 
             [ 시멘틱 태그란? ]
             - sementic(의미론적인, 의미있는)

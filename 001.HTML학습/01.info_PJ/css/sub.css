@@ -4,6 +4,10 @@
 /* 공통외부CSS 합치기 */
 @import url(./common.css);
 
+/* 서브페이지 공통 글자설정 */
+#cont{font-family: 'Gowun Dodum', sans-serif;}
+
+/* 서브타이틀 */
 .stit {
     color: #429b42;
     font-size: 20px;
@@ -11,9 +15,85 @@
     font-weight: bold;
     text-align: center;
     background-color: #00c30033;
-   border-radius: 12px;
-}
+    border-radius: 12px;
+    margin-bottom: 10px;
 
-.afig {
-    text-align: center;
+    
+    /* outline : 1px solid red */
+    
+    /* [outline 요소]
+    
+        box 모델의 필수 속성은 아니지만 박스의 외곽선을 표현해주며 박스자체에 크기에 영향을 주지 않음
+        outline : 두께 종류 색상
+        -> border와 셋팅이 같음
+        -> 주로 사용되는 예는 input 입력창에서 포커스가 갈 경우 외곽선 표시가 됨
+        
+        
+        /* 배경넣기 : 한번에 쓰기 */
+        /*  background: url(../images/article4.jpg) no-repeat center/cover; */
+        /* background : 색이반고윙/크; (색상 이미지 반복여부 고정 위치/크기)  */
+
+    /* 배경넣기 : 속성별쓰기 */
+
+    /* 반복여부 */
+    /* background-repeat: no-repeat; */
+    /* 배경위치: 가로 세로 */
+    /*  background-position: center; */
+    /* 배경크기 : 가로 세로 (cover - 박스채우기) */
+    /*   background-size: cover; */
+    
+    /* 박스그림자 */
+    box-shadow: 4px 4px 4px #00000033;
+    /*
+    [box-shadow 속성]
+    - 박스 외부/내부 그림자 설정속성
+    - 값: x축 y축 blur spread 색
+    text-shadow와 달리 spread속성이 있음
+    이것은 그림자를 커지게 함
+    - 내부그림자 옵션 : inset
+    - 그림자 다중설정 : 콤마로 연속사용 가능
+    */
+}
+/* 언론사 로고 */
+.prlogo img {
+    height: 32px;
+}
+/* 이미지는 기본 비율을 가지고 있어서
+    가로, 세로중 한쪽만 크기를 주면 나머지 방향은 자짐으로 비율을 유지함
+    가로세로를 다 주면 비율이 깨짐 */
+    
+    /* 기사 타이틀 */
+    .atit{font-size: 30px;}
+    /*  기사 이미지 박스*/
+    .afig{margin-bottom: 20px;}
+    .afig img{width: 100%;}
+    /* 기사 이미지 설명 */
+    .afig figcaption{
+        font-size: 17px;
+        text-align: center;
+        color: #5f5f5f;
+    }
+
+    /* 기사 문단 */
+    .acont p{
+        font-size: 17px;
+        color: #303038;
+    /* 자간 : ls */
+    letter-spacing: 1px;
+    /* 단어간격 : ws */
+    word-spacing: 1px;
+    /* 양쪽정렬  */
+    text-align: justify;
+    }
+
+/* IT/과학 배경이미지 */
+.st4 {
+    /* 배경이미지 */
+    /*  background-image: url(../images/article4.jpg); */
+}
+/* 연예/TV 배경이미지 */
+.st5 {
+    /*  background-image: url(../images/artcle5.jpg); */
+    /* 배경위치변경 */
+    /* background-position: top; */
 }
