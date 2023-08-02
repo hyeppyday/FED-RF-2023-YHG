@@ -98,6 +98,29 @@
         -> 줄간격의 응용은 버튼 등의 글자를 세로 중앙에 오게 할 때 박스 높이값만큼 준다. */
 }
 
+.acont p em{
+    /* 이탤릭 해제 */
+    font-style: normal;
+    /* 글자색 변경 */
+    color: hotpink;
+    /* 글자 두께 변경 */
+    font-weight: bold;
+    /* 글자 그림자 적용 */
+    text-shadow: 2px 1px #000000ad;
+}
+
+.acont p mark {
+    color: aliceblue;
+    font-size: 25px;
+    display: block;
+    text-align: center;
+    background-color: #80008059;
+    margin: 20px;
+    padding: 30px;
+    border-top: 2px solid #00000094;
+    border-bottom: 2px solid #00000094;
+}
+
 /* 유튜브 동영상 박스 */
 .mvbx {
     height: 550px;
@@ -109,6 +132,80 @@
     height: 100%;
 }
 
+/* 인용블록 영역 */
+.bqbx{
+    padding: 20px 0px;
+    margin: 20px 0px;
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+    font-size: 15px;
+
+}
+.bqbx img{
+    float: left;
+    margin-right: 20px;
+}
+
+.bqbx blockquote{
+     padding: 15px 0px;
+     line-height: 2;
+     text-align: justify;
+
+}
+
+/* article 제목 공통 class=atbx */
+.atbx h5{
+    font-size: 15px;
+    background-color: darkkhaki;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(4, 56, 4, 0.455);
+    
+}
+
+.atbx div{
+    text-align: justify;
+    font-size: 15px;
+    padding: 15px 0px;
+    line-height: 2;
+    
+
+}
+.desc{
+    padding: 20px 0px;
+    margin: 20px 0px;
+    border-top: 2px dashed #ccc;
+    border-bottom: 2px dashed #ccc;
+}
+
+.rpt{
+    display: inline-block;
+    background-color: #8baff1;
+    padding: 5px 15px;
+    
+
+}
+
+.work h3{
+    text-align: center;
+    background: rgb(15,71,246);
+background: linear-gradient(78deg, rgba(15,71,246,0.734341252699784) 0%, rgba(255,135,0,0.4535637149028078) 99%);
+padding: 5px;
+}
+
+.work img{display: block;
+    margin: 0 auto;
+    width: 200px;
+}
+
+.work figcaption{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 0 0 2px #e4e24f;
+}
 /* 기사 원문 */
 
 .alink {
