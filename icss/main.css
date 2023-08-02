@@ -1,13 +1,14 @@
-@charset "uft-8"
+@charset "uft-8";
 /* 웹폰트 CDN(Content Delevery Network) */
 @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+And+White+Picture&family=Gugi&family=Noto+Sans+KR&display=swap");
 
 /* 
-    웹폰트 font-family 이름
-    font-family: 'Bagel Fat One', cursive;
-    font-family: 'Black And White Picture', sans-serif;
-    font-family: 'Gugi', cursive;
-    font-family: 'Noto Sans KR', sans-serif;
+
+                웹폰트 font-family 이름
+                font-family: 'Black Han Sans', sans-serif;
+                font-family: 'Song Myung', serif;
+                font-family: 'Hahmlet', serif;
+                font-family: 'Gowun Dodum', sans-serif;
 */
 /* 초기화 */
 html,body,h1,h2,h3,ul,ol{
@@ -16,11 +17,11 @@ html,body,h1,h2,h3,ul,ol{
 }
 /* 전체배경이미지 */
 body{
-    background: url(../imgs/worksbg.jpg)no-repeat fixed center/cover;
-    /* 전체 글씨 크기 */
+    background: url(../imgs/worksbg.jpg) no-repeat fixed center/cover;
+    /* 전체 글자체 */
+    font-family: 'Hahmlet', serif;
+    /* 전체 글자기본크기 */
     font-size: 17px;
-    /* 전체 글씨체 */
-    font-family: 'Black And White Picture', sans-serif;
 }
 
 
@@ -36,4 +37,8 @@ body{
 /* 메인타이틀 */
 .tit{
     text-align: center;
+    font-family: 'Gowun Dodum', sans-serif;
+    font-weight: inherit;
+    font-size: 25px;
+    color: darkblue;
 }
