@@ -186,25 +186,62 @@
     
 
 }
-
-.work h3{
+.work{
     text-align: center;
-    background: rgb(15,71,246);
-background: linear-gradient(78deg, rgba(15,71,246,0.734341252699784) 0%, rgba(255,135,0,0.4535637149028078) 99%);
-padding: 5px;
+    /* background-color: pink; */
+    /* 그라데이션 -> 이미지로 bgi */
+    background: linear-gradient(90deg, #fcff9e 0%, #c67700 100%);
+    /* [선형 그라데이션 : linear-gradient ]
+     background-image: linear-gradient(방향, 색1, 색2);
+    liner-gradient(방향, 색1, 몇%, 색2, 몇%);
+    liner-gradient(각도, 색1, 몇%, 색2, 몇%);
+    -옵션  
+        1. 방향: to top, to bottom, to left, to right
+        2. 각도 : 각도deg
+        3. 콤마로 나열된 색상에 %를 뒤에 쓰면 비율 조정가능 */
+       /*  border: 10px dotted white;
+        padding: 50px; */
+        background-clip: border-box;
+        box-shadow: inset 0 0 10px #767171b3;
+
+        /* 배경옵션 추가
+        background-clip : 배경이 적용되는 범위 설정
+        1. border-box : border까지 적용
+        2. padding-box : padding까지 적용
+        3. content-box : 내용영역만 적용(padding, border빠짐)
+        */
+
+    
+}
+
+/* 작품타이틀 */
+
+
+
+  .work h3{
+    text-align: center;
+    padding-top: 20px;
+    font-size: 25px;
+
 }
 
 .work img{display: block;
     margin: 0 auto;
-    width: 200px;
+    border: 15px ridge orange
 }
 
 .work figcaption{
     text-align: center;
-    margin-top: 20px;
+   
     font-weight: bold;
-    font-style: italic;
-    text-shadow: 0 0 2px #e4e24f;
+    text-shadow: 0 0 2px #e4e24f; 
+    padding: 10px;
+    
+} 
+
+.work figcaption cite{
+    font-style: normal;
+    color: brown;
 }
 /* 기사 원문 */
 
@@ -238,6 +275,118 @@ padding: 5px;
     background-color: #9298fe;
     box-shadow: 0 0 10px 5px #3f51b5;
 }
+
+/* 뉴스 파트 공통 */
+.nbx{
+    border-top : 2px dashed #ccc;
+    margin : 20px 0;
+    padding: 20px 0;
+
+}
+/* 뉴스 파트 공통 a요소 */
+.nbx a{
+    /* 글자크기 fz */
+    font-size: 17px;
+    /* 줄간격 */
+    line-height: 2.5;
+    color: #222;
+    text-decoration: none;
+    
+}
+/* 공통 a 마우스 오버시 */
+.nbx a:hover{
+    color: yellowgreen;
+    text-shadow: 1px 1px 2px #000;
+}
+/* 타이틀 공통 */
+.nbx h3{
+    font-family: 'Song Myung', serif;
+    font-weight: normal;
+    font-size: 25px;
+    background-image: linear-gradient(to right, lightblue,transparent);
+    padding: 10px;    
+}
+/* 한줄 말줄임표시하기 공통처리 */
+.nbx li, .nbx dd, .nbx td{
+    /* 줄바꿈 방지 wh */
+    white-space: nowrap;
+    /* 넘치는 컨텐츠 숨기기 oh */
+    overflow: hidden;
+    /* 넘치는 글자 말줄임 표시 tv */
+    text-overflow: ellipsis;
+}
+
+/* 추가) 여러줄일때 말줄임은 아래와 같음
+     display: -webkit-box;
+    - webkit-line-clamp: 2; 몇줄인지 라인 수
+    - webkit-box-orient: vertical;
+    - overflow: hidden;
+    - text-overflow: ellipsis;
+    단, 박스 높이값을 글자가 보일만큼 조절해야한다
+    - 주의 : white-space:nowrap;이 없음
+*/
+/* 주요뉴스 ul */
+.cnews ul li::before{
+    content: '🎀';}
+.cnews ul li::after{
+    content: '🎀';
+}
+
+/* dd 앞에 가상 블릿 */
+.snews dd::before{
+    content: '🎁';
+}
+
+/* 분야별 뉴스 dt별 글자색, 배경색 변경 */
+.snews dt:first-of-type{
+    color: red;
+    background-color: lawngreen;
+}
+.snews dt:nth-of-type(2){
+    color: blue;
+    background-color: lightblue;
+}
+.snews dt:last-of-type{
+    color: yellow;
+    background-color: orchid;
+}
+/* [ 자식요소 선택 가상클래스 : 자식요소 종류가 같아야함! ]
+    요소:first-child -> 첫번째 자식요소
+    요소:nth-child(n) -> n번째 자식요소
+    요소:last-child -> 마지막째 자식요소
+
+    [ 여러종류가 섞여 있을 경우 형제 선택하기 ]
+    요소:first-of-type -> 같은 요소 중 첫번째
+    요소:nth-of-type(n) -> 같은 요소 중 n번째
+    요소:last-of-type -> 같은 요소 중 마지막째 
+    (단, n은 1부터)
+    */
+.nbx dt{
+    display: inline-block;
+    background-color: #01084d;
+    font-size: 15px;
+    color: white;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: 2px 2px 2px rgba(66, 164, 222, 0.75);
+    margin-top: 10px;
+}
+/* 
+    [ CSS 가상요소 : before, after ]
+    - 모든 요소는 맨앞과 맨뒤에 가상요소를 사용할 수 있다
+    - 맨앞은 before, 맨뒤는 after
+*/
+
+/* 주요뉴스 li별 글자색 바꾸기 */
+.cnews li:first-child  a{
+    color: red;}
+.cnews li:nth-child(2) a{
+    color: blue;
+}
+.cnews li:last-child a{
+    color: green;
+}
+
 
 /* IT/과학 배경이미지 */
 .st4 {

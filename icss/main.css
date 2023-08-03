@@ -42,3 +42,22 @@ body{
     font-size: 25px;
     color: darkblue;
 }
+
+.part2{
+    font-family: 'Gowun Dodum', sans-serif;
+    
+}
+.part2 h2{
+    text-shadow: 2px 2px 2px #ffffff80;
+    display: inline-block;
+    background-color: #68380874;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px dotted #2d1002fb;
+    font-size: 20px;
+}
+
+.part2 h3{
+    display: inline-block;
+    padding: 20px;
+}
