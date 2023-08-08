@@ -64,10 +64,16 @@ html,body{
     border-bottom: 1px solid #ccc;
 }
 
-/* th에 윗줄, 아랫줄 두꺼운 보더넣기 */
+/* tbody의 tr의 td 중앙정렬 */
+#drama tbody tr td:first-child{
+    text-align: center;
+}
+
+/* th에 윗줄, 아랫줄 두꺼운 보더넣기 + 배경색 */
 #drama th{
     border-top: 2px solid #555;
     border-bottom: 2px solid #555;
+    background-color: yellow;
 }
 
 /* tbody의 마지막 tr의 td 아랫줄 두꺼운 보더넣기 */
@@ -105,4 +111,52 @@ html,body{
     color: skyblue;
     text-decoration: overline;
     text-decoration-style: double;
+}
+
+/* 구분테이블 박스 */
+
+.gubun{
+    width: 1000px;
+   
+    min-width: 95%;
+    /* 최대크기 95%란 싸고 있는 박스의 95%를 유지함 */
+    /* max-width:1000px */
+    /* 테이블은 가로크기 설정이 없으면 내용만큼 늘어남.
+    max-width를 특정 px로 줄때 table은 적용안됨 */
+    margin: 0 auto;
+    margin-bottom: 200px;
+    /* 자식 테이블의float 감싸기 (float으로 망가진 높이값 고쳐주기) */
+    overflow: hidden;
+}
+
+/* 구분 테이블 */
+/* 요소명#아이디명 - 종속선택자 */
+#gubun{
+font-size: 20px;
+    /* 테이블을 오른쪽 끝으로 보내기 */
+    float: right;
+    border: 1px solid #999;
+
+    /* td에 사이간격주기 */
+    border-collapse: separate;
+    /* td 셀 사이의 간격주기
+        border-spacing : 가로 세로;
+        border-spacing : 양방향;
+     */
+    border-spacing: 10px;
+}
+
+/* 구분테이블 td */
+#gubun td{
+    padding: 10px;
+}
+
+/* 구분 테이블 첫번째 tr의 첫번째 td */
+#gubun tr:first-child td:first-child{
+    border-right: 1px dotted #999;
+}
+
+/* 구분테이블의 두번째 tr부터 끝까지 td위쪽 점선보더넣기 */
+#gubun tr+tr td{
+    border-top: 1px dotted #999;
 }
