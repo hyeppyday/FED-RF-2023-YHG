@@ -279,7 +279,7 @@ body * {
     top: 100%;
     left: 10%;
     width: 80%;
-    height: 80%;
+    height: 104%;
     border-radius: 20%;
 }
 /* 가상요소로 부츠 만들기 */
@@ -287,10 +287,10 @@ body * {
     content: '';
     display: block;
     position: absolute;
-    top: 40%;
-    left: -7%;
+    top: 29%;
+    left: -6%;
     width: 100%;
-    height: 60%;
+    height: 71%;
     background-image: linear-gradient(to right, #9e9797, #262626);
     border: 4px solid #000;
     border-top: 10px solid #000;
