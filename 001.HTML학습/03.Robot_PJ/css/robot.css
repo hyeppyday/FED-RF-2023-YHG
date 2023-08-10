@@ -45,6 +45,37 @@ body * {
 
 /*************************** 1. 상단 영역 ***************************/
 /* 1-1. 로고 */
+.logo {
+    /* 픽스드 포지션 */
+    position: fixed;
+    /* 화면 정중앙으로 이동시키기 */
+    top: calc(50% - 200px/2);
+    left: calc(50% - 200px/2);
+    width: 200px;
+    height: 200px;
+    z-index: 99; /* 제일위로 */
+    background: pink url(../images/robot_03.png)no-repeat center/160px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+
+    /* 텍스트 */
+    text-align: center;
+    /* line-height: 200px; */
+    color: aquamarine;
+    /* 폰트 한번에 쓰기 : 스두크/줄체 (스타일 두께 크기/줄간격 글씨체 */
+    font: 45px/200px 'Orbitron';
+    /* 글자그림자 */
+    text-shadow: 2px 2px 5px #000;
+    /* 박스그림자 
+    - 밝은 색을 사용하면 glow효과 */
+    box-shadow: inset 0 0 20px 5px #000,
+    0 0 20px 5px aquamarine;
+    /* 박스그림자에만 spread설정이 있음 x y blur spread color */
+
+    /* transform 크기조정 */
+    transform: scale(2);
+    
+}
 /* 1-2. 링크타이틀 */
 /* 1-3. 탑이동버튼 */
 /*************************** 2. 메인 영역 ***************************/
@@ -81,11 +112,12 @@ body * {
     /* 마치 div를 넣은것 같다 */
     position: absolute;
     /* 앱솔루트요소 */
-    top: -110px;
-    left: -23px;
-    width: 300px;
-    height: 300px;
-    background: url(../images/hair.png) no-repeat 0/100% 100%;
+    top: -75px;
+    left: -118px;
+    width: 500px;
+    height: 505px;
+    background: url(../images/dress-wig-long-hair-clothing-western-style-golden-hair-wig-free-to-pull-the-material-aedd2767d00901410e981f7d3d0f5e02.png)
+        no-repeat 0/100% 100%;
 }
 /* 오버시 가상요소로 가발 변경하기 */
 .head:hover:after {
@@ -189,7 +221,7 @@ body * {
     width: 257px;
     height: 200px;
     border-radius: 30px;
-    background-image: linear-gradient(to top, #e8e8e8, #000);
+    background-image: linear-gradient(to top, #77a6fe, #2b045d);
 }
 .body::after {
     content: "";
@@ -199,7 +231,7 @@ body * {
     left: -18px;
     width: 257px;
     height: 140px;
-    border-radius: 30px;
+    border-radius: 50px 50px 20px 20px;
     background-image: linear-gradient(to top, #800f0f, #edf246);
 }
 
@@ -303,6 +335,36 @@ body * {
     border-radius: 20%;
 }
 
+/* 가상요소로 다리관절 만들기 */
+.leg::after {
+    content: "";
+    position: absolute;
+    bottom: calc(-80px / 2);
+    left: 0;
+    /* 부모는? .leg */
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 5px solid #000;
+    background-color: #ccc;
+}
+/* 가상요소로 다리관절2 만들기 */
+.leg::before {
+    content: "";
+    position: absolute;
+    bottom: -29px;
+    left: 10px;
+    /* 부모는? .arm */
+    width: 60px;
+    height: 60px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right, #ccc, #393939);
+    box-shadow: inset 0 0 2px #000;
+
+    z-index: 1;
+}
 /* 다리 하단부분 공통 */
 .leg span {
     position: absolute;
@@ -374,6 +436,41 @@ body * {
     border-radius: 0 50% 50% 0;
 }
 /* TV */
+
+.tv {
+    background: url(../images/tv.jpg) no-repeat 0/100%;
+    top: 10%;
+    left: 50%;
+    /* left 방향 중앙이동 */
+    transform: translateX(-50%);
+    border-radius: 10%;
+    width: 180px;
+    height: 125px;
+    border: 2px solid #222;
+    box-shadow: inset 0 0 10px #000;
+}
+
+/* 스크린 */
+.screen {
+    position: absolute;
+    top: 7px;
+    left: 9px;
+    /* 부모는? .tv */
+    width: 128px;
+    height: 99px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    overflow: hidden;
+}
+/* 아이프레임 */
+#mv {
+    position: absolute;
+    top: 3px;
+    left: -39px;
+    width: 237px;
+    height: 132px;
+    /* 부모는? .screen */
+}
 /* 2-2. 로봇설명박스 */
 /*************************** 3. 하단 영역 ***************************/
 /* 3-1. 회사정보 */
