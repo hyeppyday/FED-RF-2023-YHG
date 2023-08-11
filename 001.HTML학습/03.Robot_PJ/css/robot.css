@@ -115,7 +115,7 @@ body * {
     /* 마치 div를 넣은것 같다 */
     position: absolute;
     /* 앱솔루트요소 */
-    top: -75px;
+    top: -90px;
     left: -118px;
     width: 500px;
     height: 505px;
@@ -231,8 +231,8 @@ body * {
     display: block;
     position: absolute;
     bottom: 0;
-    left: -18px;
-    width: 257px;
+    left: -11px;
+    width: 241px;
     height: 140px;
     border-radius: 50px 50px 20px 20px;
     background-image: linear-gradient(to top, #800f0f, #edf246);
@@ -327,7 +327,7 @@ body * {
 }
 /* 오른팔 */
 .arm2 {
-    right: -70px;
+    right:-87px;
 }
 /* 다리공통 */
 .leg {
@@ -447,14 +447,32 @@ body * {
     top: 10%;
     left: 50%;
     /* left 방향 중앙이동 */
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(1);
     border-radius: 10%;
     width: 180px;
     height: 125px;
     border: 2px solid #222;
     box-shadow: inset 0 0 10px #000;
+    z-index: 1;
+
+    /* 트랜지션: 속시이지 */
+    transition:  1.2s ease-in-out;
 }
 
+/* TV가 커지는 클래스 */
+.tv.on{
+    transform: translateX(-50%) scale(3);
+}
+.box-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    width: 40px;
+    height: 70px;
+}
+.box-btn button{
+width: 100%;
+}
 /* 스크린 */
 .screen {
     position: absolute;
@@ -474,6 +492,8 @@ body * {
     left: -39px;
     width: 237px;
     height: 132px;
+    /* 아이프레임 기본 보더 없앰 */
+    border: none;
     /* 부모는? .screen */
 }
 /* 2-2. 로봇설명박스 */
