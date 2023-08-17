@@ -11,7 +11,10 @@
     font-family: 'Chakra Petch', sans-serif;
     font-family: 'Orbitron', sans-serif;
 */
-
+html{
+    font-size: 10px;
+    /* 상대단위 rem 계산 편의를 위해 변경함 */
+}
 /* 초기화 */
 html,
 body,
@@ -30,9 +33,9 @@ body {
 }
 
 /* 공사중표시 */
-body * {
+/* body * {
     outline: 2px dashed yellow;
-}
+} */
 
 /* 공통클래스 */
 /* 메탈배경 클래스 */
@@ -49,10 +52,10 @@ body * {
     /* 픽스드 포지션 */
     position: fixed;
     /* 화면 정중앙으로 이동시키기 */
-    top: calc(50% - 200px/2);
-    left: calc(50% - 200px/2);
-    width: 200px;
-    height: 200px;
+    top: calc(50% - 20vw/2);
+    left: calc(50% - 20vw/2);
+    width: 20vw;
+    height: 20vw;
     z-index: 99; /* 제일위로 */
     background: pink url(../images/robot_03.png)no-repeat center/160px;
     border-radius: 50%;
@@ -63,7 +66,7 @@ body * {
     /* line-height: 200px; */
     color: aquamarine;
     /* 폰트 한번에 쓰기 : 스두크/줄체 (스타일 두께 크기/줄간격 글씨체 */
-    font: 45px/200px 'Orbitron';
+    font: 5vw/20vw 'Orbitron';
     /* 글자그림자 */
     text-shadow: 2px 2px 5px #000;
     /* 박스그림자 
@@ -74,13 +77,16 @@ body * {
 
     /* transform 크기조정 */
     transform: scale(2);
-    
 }
 
 /* 1-2. 링크타이틀 */
 /* 1-3. 탑이동버튼 */
 /*************************** 2. 메인 영역 ***************************/
 .main-area {
+    padding-top: 860px;
+    /* 자식요소인 .box-robot이 fixed포지션이
+    됨에 따라 상단부분이 없어졌으므로
+    패딩으로 로봇영역을 채워준다! */
     overflow: hidden;
     /* 첫번째 자식요소 블록박스에 마진탑을 준 경우
     그 마진값은 부모요소 바깥쪽으로 나간다!(기본성질)
@@ -89,6 +95,12 @@ body * {
 }
 /* 2-1. 로봇박스 */
 .box-robot {
+    position: fixed;
+    /* top값을 아주면 젠틀픽스드 이므로
+    패딩/static요소를 존중하므로
+    위치값을 줘서 화면을 기준한다! */
+    top: 0;
+    width: 100%;
     padding: 200px 0 520px;
     /* 로봇 처음 상태 설정 - transform 변경설정*/
     transform: translate(23%, -17%) scale(.2);
@@ -136,7 +148,10 @@ body * {
     position: absolute;
     /* 모든 직계 하위요소는 absolute */
 }
-
+/* 각 몸에 글로우효과 넣기 */
+.ear,.body>div,.body>div>span{
+    box-shadow: 0 0 10px 5px aqua;
+}
 /* 눈공통 */
 .eye {
     /* 앱솔루트 top 값은 공통임 */
@@ -497,5 +512,105 @@ width: 100%;
     /* 부모는? .screen */
 }
 /* 2-2. 로봇설명박스 */
+.box-text{
+    /* 최대크기 800px */
+    max-width: 800px;
+    /* 박스 중앙 : 마영오 */
+    margin: 0 auto;
+    /* 하단 마진 200px */
+    margin-bottom: 200px;
+    /* 반투명 흰색배경 */
+    background-color: #ffffff73;
+    /* 글자색 흰색 */
+    color: #ffffff;
+    /* 글자그림자 */
+    text-shadow: 2px 2px 2px #000;
+    /* 패딩 : 15px 30px */
+    padding: 15px 30px;
+    /* 경계선 : 3px solid #fff */
+    border: 3px solid #fff;
+    /* 둥근모서리 : 20px */
+    border-radius: 20px;
+    /* 박스 그림자를 이용한 글로우효과 : 내부만 2개줌 */
+    box-shadow: inset 0 0 20px #0934ce,
+    inset 0 0 50px 10px #22e0c7;
+    /* 로봇보다 위 - 포지션 있어야 위에옴 */
+    position: relative;
+    
+
+}
+
+/* 2-2-1. 제목 */
+.box-text h2{
+    /* 스티키 포지션 */
+    /* top값 설정시 위치고정 */
+    position: sticky;
+    top: 15px;
+    /* 글자 : 35px 'Chakra Petch' */
+    font: 3.5rem 'Chakra Petch';
+    /* 글자색 lime */
+    color: lime;
+    /* 글자 중앙 정렬 */
+    text-align: center;
+    /* 배경색 반투명 */
+    background-color: #ffffff50;
+    /* 둥근모서리 20px */
+    border-radius: 20px;
+
+}
+/* 2-2-2. 출처 */
+.box-text small{
+    /* 글자체 : 'Chakra Petch' */
+    font: 1.2rem 'Chakra Petch';
+    /* 글자크기 12px -> rem */
+    /* 줄간격 : 3배*/
+    line-height: 3;
+    /* 글자색 : 노란색 */
+    color: yellow;
+    /* 블록변경 */
+    display: block;
+    /* 글자중앙 */
+    text-align: center;
+
+}
+/* 2-2-3.내용단락 */
+.desc{
+    /* 글자체 : 'barlow' */
+    font: 1.7rem 'barlow';
+    /* 글자크기 17px -> rem */
+    /* 줄간격 : 1.8배 */
+    line-height: 1.8;
+    /* 자간 : 1px */
+    letter-spacing: 1px;
+    /* 단어간격 : 2px */
+    word-spacing: 2px;
+    /* 
+        [ 다단 설정 ]
+        - 다중열 속성
+        -> column-count : 다중열 개수
+        -> column-rule : 다중열 구분선 (두께 종류 색상 - border랑 비슷)
+        -> column-gap : 다중열 사이간격
+     */
+     column-count: 3;
+     column-rule: 4px dotted #000;
+     column-gap: 55px;
+
+     /* 양쪽 정렬 : taj */
+     text-align: justify;
+     /* 단어 단위로 줄바꿈하므로 양쪽 정렬시 영어는 단어 깨기를 해줘야함
+     2byte인 한글, 일본어 등은 안깨도 잘 나옴. */
+     word-break: break-all;
+
+     /* 들여쓰기 : ti */
+     text-indent: 40px; 
+
+}
+
+/* 설명문단 첫글자 가상요소로 디자인변경 */
+.desc::first-letter{
+    font-size: 3rem;
+    font-weight: bold;
+    color: orange;
+}
 /*************************** 3. 하단 영역 ***************************/
 /* 3-1. 회사정보 */
