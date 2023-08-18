@@ -14,6 +14,8 @@
 html{
     font-size: 10px;
     /* 상대단위 rem 계산 편의를 위해 변경함 */
+    scroll-behavior: smooth;
+    /* 최상위요소인 html에 부드러운 스크롤적용 */
 }
 /* 초기화 */
 html,
@@ -57,7 +59,7 @@ body {
     width: 20vw;
     height: 20vw;
     z-index: 99; /* 제일위로 */
-    background: pink url(../images/robot_03.png)no-repeat center/160px;
+    background: pink url(../images/robot_03.png)no-repeat center/70%;
     border-radius: 50%;
     border: 2px solid #ccc;
 
@@ -80,7 +82,42 @@ body {
 }
 
 /* 1-2. 링크타이틀 */
-/* 1-3. 탑이동버튼 */
+/* 1-2. 탑이동버튼 */
+.btn-top{
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px outset #fff;
+    background-color: #ccc;
+    
+}
+.btn-top a{
+    display: block;
+    /* 디자인확장 */
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: blue;
+    font: 30px/90px 'Black Ops One';
+    /* 줄간격은 높이값 100px - 보더 10px = 90px (보더 값도 포함해서 계산되기 때문)*/
+    
+
+}
+/* 버튼 a요소 서식 */
+/* 버튼 마우스 오버시 */
+.btn-top:hover{
+    background-color: yellow;
+    border-style: inset;
+
+}
+/* 버튼 오버시 글자색 */
+.btn-top:hover a{
+    color: red;
+}
+
 /*************************** 2. 메인 영역 ***************************/
 .main-area {
     padding-top: 860px;
@@ -511,6 +548,80 @@ width: 100%;
     border: none;
     /* 부모는? .screen */
 }
+ /* 2-1-3. 링크타이틀 : 말풍선 모양  */
+ .link-title{
+    position: absolute;
+    top: 5vh;
+    right: -100px;
+    color: #2a6bc1;
+    font-size: 5vw;
+    background-color: #fff;
+    padding: 5vw 3vw;
+    border-radius: 50%;
+    border: 4px dashed orangered;
+    text-decoration: none;
+    /* 처음에 안보임 */
+    transform:scale(0);
+    /* transform축변경 :가로 세로*/
+    transform-origin: left bottom;
+ }
+
+ /* 가상요소로 삼각형 만들기 */
+.link-title::after{
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -14px;
+    transform: rotate(38deg);
+     /* 삼각형만들기 필수
+    - 양쪽방향 보더를 투명으로 한쪽방향 보더에 색
+    - 가로,세로값 0 */
+    width: 0;
+    height: 0;    
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-top: 113px solid orangered;
+
+}
+
+/* 마우스 오버시 배경색 변경 */
+.link-title:hover {
+    background-image: 
+    radial-gradient(darkgreen,darkorange);
+    color: #fff;
+}
+/* 
+    [ 원형 그라데이션 ]
+
+    - 기본형, 영역지정형은 박스모양을 따라감!
+
+    1) 기본형: 중앙중심, 모양은 박스크기에 맞춤
+    background-image: 
+        radial-gradient(색1,색2,색3,...);
+    - 시작색으로부터 중앙에서 시작됨
+
+    2) 영역 지정형:
+    background-image: 
+        radial-gradient(색1 몇%,색2 몇%,색3 몇%,...);
+    - 색 뒤에 한칸 띄고 %수치로 영역지정함
+
+    3) 그라데이션 모양을 원형으로 사용할 경우:
+    background-image: 
+        radial-gradient(circle,색1,색2,색3,...);
+    - circle 키워드를 첫번째에 사용함
+
+    4) 영역옵션 지정형: 중심점 변경
+    background-image: 
+        radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색3,...);
+    - 옵션4가지 : closest-side / farthest-side
+                closest-corner / farthest-corner
+                ___________________________________
+                - closest는 중심점으로 좀더 모아진것
+                - farthest는 중심점에서 멀리 퍼진것
+                - side와 corner는 경계선과 끝부분옵션임
+    - 가로위치, 세로위치 (중심점) - 단위는 px / %
+*/
+
 /* 2-2. 로봇설명박스 */
 .box-text{
     /* 최대크기 800px */
@@ -540,6 +651,36 @@ width: 100%;
 
 }
 
+/* [ 2. 원형 그라데이션 ]
+
+            - 기본형, 영역지정형은 박스모양을 따라감!
+
+            1) 기본형: 중앙중심, 모양은 박스크기에 맞춤
+            background-image: 
+                radial-gradient(색1,색2,색3,...);
+            - 시작색으로부터 중앙에서 시작됨
+
+            2) 영역 지정형:
+            background-image: 
+                radial-gradient(색1 몇%,색2 몇%,색3 몇%,...);
+            - 색 뒤에 한칸 띄고 %수치로 영역지정함
+
+            3) 그라데이션 모양을 원형으로 사용할 경우:
+            background-image: 
+                radial-gradient(circle,색1,색2,색3,...);
+            - circle 키워드를 첫번째에 사용함
+
+            4) 영역옵션 지정형: 중심점 변경
+            background-image: 
+                radial-gradient(옵션 at 가로위치 세로위치,색1,색2,색3,...);
+            - 옵션4가지 : closest-side / farthest-side
+                        closest-corner / farthest-corner
+                        ___________________________________
+                        - closest는 중심점으로 좀더 모아진것
+                        - farthest는 중심점에서 멀리 퍼진것
+                        - side와 corner는 경계선과 끝부분옵션임
+            - 가로위치, 세로위치 (중심점) - 단위는 px / %
+ */
 /* 2-2-1. 제목 */
 .box-text h2{
     /* 스티키 포지션 */
@@ -614,3 +755,27 @@ width: 100%;
 }
 /*************************** 3. 하단 영역 ***************************/
 /* 3-1. 회사정보 */
+#bottom-area{
+    position: relative;
+    text-align: center;
+    font: 3rem 'Black Ops One';
+    text-shadow: 2px 2px 2px #000;
+    color: white;
+    background-color: #00000063;
+    padding: 50px;
+}
+/* 속박스 가상요소로 아이콘 모양 넣기 */
+.bottom-area::before{
+    
+    content: '';    
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: pink url(../images/robot_03.png)no-repeat;
+    background-position: -7px 1px;
+    background-size: 50px;
+    /* 인라인요소간 세로 정렬 */
+    vertical-align: top;
+}
