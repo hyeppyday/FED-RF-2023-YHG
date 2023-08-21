@@ -24,12 +24,97 @@
             // 2-2. 출력요소 : #jexp
             var jexp = document.querySelector('#jexp');
 
-            // console.log('요소확인:',jumsu,jexp);
+            // 2-3. 칭찬스티커 : .jshow
+            var jshow = document.querySelector('.jshow');
+
+
+           console.log('요소확인:',jumsu,jexp,jshow);
 
             // 3. 입력값 읽어오기 ////////////
             var score = jumsu.value;
             // value속성 - 입력된 값을 읽기/쓰기
             console.log('입력된값:',score);
+
+            /***************************************** 
+             [ 입력값 유효성 검사하기! ]
+            1. 위치 : 입력값읽은 후 메시지 만들기 전
+            2. 검사내용 : 
+                (1) 빈값인지 여부검사
+                (2) 숫자인지 여부검사
+                (3) 숫자범위 검사(0~100)
+
+            *****************************************/
+           //매번 검사후 메시지 넣고 지우고 포커스 넣고 리턴
+           //같은 일을 하므로 메시지만 변경할 수 있게 함수를 만들어 준다
+
+           var validateFn = function(txt){
+            // 1. 메시지 출력하기
+            jexp.innerText = txt;
+                console.log(txt);
+
+                // 2. 기존 메시지 지우기
+                // 대상 : #jumsu -> jumsu변수
+                // input요소.value = 값
+                // 빈값을 넣으므로 값이 지워짐!
+                jumsu.value = ''; 
+
+                // 3. 포커스 입력창에 주기!(버튼클릭할 경우)
+                // 대상 : #jumsu -> jumsu변수
+                // input요소.focus()
+                jumsu.focus();
+
+                // 4. 글자색 초기화
+                // 대상: jexp
+                jexp.style.color = '#000';
+
+                // 5. 칭찬스티커 배경위치 초기화
+                // 대상: jshow
+                jshow.style.backgroundPosition = '-50% 0%';
+
+
+            }; ////////// validateFn 함수 ///////////
+
+            // (1) 빈값인지 여부검사
+            //스페이스 문자도 공백문자로 취급하므로
+            //이것을 제거하여 검사한다.
+            // 제거메서드는 : 트림() ->trim() :앞뒤 공백제거
+            if(score.trim()==''){
+                // 1. 메시지처리하기
+                validateFn('값을 꼭 입력하세요!');
+
+                // 2.함수를 나가라! 리턴! return!
+                // 리턴은 함수를 나가는 것!
+                // 함수내의 리턴 아래쪽 코드는 실행하지 않음!
+                // 따라서 위치가 매우 중요하다!!!
+                // return 값 -> 리턴시 뒤에 값을 쓰면
+                // 호출한 곳을 갈때 값을 가져갈 수 있다!
+                return;
+           } /////// if ////////
+
+            //(2)숫자인지 여부검사
+            // 숫자인지 여부 검사 JS내장함수 ->isNaN()
+            // is Not a Number? -> 숫자가 아닌가? -> isNaN
+            // 결과값을 숫자가 아니면 true
+            // false이면 숫자
+            console.log('숫자가아닌가?',isNaN(score));
+
+            if(isNaN(score)){
+                //1. 메시지 처리하기
+                validateFn('숫자만 입력하세요!');
+                //2.함수나가기
+                return;
+            };///////if///////////////////////////////
+            
+            //(3) 숫자범위 검사 (0~100)
+            //조건 : 0미만 이거나 100초과
+            if(score < 0 || score > 100){
+                //1. 메시지 처리하기
+                validateFn('0부터 100사이의 숫자만 입력하세요!');
+                //2.함수나가기
+                return;
+
+            }//////////////////////////if//////////////
+
 
             // 4. 메시지 만들기 ////////////
             // 점수에 따른 메시지를 if문으로 작성한다!
@@ -41,32 +126,40 @@
             // 글자색 변수
             var fontColor;
 
+            //위치변수
+            var bgPosition;
+
             // if문을 셋트로 작성시 구간처리 불필요!
             if(score >= 90){
                 message = '매우잘함';
                 fontColor = 'blue';
+                bgPosition = '100% 50%';
             } ////// if ////
             else if(score >= 80){
                 message = '잘함';
                 fontColor = 'green';
+                bgPosition = '100% 100%';
             }
             else if(score >= 70){
                 message = '보통';
                 fontColor = 'purple';
+                bgPosition = '50% 50%';
             }
             else if(score >= 60){
                 message = '노력요함';
                 fontColor = 'orange';
+                bgPosition = '50% 100%';
             }
             else{
                 message = '재시험';
                 fontColor = 'red';
+                bgPosition = '0% 0%';
             }
 
             // 메시지 완성하기 : 평가결과는 어쩌구...
             message = '평가결과는 ' + message;
 
-            console.log('결과:',message,fontColor);
+            console.log('결과:',message,fontColor,bgPosition);
 
             // if문을 따로 작성하면 적용범위를 줘야함!
             // if(score >= 80 && score < 90){
@@ -80,6 +173,11 @@
             // 6. 출력 글자색 변경하기 /////
             // 대상 : #jexp -> jexp변수
             jexp.style.color = fontColor;
+
+            // 7. 칭찬스티커 배경이미지 위치 변경하기 ////
+            // 대상 : .jshow ->jshow변수
+            jshow.style.backgroundPosition = bgPosition;
+            
 
         } /////////// jumsu 함수 /////////////////////
         /////////////////////////////////////////////
@@ -148,6 +246,32 @@
                 text-align: center;
                 background-image: linear-gradient(to bottom, lightgreen, lightsalmon);
             }
+
+            /* if문 박스 */
+            .bx-if{
+                position: relative;
+                /* 부모자격이 갖춰짐 */
+            }
+            /* 칭찬스티커박스 */
+            .jshow{
+                position: absolute;
+                top: -2vw;
+                left: 37vw;
+                width: 30vw;
+                height: 30vw;
+                outline: 2px solid red;
+                background: url(./images/ifshow.jpg)no-repeat;
+                transform: scale(.3);
+                /* 배경위치 */
+                /* 처음에 안보이게 */
+                background-position: -50% 0;
+                /* 배경크기 */
+                background-size: 300%;
+                /* 부모는? .bx-if */
+
+                /* 트랜지션 : 배경 위치만 적용(속성쓰기) */
+                transition: background-position 1s;
+            }
         </style>
         
     </head>
@@ -155,42 +279,46 @@
         <h1 class="tit">JS 제어문</h1>
         <hr />
         <!-- if문 연습 -->
-        <h2 class="tit">if문 연습</h2>
-        <h3 id="jexp">평가출력</h3>
-        <label for="jumsu">점수입력:</label>
-        <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3"
-        onkeypress="if(event.keyCode==13)jumsu()" />
+        <div class="bx-if">
+            <h2 class="tit">if문 연습</h2>
+            <h3 id="jexp">평가출력</h3>
+            <label for="jumsu">점수입력:</label>
+            <input type="text" id="jumsu" placeholder="점수를 입력하세요!" maxlength="3"
+            onkeypress="if(event.keyCode==13)jumsu()" />
+            <!-- 
+            [ onkeypress 이벤트 속성 ]
+            -> 키보드를 치면 발생하는 이벤트 속성
+            if조건문
+            조건식 : event.keyCode === 13
+            -> 키보드의 키코드가 13번이냐? 엔터키 눌렀냐?
+            -> 엔터키의 키코드는 13번이다!
+            -> true이면 jumsu() 라는 함수를 호출해라!
+            -> event 브라우저 내장객체 : 이벤트관련 객체
+    
+            참고) 키코드 참조: 아스키코드 
+            (리턴키는 carriage return)
+            https://www.w3schools.com/charsets/ref_html_ascii.asp
+         -->
+            
+    
+            <!-- 버튼클릭시 클릭이벤트 속성과 미리만든 함수를 연결한다! -->
+            <button class="sbtn" onclick="jumsu()">평가하기</button>
+    
+            <!-- 
+            [ label요소 ]
+            input요소의 설명라벨요소
+            - for속성 : 클릭시 아이디 input요소로 포커스이동
+    
+            [ input 요소 : 입력요소 ]
+            - type = "text" -> 글자입력창
+            - placeholder  -> 안내문구출력
+            - maxlength -> 최대입력 글자수 제한
+         -->
+    
+            <!-- 칭찬스티커 박스 -->
+            <div class="jshow"></div>
 
-        <!-- 
-        [ onkeypress 이벤트 속성 ]
-        -> 키보드를 치면 발생하는 이벤트 속성
-        if조건문
-        조건식 : event.keyCode === 13
-        -> 키보드의 키코드가 13번이냐? 엔터키 눌렀냐?
-        -> 엔터키의 키코드는 13번이다!
-        -> true이면 jumsu() 라는 함수를 호출해라!
-        -> event 브라우저 내장객체 : 이벤트관련 객체
-
-        참고) 키코드 참조: 아스키코드 
-        (리턴키는 carriage return)
-        https://www.w3schools.com/charsets/ref_html_ascii.asp
-     -->
-        
-
-        <!-- 버튼클릭시 클릭이벤트 속성과 미리만든 함수를 연결한다! -->
-        <button class="sbtn" onclick="jumsu()">평가하기</button>
-
-        <!-- 
-        [ label요소 ]
-        input요소의 설명라벨요소
-        - for속성 : 클릭시 아이디 input요소로 포커스이동
-
-        [ input 요소 : 입력요소 ]
-        - type = "text" -> 글자입력창
-        - placeholder  -> 안내문구출력
-        - maxlength -> 최대입력 글자수 제한
-     -->
-
+        </div>
 
         <br /><br />
         <hr />
