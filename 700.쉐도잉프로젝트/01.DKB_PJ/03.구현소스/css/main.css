@@ -22,12 +22,79 @@ body > div > * {
 
 /************* 2. 캐릭터소개 *************/
 #banner {
-    background-color: lightgreen;
+    background: url(../images/bg_mainvisual2.jpg) no-repeat center/auto 100%;
 }
 .banner .partbox {
     height: 530px;
 }
-/************* 3. 메인영역 : .group-part *************/
+
+
+/************* 3. 도깨비 메뉴박스 *************/
+
+/* 1-2-2. dokebi메뉴 */
+#dokebi-menu{
+    /* 스티키 포지션 - 상단스크롤 걸림! */
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+.dokebi-menu ul{
+    /* 플렉스박스 */
+    display: flex;
+    padding: 12px 0;
+}
+/* dokebi메뉴 상위메뉴a */
+.dokebi-menu ul>li>a{
+    color: #ccc;
+    font-size: 1.8rem;
+    display: block;
+    padding: 9px 24px;
+    /* 줄바꿈방지 */
+    white-space: nowrap;
+}
+/* dokebi-menu 상위li 오버시 a */
+.dokebi-menu ul>li:hover>a{
+    color: #222;
+}
+/* 하위메뉴가 있는 li만 표시하기 하위 표시하기 */
+.dokebi-menu ul>li.be-sub>a::after{
+    content: '∨';
+    display: inline-block;
+    transform: scale(.5,.3);
+    margin-left: 3px;
+}
+
+/* 현재 선택된 메뉴 a 클래스 */
+.dokebi-menu ul>li.on>a{
+    background: red;
+    color: white;
+    border-radius: 30px;
+    
+}
+/* 상위 li에 마우스 오버시 서브보이기 */
+.dokebi-menu ul>li:hover .dokebi-sub-menu{
+    display: block;
+}
+
+/* 도깨비 서브메뉴 */
+.dokebi-sub-menu{
+    position: absolute;
+    border: 1px solid red;
+    border-radius: 10px;
+    width: 180px;
+    background-color: #fff;
+    
+    /* 처음에 숨김 */
+    display: none;
+}
+.dokebi-sub-menu a{
+    display: block;
+    padding: 10px 15px;
+    font-size: 1.8rem;
+
+}
+
+/************* 4. 메인영역 : .group-part *************/
 #main {
     background-color: lightgoldenrodyellow;
 }

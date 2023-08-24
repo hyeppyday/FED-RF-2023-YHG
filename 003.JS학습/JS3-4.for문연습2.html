@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JS3-4.for문연습2 - 쇼핑몰 상품 리스트</title>
+        <!-- 외부 JS불러오기 -->
+        <script src="./js/for_ex2.js" defer></script>
+        <!-- 스타일시트 구역 -->
+        <style>
+            /************************************** 
+                [CSS에서 변수사용하기!]
+
+                1. 정의 : 같은 값을 사용하는 속성에
+                변수를 사용하여 반복작업을 줄여주기 위한
+                CSS에서만 사용되는 변수
+
+                2. 사용법 :
+
+                (1) 변수선언 및 세팅 구역
+                :root{
+                    --변수명:값;
+                    --변수명:값;
+                    --변수명:값;
+                }
+
+                (2) 변수호출
+                    -사용하고자 하는 속성값에 변수를
+                    아래처럼 호출
+                    var(--변수명)
+
+                    예) 
+                    :root{
+                        --my-color:red;
+                        --my-num:5;
+                    }
+                    
+                    #my{
+                        width:calc(1000px/var(--my-num));
+                    }
+
+                    h1{
+                        color: var(my-color);
+
+                    }
+                    .mymy{
+                        backgroung-color: var(my-color);
+                    }
+            **************************************/
+
+            /* 변수구역 */
+            :root{
+                /* 1. 분할개수 */
+                --sp-num:5;
+                /* 2. 보더색 */
+                --bd-color:gray;
+                /* 3. 타이틀 글자크기 */
+                --tit-font-size:40px;
+            }
+
+            /* 초기화 */
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            ul,
+            ol {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            /* 공사중 표시 */
+            body * {
+                outline: 1px dashed var(--bd-color);
+            }
+            /* 타이틀 */
+            .tit {
+                text-align: center;
+                font-size: var(--tit-font-size);
+            }
+            /* 쇼핑몰 리스트박스 */
+            .list-box {
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+            /* 플렉스박스 */
+            .list-box ul {
+                display: flex;
+                /* 플렉스 랩핑 - 랩핑하면 flex-shrink 값이 
+            자동으로 0으로 전환되어 크기가 강제 조정되지 않는다 */
+                flex-wrap: wrap;
+                /* 
+            [사이간격주기 속성 : gap]
+            gap : 위아래 양쪽; (2개 쓸경우)
+            gap : 한번에모든방향; (1개 쓸경우)
+
+            간격단위는 여러가지 사용 가능
+
+             */
+                gap: 3vw 2vw;
+            }
+            .list-box li {
+                /* 사이간격 gap값을 고려한 계산법 */
+                flex-basis: calc((100% - 2vw * (var(--sp-num) - 1)) / var(--sp-num));
+                /* flex-basis: calc((100% - 2vw * 3) / 4); */
+                /* flex-basis: calc((100% - 가로간격 * 분할수-1)/분할수); */
+
+                /* flex-basis: calc(100%/4); */
+                /* 등분할 비율을 %로 줄때 직접 계산하기보다
+            calc()를 이용하여 분할하자 ! */
+
+                /* 부모자격 : .item-info */
+                position: relative;
+            }
+            /* 이미지 채우기 */
+            .list-box img {
+                width: 100%;
+                /* 등분할된 박스의 가로를 채움
+            이미지의 height값은 자동 비율 유지 */
+            }
+            /* 상품정보박스 */
+            .item-info {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                color: #fff;
+                text-align: center;
+                background-color: #00000052;
+            }
+
+            /* 1300이하 미디어쿼리 시작 */
+@media screen and (max-width:1300px){
+    /* 분할개수 조정하기 - 변수만 업데이트*/
+    :root{
+        --sp-num:4;
+        --bd-color:pink;
+    }
+    
+}
+            /* 1300이하 미디어쿼리 종료 */
+
+
+            /* 1100이하 미디어쿼리 시작 */
+@media screen and (max-width:1100px){
+    /* 분할개수 조정하기 - 변수만 업데이트*/
+    :root{
+        --sp-num:3;
+        --bd-color:rgb(33, 81, 158);
+    }
+    
+}
+            /* 1100이하 미디어쿼리 종료 */
+
+            /* 700이하 미디어쿼리 시작 */
+@media screen and (max-width:700px){
+    /* 분할개수 조정하기 - 변수만 업데이트*/
+    :root{
+        --sp-num:2;
+        --bd-color:rgb(38, 194, 64);
+    }
+    
+}
+            /* 700이하 미디어쿼리 종료 */
+
+
+            /* 500이하 미디어쿼리 시작 */
+@media screen and (max-width:500px){
+    /* 분할개수 조정하기 - 변수만 업데이트*/
+    :root{
+        --sp-num:1;
+        --bd-color: orange;
+    }
+    
+}
+            /* 500이하 미디어쿼리 종료 */
+
+            
+
+        </style>
+    </head>
+    <body>
+        <h1 class="tit">JS3-4.for문연습2 - 쇼핑몰 상품 리스트</h1>
+        <!-- 쇼핑몰 리스트박스 -->
+        <section class="list-box">
+            
+        </section>
+    </body>
+</html>
