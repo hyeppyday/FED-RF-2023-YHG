@@ -71,8 +71,33 @@ h2.stit {
 .afig {
     margin-bottom: 20px;
 }
+/* .wrap-afig{
+    width: 99vw;
+    height: 47vw;
+
+} */
+/* .afig-main{
+    animation: fadein 3s forwards;
+    margin-top: -10vw;
+    width: 80vw;
+    margin: 0 auto;
+    
+    
+} */
+@keyframes fadein {
+    from {
+        
+        opacity: 0;
+    }
+    to {
+        margin-top: 0vw;
+        opacity: 1;
+    }
+}
 .afig img {
     width: 100%;
+    animation: fadein 3s forwards;
+    
 }
 /* 기사 이미지 설명 */
 .afig figcaption {
