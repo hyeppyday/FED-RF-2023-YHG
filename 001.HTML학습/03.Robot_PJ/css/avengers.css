@@ -68,6 +68,7 @@ body * {
     position: absolute;
     top: calc(50% - 150px/2); /* 부모는 ? .avengers-box */
     left: calc(50% - 150px/2); /* 부모박스의 정중앙에 */
+    
     width: 150px;
     height: 150px;
 
@@ -77,6 +78,7 @@ body * {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    box-shadow: 0 0 20px 10px cornflowerblue;
     object-fit: cover;
 
     /* 
@@ -90,3 +92,65 @@ body * {
             유사한 효과를 준다! 
     */
 }
+
+.txt{
+    position: absolute;
+    top: 50%;
+    /* transform: translateY(-50%); -> 밑에서 위로 올라오는 효과를 위해 위치변경*/
+    transform: translateY(25%);
+    right: 110%;
+    width: 320px;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    background-color: #ffffff63;
+    border-radius: 15px;
+    text-shadow: 1px 1px 1px #000;
+    font-family: 'Single Day', cursive;
+
+    /* 숨기기 설정 -> 숨길때 패딩,보더는 안숨겨질 때 감싸고있는 박스에 대신 디자인을 주기 */
+    height: 0;
+    overflow: hidden;
+
+    /* 트랜지션 */
+    transition: .4s ease-in-out;
+}
+
+    /* 상위박스 .hero오버시 설명보이기 */
+    .hero:hover .txt{
+        height: 200px;
+        transform: translateY(-50%);
+    }
+
+/* 패딩과 보더는 하위박스에 주고 완전히 숨기기 */
+.txt>div{
+    padding: 2rem;
+}
+
+/* 설명박스 위치 오른쪽 변경 클래스 */
+.txt.right{
+    right: auto;
+    left: 110%;
+}
+/* 캐릭터 타이틀 */
+.txt h3{
+    font-size: 2.5rem;
+    text-align: center;
+    color: cyan;
+}
+/* .hero 순서별 위치값 세팅 */
+.hero:nth-child(1){
+    transform: translate(-170%,-130%); /* 개별위치 이동값 */
+}
+.hero:nth-child(2){
+    transform: translate(-170%,130%); /* 개별위치 이동값 */
+}
+.hero:nth-child(3){
+    transform: translate(0%,253%); /* 개별위치 이동값 */
+}
+.hero:nth-child(4){
+    transform: translate(170%,130%); /* 개별위치 이동값 */
+}
+.hero:nth-child(5){
+    transform: translate(170%,-130%); /* 개별위치 이동값 */
+}
+
