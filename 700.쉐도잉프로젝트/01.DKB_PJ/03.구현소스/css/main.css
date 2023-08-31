@@ -80,7 +80,7 @@ body > div > * {
 .dokebi-sub-menu{
     position: absolute;
     border: 1px solid red;
-    border-radius: 10px;
+    border-radius: 19px;
     width: 180px;
     background-color: #fff;
     
@@ -94,7 +94,29 @@ body > div > * {
 
 }
 
-/************* 4. 메인영역 : .group-part *************/
+/************* 4. 메인배너  *************/
+/* 캐릭터 파트박스 */
+.cat-area{
+    position: relative;
+    /* 부모자격 */
+}
+.cat-box{
+    position: absolute;
+    bottom:5%;
+    
+    /* 플렉스박스 */
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
+}
+/* 개별 캐릭터 박스 */
+.cat-box article{
+    width: calc(100%/4);
+    aspect-ratio: 2/1.5;
+    outline: 2px dashed blue;
+}
+/************* 5. 메인영역 : .group-part *************/
 #main {
     background-color: lightgoldenrodyellow;
 }
