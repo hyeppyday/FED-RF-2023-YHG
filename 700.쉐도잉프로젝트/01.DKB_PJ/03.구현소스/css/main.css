@@ -24,10 +24,115 @@ body > div > * {
 #banner {
     background: url(../images/bg_mainvisual2.jpg) no-repeat center/auto 100%;
 }
-.banner .partbox {
-    height: 530px;
+
+/* 캐릭터 파트박스 */
+.cat-area{
+    position: relative;
+    /* 부모자격 */
+    aspect-ratio: 2/1;
+    /* 파트박스에 비율만들기
+        -> height 값을 절대!! 주지말것!! */
+    
+}
+.cat-box{
+    position: absolute;
+    bottom:5%;
+    
+    /* 플렉스박스 */
+    display: flex;
+    flex-wrap: wrap;
+    /* 진행방향 정렬 */
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+/* 개별 캐릭터 박스 */
+.cat-box article{
+    position: relative;
+    width: calc(95%/4);
+    /* 개별박스 비율설정 : height설정하지않기!!! */
+    aspect-ratio: 2/1.2;
+    outline: 2px dashed blue;
 }
 
+/* 캐릭터 컨텐츠 박스 */
+.cat-content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    /* 트랜지션 */
+    transition: height .4s ease-in-out;
+}
+
+/* 개별 상위 박스 오버시 컨텐트 박스 설명보이기 */
+.cat-box article:hover .cat-content{
+    height: 200%;
+}
+
+.cat-content .part{
+    flex: 1;
+    /* 등분할 */
+
+    
+}
+/* 이미지설명박스 - 캐릭터이미지 */
+.img-box>img{
+    width: 100%;
+}
+/* 이미지설명박스 */
+.img-box figcaption{
+    text-align: center;
+    margin-top: -20%;
+    /* 싸고있는 박스 높이를 기준한 %로 마진을 설정함
+    동적인 크기변경시 마진도 변경되어야 위치가 일정함 */
+}
+/* 이미지설명박스 - 캐릭터이름이미지 */
+.img-box figcaption img{
+    width: 40%;
+}
+/* 마지막 이미지(진한글자) 숨기기 */
+.img-box figcaption img:last-child{
+    display: none;
+
+}
+/* 개별박스에 오버시(진한글자) 보이기 */
+.cat-box article:hover
+.img-box figcaption img:last-child{
+ display: inline;
+}
+/* 개별박스에 오버시(진한글자) 숨기기 */
+.cat-box article:hover
+.img-box figcaption img:first-child{
+ display: none;
+}
+
+/* 캐릭터 설명박스 */
+.desc-box{
+    background: url(../images/eachBG.jpg)no-repeat bottom/cover;
+    border-radius: 10px 5px 5px 10px;
+    height: 50%;
+    overflow: auto; /* 스크롤바 생성 (크기 맞춤) */
+}
+/* 캐릭터 타이틀 */
+.desc-box h3{
+    font-family: 'Gugi';
+    font-size: min(2.4rem,1.7vw);
+    font-weight: normal;
+    white-space: nowrap;
+    padding: 15px 10px 5px;
+    letter-spacing: -1px;
+}
+/* 캐릭터 설명박스 */
+.desc-box p{
+    font-family: 'single Day','ZCOOL KuaiLe';
+    font-size: min(11.8rem,1.3vw);
+    line-height: 1.6;
+    padding: min(1vw,1.5rem);
+    text-align: justify;
+}
 
 /************* 3. 도깨비 메뉴박스 *************/
 
@@ -95,27 +200,7 @@ body > div > * {
 }
 
 /************* 4. 메인배너  *************/
-/* 캐릭터 파트박스 */
-.cat-area{
-    position: relative;
-    /* 부모자격 */
-}
-.cat-box{
-    position: absolute;
-    bottom:5%;
-    
-    /* 플렉스박스 */
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    margin: 0 auto;
-}
-/* 개별 캐릭터 박스 */
-.cat-box article{
-    width: calc(100%/4);
-    aspect-ratio: 2/1.5;
-    outline: 2px dashed blue;
-}
+
 /************* 5. 메인영역 : .group-part *************/
 #main {
     background-color: lightgoldenrodyellow;
