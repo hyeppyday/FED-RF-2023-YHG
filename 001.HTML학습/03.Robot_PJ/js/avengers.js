@@ -10,7 +10,7 @@ const qs = x => document.querySelector(x);
 const qsa = x => document.querySelectorAll(x);
 
 // 어벤저스 캐릭터 박스 셋팅하기
-// 대상선정 : .avengers-box
+// 1. 대상선정 : .avengers-box
 const avengers = qs('.avengers-box');
 
 console.log('대상:',avengers);
@@ -52,6 +52,47 @@ console.log(hcode);
 
 // 3. 대상에 html넣어 출력하기
 avengers.innerHTML = hcode;
+
+// 4. 로딩후 2초후 avengers-box의 클래스 on 넣기 
+setTimeout(() => {
+    avengers.classList.add('on');
+}, 2000);
+
+// 5. 타이틀 애니 위해 한글자씩 싸기
+// 대상 : .t1
+let mytit = qs('.t1');
+let my_text = mytit.innerText;
+
+// 글자담기변수
+let tit_one = '';
+
+// for of문으로 한글자씩 순회하기
+for(let x of my_text){
+    console.log(x);
+    tit_one += `<span>${x}</span>`;
+} //////// for of /////////////////
+
+
+console.log(tit_one);
+
+//다시 타이틀에 넣기
+mytit.innerHTML = tit_one;
+
+// 생성된 span요소 선택
+let new_span = qsa('.t1 span')
+// 셋팅된 span 요소를 돌면서 하나씩 transition-delay시간
+// 일정시간 간격으로 주기!
+new_span.forEach((ele,idx)=>{
+    ele.style.transitionDelay = (0.1*idx)+'s';
+});
+
+// 어벤져스 박스 나올때까지 (5초) 기다린 후 
+// span 의 transform 변경하기 + .hero 오버시 설정 적용되도록 .active 주기
+setTimeout(() => {
+    // for(let x of new_span) x .style.transform = 'translateY(0%) scale(1)';
+    mytit.classList.add('on');
+    avengers.classList.add('active');
+}, 5000);
 
  /************************************************* 
                 [ 객체를 위한 for in 문 ]
