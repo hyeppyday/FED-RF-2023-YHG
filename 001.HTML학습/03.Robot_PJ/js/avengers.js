@@ -4,6 +4,10 @@
 const qs = x => document.querySelector(x);
 const qsa = x => document.querySelectorAll(x);
 
+// 새로고침시 맨위로 이동
+setTimeout(() => {
+    window.scrollTo(0,0)
+}, 500);
 window.addEventListener('wheel',(e)=>{
     // 기본기능 막기 : preventDefault()
     e.preventDefault();
@@ -16,6 +20,14 @@ window.addEventListener('wheel',(e)=>{
     // window.innerHeight*(e.wheelDelta<0?1:0)
     // 윈도우높이값 * 음수명 1곱하고 양수면 0곱함
     // 아랫방향은 윈도우높이값만큼 가고 윗방향은 위치값 0임!
+
+    // 두번째 페이지일때 동영상 플레이하기
+    if(e.wheelDelta<0){ //아래로 내려갈때 자동플레이
+        qs('.trailer-box iframe').src='https://www.youtube.com/embed/Ko2NWhXI9e8?autoplay=1'
+    }////////////////// if //////////////////////////
+    else{ // 위로 올라올때 멈춤
+        qs('.trailer-box iframe').src='https://www.youtube.com/embed/Ko2NWhXI9e8'
+    }///////////////// else /////////////////////////
 },{passive:false});
 // passive:false 설정값 변경을 해야
 // window,document,body 이 세가지 중요객체에 대하여
@@ -27,7 +39,7 @@ window.addEventListener('wheel',(e)=>{
 // 따라서 유튜브 박스 영역에서 wheel하면 휠을 막아줘야함
 // 이벤트는 위로 전달되므로 (이벤트 버블링)이를 막아준다!
 // 막는 방법은 stop propagation 사용 !
-qs('.trailer-box').addEventListener('wheel',e=>{e.stopPropagation()});
+// qs('.trailer-box').addEventListener('wheel',e=>{e.stopPropagation()});
 
 // 초기 데이터 셋팅하기
 // 데이터 : 어벤저스 데이터 - data.js > character
