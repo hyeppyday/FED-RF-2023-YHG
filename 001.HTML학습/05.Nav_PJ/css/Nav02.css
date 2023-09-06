@@ -1,0 +1,142 @@
+@charset "utf-8";
+
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
+/* 네비게이션 유형 1 CSS - nav01.css */
+
+html,
+body,
+h1 {
+    margin: 0;
+    padding: 0;
+}
+h1.tit {
+    text-align: center;
+    padding: 20px;
+}
+
+/* ul,ol 초기화 : 3無 */
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/* a요소 공통 */
+a {
+    color: #222;
+    text-decoration: none;
+}
+body {
+    background-color: palegoldenrod;
+    height: 200vh;
+}
+
+/* 개별셋팅 */
+
+/* 메뉴박스 */
+.gnb {
+    position: sticky;
+    top: 0;
+    padding: 10px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+    /* 하단 컨텐츠보다 상위메뉴는 항상 위!! */
+    z-index: 999;
+}
+.gnb > ul {
+    /* flex 박스 */
+    display: flex;
+    justify-content: center;
+    font-family: "Nanum Gothic", sans-serif;
+    /* 줄바꿈 방지 */
+    white-space: nowrap;
+}
+
+/* 상위메뉴 a */
+.gnb > ul > li > a {
+    /* 부모자격 */
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* 상위 li에 가상요소로 서브배경만들기 */
+.gnb > ul > li::after {
+    content: "";
+    position: absolute;
+    /* 부모는? .gnb -> sticky포지션이니까 ! */
+    left: 0;
+    width: 100%;
+    height: 60px;
+    margin-top: 11px;
+    background-color: #ffffff;
+    border-bottom: 3px solid palevioletred;
+    /* 처음에 안보임 */
+    display: none;
+}
+/* 상위메뉴 오버시 보이기 */
+.gnb>ul>li:hover::after{
+    display: block;
+}
+/* 오버시 */
+.gnb > ul > li > a:hover {
+    color: #fbad69;
+}
+
+/* 가상요소 밑줄 */
+.gnb > ul > li > a:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 52px;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fbad69;
+}
+
+/* 서브메뉴 */
+.smenu {
+    display: none;
+    position: absolute;
+    padding-top: 11px;
+    z-index: 1;
+}
+/* 5번째 메뉴부터 서브메뉴 위치변경하기 */
+.gnb>ul>li:nth-child(4)~li .smenu{
+    right: 20%;
+}
+/* 상위메뉴 오버시 하위메뉴 보이기 */
+.gnb>ul>li:hover .smenu{
+    display: block;
+}
+/* 서브메뉴 ul */
+.smenu ul {
+    display: flex;
+}
+/* 서브메뉴 li */
+.smenu li {
+    padding: 16px 10px;
+}
+/* 서브메뉴 a */
+.smenu a {
+    display: block;
+    color: #000000;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+.smenu a:hover {
+    background-color: palevioletred;
+    color: #fff;
+}
+
+/* 컨텐츠 박스 */
+.cont {
+    position: relative;
+    /* 비율적용 */
+    aspect-ratio: 16/9;
+    background: url(../images/visual_img_gansam.jpg) no-repeat center/cover;
+}
