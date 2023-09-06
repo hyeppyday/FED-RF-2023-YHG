@@ -17,8 +17,94 @@ body{
 }
 
 /**************** 1.상단영역 ****************/
-
+.header{
+    height: 80px;
+    background: url(../images/curtain.jpg);
+}
+/* 로고 */
+.tit{
+    color: aquamarine;
+    font-size: 40px;
+    font-family: 'Jua', sans-serif;
+    font-weight: normal;
+    text-align: center;
+    line-height: 80px;
+    text-shadow: 0 0 4px rgb(163, 249, 220);
+    animation: tit-ani 1s ease-in infinite alternate;
+    
+}
+@keyframes tit-ani{
+    to{
+        text-shadow: 0 0 20px rgb(163, 249, 220);
+    
+}}
 /**************** 2.메인영역 ****************/
+.main{
+    height: 788px;
+    background: url(../images/bg.jpg)no-repeat center;
+    position: relative;
+}
+.screen{
+    position: absolute;
+    top: 135px;
+    left: 180px;
+    width: 702px;
+    height: 398px;
+    background-color: #000;
 
+}
+.screen iframe{
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.poster-menu{
+    position: absolute;
+    width: 700px;
+    left: 50%;
+    bottom: 5%;
+    transform: translateX(-50%);
+}
+.poster-menu ul{
+    display: flex;
+    /* 가로사이 간격 */
+    gap: 0 10px;
+}
+.poster-menu >ul>li{
+    /* 등분할 */
+    flex: 1;
+    /* 앱솔루드 영화정보 부모자격요소가 숨길수있다 */
+    overflow: hidden;
+    position: relative;
+}
+.poster-menu img{
+    /* li에 이미지 가로채우기 */
+    width: 100%;
+}
+.mv-info{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #0905056d;
+    top: 100%; /* 아랫쪽 바깥에 위치 */
+    /* 부모는 싸고있는 li */
+    text-align: center;
+
+    /* 트랜지션 */
+    transition: top .3s ease-out;
+}
+.poster-menu>ul>li:hover .mv-info{
+    top: 0;
+}
+.mv-info ol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    gap: 7% 0;
+}
 /**************** 3.하단영역 ****************/
+.footer{
+    height: 100px;
+}
 
