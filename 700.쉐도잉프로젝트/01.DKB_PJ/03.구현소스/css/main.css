@@ -202,9 +202,7 @@ body > div > * {
 /************* 4. 메인배너  *************/
 
 /************* 5. 메인영역 : .group-part *************/
-#main {
-    background-color: lightgoldenrodyellow;
-}
+
 /*************************** 방송편성소개파트 ***************************/
 .main .group-part-01 .partbox {
     height: 455px;
@@ -218,8 +216,8 @@ body > div > * {
 .live-box ul{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    grid-column-gap: 1.6rem;
-    grid-row-gap: 1.6rem;
+    grid-column-gap: 24px;
+    grid-row-gap: 48px;
     
     
 }
@@ -231,6 +229,7 @@ body > div > * {
 .live-box figcaption{
     font-size: 2rem;
     font-weight: 500;
+    padding-top: 14px;
 }
 /*************************** 대표이미지파트 ***************************/
 .main .group-part-04 .partbox {
