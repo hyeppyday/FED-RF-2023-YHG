@@ -205,23 +205,38 @@ body > div > * {
 #main {
     background-color: lightgoldenrodyellow;
 }
-/* 방송편성소개파트 */
+/*************************** 방송편성소개파트 ***************************/
 .main .group-part-01 .partbox {
     height: 455px;
 }
-/* 미리보기파트 */
+/*************************** 미리보기파트 ***************************/
 .main .group-part-02 .partbox {
     height: 298px;
 }
-/* 현장포토파트 */
-.main .group-part-03 .partbox {
-    height: 300px;
+/*************************** 현장포토파트 ***************************/
+
+.live-box ul{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-column-gap: 1.6rem;
+    grid-row-gap: 1.6rem;
+    
+    
 }
-/* 대표이미지파트 */
+.live-box img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+.live-box figcaption{
+    font-size: 2rem;
+    font-weight: 500;
+}
+/*************************** 대표이미지파트 ***************************/
 .main .group-part-04 .partbox {
     height: 542px;
 }
-/* 최신동영상파트 */
+/*************************** 최신동영상파트 ***************************/
 .main .group-part-05 .partbox {
     height: 376px;
 }
