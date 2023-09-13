@@ -52,5 +52,6 @@ http://h4ani.com/default/00/01.php (메뉴참고)
 https://www.thepinkfongcompany.com/ (메뉴참고)
 http://atoonz.net/ (구성참고)
 https://www.laneige.com/kr/ko/index.html (기능 참고)
+https://tombap8.github.io/KNG-FED211/804.GITA-FED221_PF/%EC%9B%90%ED%95%98%EB%82%98/source/index.html (커서 애니메이션)
 
 JS4-1 배열과 객체 => 클릭시 동영상 띄우기 (암전효과)

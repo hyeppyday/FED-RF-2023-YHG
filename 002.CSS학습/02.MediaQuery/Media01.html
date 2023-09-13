@@ -127,7 +127,6 @@
                 </head>
 
         */
-
             /* 초기화 */
             html,
             body {
@@ -225,7 +224,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 1100px이하";
-                    color: rgb(19, 150, 100);
+                    color: lime;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(2) {
@@ -238,16 +237,12 @@
             }
             /* 1100px 이하 미디어쿼리 끝 */
 
-            /* 1100px 이하 미디어쿼리 시작 */
-
-            /* 1100px 이하 미디어쿼리 끝 */
-
             /* 1000px 이하 미디어쿼리 시작 */
             @media screen and (max-width: 1000px) {
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 1000px이하";
-                    color: rgb(218, 181, 35);
+                    color: darkmagenta;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(3) {
@@ -265,7 +260,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 900px이하";
-                    color: rgb(50, 14, 158);
+                    color: darkorange;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(4) {
@@ -283,7 +278,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 850px이하";
-                    color: rgb(175, 38, 202);
+                    color: darkseagreen;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(5) {
@@ -301,7 +296,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 830px이하";
-                    color: rgb(199, 46, 94);
+                    color: darkkhaki;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(6) {
@@ -319,7 +314,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 810px이하";
-                    color: rgb(19, 63, 150);
+                    color: darkred;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(7) {
@@ -337,7 +332,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 790px이하";
-                    color: rgb(151, 242, 154);
+                    color: lawngreen;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(8) {
@@ -355,7 +350,7 @@
                 /* 1. 타이틀 변경하기 */
                 .tit::after {
                     content: "최대 770px이하";
-                    color: rgb(156, 60, 36);
+                    color: darkgoldenrod;
                 }
                 /* 2. 기존이미지 숨기기 */
                 .screen img:nth-child(9) {
@@ -381,16 +376,14 @@
             *****************************************/
 
             /* 세로모드 시작 */
-            @media screen and 
-            (orientation: portrait) and (max-width: 1000px) {
-                /* TV화면 박스 배경변경 */
+            @media screen and (orientation: portrait) and (max-width: 1000px) {
+                /* tv화면 박스 배경변경 */
                 .bx {
                     background-position-y: top;
                     background-size: auto 60%;
-                    
                 }
                 /* 스크린 위치변경 */
-                .screen{
+                .screen {
                     top: 130px;
                 }
             }
@@ -400,23 +393,22 @@
             @media screen and 
             (orientation: landscape) and (max-width: 1000px) {
                 /* 타이틀 */
-                .tit{
-
-                    text-align : left;
+                .tit {
+                    text-align: left;
                     text-indent: 15px;
                 }
-                /* TV화면 박스 배경변경 */
+                /* tv화면 박스 배경변경 */
                 .bx {
                     background-position: center -11%;
                     background-size: auto 54%;
-                    
                 }
                 /* 스크린 위치변경 */
-                .screen{
+                .screen {
                     top: 25%;
-                    transform: translate(-57%);
+                    transform: translateX(-57%);
                 }
             }
+
             /* 가로모드 끝 */
         </style>
     </head>
