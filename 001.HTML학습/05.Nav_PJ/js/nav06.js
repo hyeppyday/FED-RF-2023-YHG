@@ -35,17 +35,17 @@ for (let x in mdata) {
             <h2>
               <div class="stit">${x}</div>
               <a href="#">전체보기</a>
+              </h2>
               <div class="swrap">
               <!-- 2차메뉴 dl생성 -->
               ${makeCode(mdata[x])}
                 
               </div>
-            </h2>
           </aside>
         </div>
       </li>
   </ul>
-          `;
+          `
 } ////////////////////// for in ///////////////////////////
 
 //확인
@@ -113,3 +113,35 @@ gnbBox.innerHTML = hcode;
 // console.log(cc,Array.isArray(cc));
 
 // ul>li>a[href='#']{1차}+.smenu>aside.smbx>h2>(.stit{1차}+a[href='#']{전체보기})+.swrap>dl>dt{2차}+dd>a[href='#']{3차}{요기}
+
+
+/************************************* 
+  [ 상위메뉴 li오버시 하위메뉴 보이기 ]
+  이벤트 대상: .gnb>ul>li
+  변경 대상: .smenu
+*************************************/
+// 1. 대상선정
+const gnb = domFn.qsa('.gnb>ul>li');
+
+// 2. 이벤트 설정하기
+// 이벤트 종류: mouseover / mouseout
+gnb.forEach(ele=>{
+  domFn.addEvt(ele,'mouseover',overFn);
+  domFn.addEvt(ele,'mouseout',outFn);
+});
+
+// 3.함수만들기
+function overFn(){
+  // console.log('오버',this);
+  // 1.하위 .smbx 높이값 알아오기
+  let hv = domFn.qsEl(this,'.smbx').clientHeight;
+  // console.log('높이:',hv);
+  // 2.하위 서브메뉴박스 만큼 .smenu 높이값 주기
+  domFn.qsEl(this,'.smenu').style.height = hv + 'px';
+} //////////// overFn 함수 ////////////
+
+function outFn(){
+  // console.log('아웃',this);
+  // 서브메뉴 박스 높이값 0만들기!
+  domFn.qsEl(this,'.smenu').style.height = '0px';
+} //////////// outFn 함수 ////////////
