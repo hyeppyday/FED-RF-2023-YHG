@@ -48,14 +48,13 @@ function loadFn() {
   console.log("대상:", liveBox);
 
   // 2. 현장포토 데이터를 기반으로 HTML 코드 만들기
-  let hcode = '<ul>';
+  let hcode = "<ul>";
 
   // 반복코드 만들기 ////////
   // 현장포토 데이터 - data_drama.js 에서 가져옴
-  liveData.forEach(val=>{
+  liveData.forEach((val) => {
     // html변수에 계속 넣기
-    hcode += 
-    `
+    hcode += `
       
        <li>
            <figure>
@@ -67,10 +66,89 @@ function loadFn() {
       `;
   }); ///////////// forEach ///////////////////
 
-  hcode += '</ul>';
+  hcode += "</ul>";
 
-//   console.log(hcode);
+  //   console.log(hcode);
 
-// 3. 대상박스에 html코드 넣기
-liveBox.innerHTML = hcode;
+  // 3. 대상박스에 html코드 넣기
+  liveBox.innerHTML = hcode;
 } ///////////////// loadFn 함수 ///////////////////
+
+//[ GNB 서브메뉴 셋팅하기 ]
+// 구조 : div.smenu > aside.smbx > h2{1차메뉴} + (ol>li>a{2차메뉴})
+
+// 1. 대상선정 : .gnb > ul > li
+// 서브메뉴 넣을 li는 하위 a요소의 텍스트가 gnbData 속성명 1차 메뉴와
+// 일치하는 경우 하위 메뉴를 넣어준다 !
+const gnbList = domFn.qsa(".gnb>ul>li");
+console.log("메뉴:", gnbList, "/데이터:", gnbData);
+
+// 2. 대상에 하위메뉴 태그 만들기
+gnbList.forEach((ele) => {
+  // 1. 하위 a요소 텍스트 읽기
+  let atxt = domFn.qsEl(ele, "a").innerText;
+  // 2. GNB 데이터 읽기
+  let gData = gnbData[atxt];
+
+  // console.log('텍스트:',atxt,gData);
+
+  // 3. 해당 서브 데이터가 있을 경우 태그 만들어 넣기
+  // Array.isArray(gData)로 배열여부를 확인함!
+  // 배열값은 태그를 만들어 그자리에 출력 : 배열.map().join('')
+  if (gData) {
+    // 데이터 없으면 undefined -> false처리!
+    console.log("만들어!", atxt);
+    ele.innerHTML += `
+      <div class="smenu">
+        <aside class="smbx">
+          <h2>${atxt}</h2>
+            <ol>
+            ${gData
+              .map(
+                (val) =>
+                `
+                <li>
+                  <a href="#">${val}</a>
+                </li>
+                `
+              ).join("")}  
+            </ol>
+          </aside>
+      </div>
+      `;
+  } ///////////////// if ////////////////////
+}); ////////////// forEach /////////////////////
+
+/************************************* 
+  [ 상위메뉴 li오버시 하위메뉴 보이기 ]
+  이벤트 대상: .gnb>ul>li
+  변경 대상: .smenu
+*************************************/
+// 1. 대상선정
+const gnb = domFn.qsa(".gnb>ul>li");
+
+// 2. 이벤트 설정하기
+// 이벤트 종류: mouseover / mouseout
+gnb.forEach((ele) => {
+  // 서브메뉴가 있을 때만 이벤트 설정하기 !!!
+  if (domFn.qsEl(ele, ".smenu")) {
+    domFn.addEvt(ele, "mouseover", overFn);
+    domFn.addEvt(ele, "mouseout", outFn);
+  }
+});
+
+// 3.함수만들기
+function overFn() {
+  // console.log('오버',this);
+  // 1.하위 .smbx 높이값 알아오기
+  let hv = domFn.qsEl(this, ".smbx").clientHeight;
+  // console.log('높이:',hv);
+  // 2.하위 서브메뉴박스 만큼 .smenu 높이값 주기
+  domFn.qsEl(this, ".smenu").style.height = hv + "px";
+} //////////// overFn 함수 ////////////
+
+function outFn() {
+  // console.log('아웃',this);
+  // 서브메뉴 박스 높이값 0만들기!
+  domFn.qsEl(this, ".smenu").style.height = "0px";
+} //////////// outFn 함수 ////////////
