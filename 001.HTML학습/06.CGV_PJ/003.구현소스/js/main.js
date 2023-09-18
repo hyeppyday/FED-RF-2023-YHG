@@ -71,17 +71,25 @@ pmenu.forEach((ele) => {
 // 변경내용 : 버튼 클릭시 .gmap에 클래스 on 넣기
 //           닫기 버튼 클릭시 .gmap에 클래스 on 빼기
 
-// 1. 대상선정
+// 1. 대상선정 //
 const btnMap = domFn.qs('.btn-map');
 const gmap = domFn.qs('.gmap');
 const cbtn = domFn.qs('.cbtn');
 console.log('대상:',btnMap,gmap,cbtn);
 
-
-// 2. 이벤트 설정 및 함수구현
+// 2. 이벤트설정 및 함수구현
+// 2-1. 맵버튼 클릭시
 domFn.addEvt(btnMap,'click',()=>{
-gmap.classList.add('on');
-}); /////////////////// click /////////////////////////
+  /* 구글맵보이기 */
+  gmap.classList.add('on');
+  /* 가림막보이기 */
+  document.body.classList.add('on');
+}); //////// click이벤트함수 ////////
+
+// 2-2. 닫기버튼 클릭시
 domFn.addEvt(cbtn,'click',()=>{
-gmap.classList.remove('on');
-}); /////////////////// click /////////////////////////
+  /* 구글맵숨기기 */
+  gmap.classList.remove('on');
+  /* 가림막숨기기 */
+  document.body.classList.remove('on');
+}); //////// click이벤트함수 ////////
