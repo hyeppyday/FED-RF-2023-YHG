@@ -65,3 +65,23 @@ pmenu.forEach((ele) => {
     ele.parentElement.classList.add("on");
   });
 }); ////////////////// forEach ////////////////
+
+/////// 맵버튼 클릭시 맵박스 보이기
+// 대상: 이벤트 - .btn-map , 변경 - .gmap
+// 변경내용 : 버튼 클릭시 .gmap에 클래스 on 넣기
+//           닫기 버튼 클릭시 .gmap에 클래스 on 빼기
+
+// 1. 대상선정
+const btnMap = domFn.qs('.btn-map');
+const gmap = domFn.qs('.gmap');
+const cbtn = domFn.qs('.cbtn');
+console.log('대상:',btnMap,gmap,cbtn);
+
+
+// 2. 이벤트 설정 및 함수구현
+domFn.addEvt(btnMap,'click',()=>{
+gmap.classList.add('on');
+}); /////////////////// click /////////////////////////
+domFn.addEvt(cbtn,'click',()=>{
+gmap.classList.remove('on');
+}); /////////////////// click /////////////////////////
