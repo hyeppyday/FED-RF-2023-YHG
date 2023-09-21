@@ -75,3 +75,10 @@ const gnbData = {
 
   ],
 }
+
+// liveData, posterData 를 배열로 합치기
+// -> 그리드 스타일 모듈 데이터 하나로 보내기 !
+const gridData = [liveData,posterData];
+
+
+export {gridData,gnbData};
