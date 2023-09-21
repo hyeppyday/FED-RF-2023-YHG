@@ -8,12 +8,11 @@
 
 /* 공사중표시 */
 body * {
-    outline: 2px dashed #ccc;
+  outline: 2px dashed #ccc;
 }
 body > div > * {
-    outline-color: red;
+  outline-color: red;
 }
-
 
 /* 개별영역 박스 -> 확장형 박스
         -> 개별영역 중앙속박스에 높이값을 주면
@@ -22,232 +21,328 @@ body > div > * {
 
 /************* 2. 캐릭터소개 *************/
 #banner {
-    background: url(../images/bg_mainvisual2.jpg) no-repeat center/auto 100%;
+  background: url(../images/bg_mainvisual2.jpg) no-repeat center/auto 100%;
 }
 
 /* 캐릭터 파트박스 */
-.cat-area{
-    position: relative;
-    /* 부모자격 */
-    aspect-ratio: 2/1;
-    /* 파트박스에 비율만들기
+.cat-area {
+  position: relative;
+  /* 부모자격 */
+  aspect-ratio: 2/1;
+  /* 파트박스에 비율만들기
         -> height 값을 절대!! 주지말것!! */
-    
 }
-.cat-box{
-    position: absolute;
-    bottom:5%;
-    
-    /* 플렉스박스 */
-    display: flex;
-    flex-wrap: wrap;
-    /* 진행방향 정렬 */
-    justify-content: center;
-    width: 100%;
-    margin: 0 auto;
+.cat-box {
+  position: absolute;
+  bottom: 5%;
+
+  /* 플렉스박스 */
+  display: flex;
+  flex-wrap: wrap;
+  /* 진행방향 정렬 */
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
 }
 /* 개별 캐릭터 박스 */
-.cat-box article{
-    position: relative;
-    width: calc(95%/4);
-    /* 개별박스 비율설정 : height설정하지않기!!! */
-    aspect-ratio: 2/1.2;
-    outline: 2px dashed blue;
+.cat-box article {
+  position: relative;
+  width: calc(95% / 4);
+  /* 개별박스 비율설정 : height설정하지않기!!! */
+  aspect-ratio: 2/1.2;
+  outline: 2px dashed blue;
 }
 
 /* 캐릭터 컨텐츠 박스 */
-.cat-content{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 95%;
-    display: flex;
-    flex-direction: column;
-    /* 트랜지션 */
-    transition: height .4s ease-in-out;
+.cat-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  /* 트랜지션 */
+  transition: height 0.4s ease-in-out;
 }
 
 /* 개별 상위 박스 오버시 컨텐트 박스 설명보이기 */
-.cat-box article:hover .cat-content{
-    height: 200%;
+.cat-box article:hover .cat-content {
+  height: 200%;
 }
 
-.cat-content .part{
-    flex: 1;
-    /* 등분할 */
-
-    
+.cat-content .part {
+  flex: 1;
+  /* 등분할 */
 }
 /* 이미지설명박스 - 캐릭터이미지 */
-.img-box>img{
-    width: 100%;
+.img-box > img {
+  width: 100%;
 }
 /* 이미지설명박스 */
-.img-box figcaption{
-    text-align: center;
-    margin-top: -20%;
-    /* 싸고있는 박스 높이를 기준한 %로 마진을 설정함
+.img-box figcaption {
+  text-align: center;
+  margin-top: -20%;
+  /* 싸고있는 박스 높이를 기준한 %로 마진을 설정함
     동적인 크기변경시 마진도 변경되어야 위치가 일정함 */
 }
 /* 이미지설명박스 - 캐릭터이름이미지 */
-.img-box figcaption img{
-    width: 40%;
+.img-box figcaption img {
+  width: 40%;
 }
 /* 마지막 이미지(진한글자) 숨기기 */
-.img-box figcaption img:last-child{
-    display: none;
-
+.img-box figcaption img:last-child {
+  display: none;
 }
 /* 개별박스에 오버시(진한글자) 보이기 */
-.cat-box article:hover
-.img-box figcaption img:last-child{
- display: inline;
+.cat-box article:hover .img-box figcaption img:last-child {
+  display: inline;
 }
 /* 개별박스에 오버시(진한글자) 숨기기 */
-.cat-box article:hover
-.img-box figcaption img:first-child{
- display: none;
+.cat-box article:hover .img-box figcaption img:first-child {
+  display: none;
 }
 
 /* 캐릭터 설명박스 */
-.desc-box{
-    background: url(../images/eachBG.jpg)no-repeat bottom/cover;
-    border-radius: 10px 5px 5px 10px;
-    height: 50%;
-    overflow: auto; /* 스크롤바 생성 (크기 맞춤) */
+.desc-box {
+  background: url(../images/eachBG.jpg) no-repeat bottom/cover;
+  border-radius: 10px 5px 5px 10px;
+  height: 50%;
+  overflow: auto; /* 스크롤바 생성 (크기 맞춤) */
 }
 /* 캐릭터 타이틀 */
-.desc-box h3{
-    font-family: 'Gugi';
-    font-size: min(2.4rem,1.7vw);
-    font-weight: normal;
-    white-space: nowrap;
-    padding: 15px 10px 5px;
-    letter-spacing: -1px;
+.desc-box h3 {
+  font-family: "Gugi";
+  font-size: min(2.4rem, 1.7vw);
+  font-weight: normal;
+  white-space: nowrap;
+  padding: 15px 10px 5px;
+  letter-spacing: -1px;
 }
 /* 캐릭터 설명박스 */
-.desc-box p{
-    font-family: 'single Day','ZCOOL KuaiLe';
-    font-size: min(11.8rem,1.3vw);
-    line-height: 1.6;
-    padding: min(1vw,1.5rem);
-    text-align: justify;
+.desc-box p {
+  font-family: "single Day", "ZCOOL KuaiLe";
+  font-size: min(11.8rem, 1.3vw);
+  line-height: 1.6;
+  padding: min(1vw, 1.5rem);
+  text-align: justify;
 }
 
 /************* 3. 도깨비 메뉴박스 *************/
 
 /* 1-2-2. dokebi메뉴 */
-#dokebi-menu{
-    /* 스티키 포지션 - 상단스크롤 걸림! */
-    position: sticky;
-    top: 0;
-    background-color: #fff;
+#dokebi-menu {
+  /* 스티키 포지션 - 상단스크롤 걸림! */
+  position: sticky;
+  top: 0;
+  background-color: #fff;
 }
-.dokebi-menu ul{
-    /* 플렉스박스 */
-    display: flex;
-    padding: 12px 0;
+.dokebi-menu ul {
+  /* 플렉스박스 */
+  display: flex;
+  padding: 12px 0;
 }
 /* dokebi메뉴 상위메뉴a */
-.dokebi-menu ul>li>a{
-    color: #ccc;
-    font-size: 1.8rem;
-    display: block;
-    padding: 9px 24px;
-    /* 줄바꿈방지 */
-    white-space: nowrap;
+.dokebi-menu ul > li > a {
+  color: #ccc;
+  font-size: 1.8rem;
+  display: block;
+  padding: 9px 24px;
+  /* 줄바꿈방지 */
+  white-space: nowrap;
 }
 /* dokebi-menu 상위li 오버시 a */
-.dokebi-menu ul>li:hover>a{
-    color: #222;
+.dokebi-menu ul > li:hover > a {
+  color: #222;
 }
 /* 하위메뉴가 있는 li만 표시하기 하위 표시하기 */
-.dokebi-menu ul>li.be-sub>a::after{
-    content: '∨';
-    display: inline-block;
-    transform: scale(.5,.3);
-    margin-left: 3px;
+.dokebi-menu ul > li.be-sub > a::after {
+  content: "∨";
+  display: inline-block;
+  transform: scale(0.5, 0.3);
+  margin-left: 3px;
 }
 
 /* 현재 선택된 메뉴 a 클래스 */
-.dokebi-menu ul>li.on>a{
-    background: red;
-    color: white;
-    border-radius: 30px;
-    
+.dokebi-menu ul > li.on > a {
+  background: red;
+  color: white;
+  border-radius: 30px;
 }
 /* 상위 li에 마우스 오버시 서브보이기 */
-.dokebi-menu ul>li:hover .dokebi-sub-menu{
-    display: block;
+.dokebi-menu ul > li:hover .dokebi-sub-menu {
+  display: block;
 }
 
 /* 도깨비 서브메뉴 */
-.dokebi-sub-menu{
-    position: absolute;
-    border: 1px solid red;
-    border-radius: 19px;
-    width: 180px;
-    background-color: #fff;
-    
-    /* 처음에 숨김 */
-    display: none;
-}
-.dokebi-sub-menu a{
-    display: block;
-    padding: 10px 15px;
-    font-size: 1.8rem;
+.dokebi-sub-menu {
+  position: absolute;
+  border: 1px solid red;
+  border-radius: 19px;
+  width: 180px;
+  background-color: #fff;
 
+  /* 처음에 숨김 */
+  display: none;
+}
+.dokebi-sub-menu a {
+  display: block;
+  padding: 10px 15px;
+  font-size: 1.8rem;
 }
 
 /************* 4. 메인배너  *************/
 
 /************* 5. 메인영역 : .group-part *************/
 
-/*************************** 방송편성소개파트 ***************************/
-.main .group-part-01 .partbox {
-    height: 455px;
+/*************************** 방송편성소개파트 : .intro-part ***************************/
+.main .intro-part .partbox {
+  height: 455px;
+}
+/* 서브 타이틀 */
+.intro-part .stit {
+  padding-bottom: 0;
+}
+.intro-desc {
+  font-size: 2.5rem;
+  display: flex;
+}
+.intro-desc h3 {
+  margin-right: 10px;
+}
+.intro-desc ul {
+  display: flex;
+  gap: 0 15px;
+}
+/* 설명 박스 */
+.intro-txt {
+  padding: 20px;
+  font-size: 2.2rem;
+  line-height: 2;
+  color: #555;
+}
+
+/* 인트로버튼 */
+.intro-btn {
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-weight: bold;
+}
+/* 인트로 동영상 박스 */
+.intro-mv-img {
+  position: relative;
+  aspect-ratio: 2/1.1;
+}
+/* 가상요소로 플레이버튼 만들기 */
+.intro-mv-img.off::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  background: url(../images/icon-play.png) no-repeat;
+  cursor: pointer;
+}
+/* 하위 이미지 */
+.intro-mv-img img ,
+.intro-mv-img video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+/* 동영상 설명박스 */
+.intro-mv-box figcaption{
+    font-size: 2rem;
+    padding-top: 10px;
 }
 /*************************** 미리보기파트 ***************************/
 .main .group-part-02 .partbox {
-    height: 298px;
+  height: 298px;
 }
+
+.preview-box .partbox{
+  padding: 15px;
+  color: #888;
+  cursor: pointer;
+}
+.preview-box .partbox:hover{
+  color: #222;
+}
+/* 각 박스 외곽선 디자인 */
+.preview-box .partbox>div{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.504);
+}
+/* 각 미리보기 타이틀 */
+.preview-box h3{
+  font-size: 2rem;
+  padding-bottom: 10px;
+}
+/* 각 미리보기 내용박스 */
+.preview-box p{
+  font-size: 1.5rem;
+  line-height: 2;
+
+  /* 여러줄 말줄임표시 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}
+
 /*************************** 그리드박스 공통 파트 ***************************/
 
 /* 현장포토(.grid-box) / 대표이미지(.poster-box) */
-.grid-box ul{
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-column-gap: 24px;
-    grid-row-gap: 48px;
-    
+.grid-box ul {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 24px;
+  grid-row-gap: 48px;
 }
-.grid-box img{
-    width: 100%;
-    border-radius: 10px;
+.grid-box img {
+  width: 100%;
+  border-radius: 10px;
 }
 
-.grid-box figcaption{
-    font-size: 2rem;
-    font-weight: 500;
-    padding-top: 14px;
+.grid-box figcaption {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-top: 14px;
 }
 /* 대표이미지 박스 조정 */
-.poster-box ul{
-    /* 그리드 템플릿 줄속성 반복 사이즈 지정하기 */
-    grid-template-rows: repeat(2,min(16.5vw,238px));
-    /* min()으로 최대사이즈 지정, 작아질 때 화면맞춤(vw) 
+.poster-box ul {
+  /* 그리드 템플릿 줄속성 반복 사이즈 지정하기 */
+  grid-template-rows: repeat(2, min(16.5vw, 238px));
+  /* min()으로 최대사이즈 지정, 작아질 때 화면맞춤(vw) 
     -> 결과적으로 일정한 높이값을 줌으로 해서 
     첫번째 줄의 이미지가 큰 박스가 아래쪽으로 나가있고 
     두번째 줄은 박스 크기에 맞춰 첫번째 박스 아래에 위치하게 됨 */
-    
 }
-
+/* 각 박스 외곽선 디자인 */
+.preview-box .partbox>div{
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.504);
+}
 
 /*************************** 대표이미지파트 ***************************/
 .main .group-part-04 .partbox {
-    height: 542px;
+  height: 542px;
 }
 /*************************** 최신동영상파트 ***************************/
 .main .group-part-05 .partbox {
-    height: 376px;
+  height: 376px;
 }
