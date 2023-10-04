@@ -1,0 +1,267 @@
+@charset "utf-8";
+/* 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+/* font-family: 'Anton', sans-serif; */
+
+/* 변수 설정 */
+:root{
+    /* 폰 가로크기 */
+    --phone-width:200px;
+    /* 폰 세로크기 */
+    --phone-height:400px;
+    /* 폰 두께 */
+    --phone-side: 20px;
+    /* 회전각도 */
+    --rotate-deg: 90deg;
+}
+
+
+html,body{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: 
+    linear-gradient(to bottom, #fff 20%,skyblue 40%,#fff);
+    /* 보이는 화면 높이값 채우기 */
+    height: 100vh;
+    /* 넘치는 자식요소 숨기기 */
+    overflow: hidden;
+}
+
+.iphone{
+    /* 위치 정중앙 : 50%위치 - 크기절반 */
+    position: absolute;
+    top: calc(50% - var(--phone-height)/2);
+    left: calc(50% - var(--phone-width)/2);
+
+    width: var(--phone-width);
+    height: var(--phone-height);
+
+    /* 입체설정 : tfs */
+    transform-style: preserve-3d;
+    /* 입체를 잘보이게 약간회전 */
+    transform: rotateX(10deg) rotateY(30deg);
+
+    /* outline: 2px solid blue; */
+}
+
+/* 폰 각면 공통 */
+.iphone span{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* outline: 2px dashed red; */
+}
+
+/* 1. 앞면 */
+ .iphone span:nth-child(1){
+    background-image: url(../images/ip01.png);
+
+    /* z축 밀기 */
+    transform: translateZ(calc(var(--phone-side)/2));
+ }
+
+ /* 앞면 화면변경박스 */
+ .iphone span:nth-child(1) b#screen{
+    position: absolute;
+    top: 47px;
+    left: 12px;
+    width: 175px;
+    height: 305px;
+    /* background-color: rgba(255, 0, 0, 0.344); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+ }
+
+/* 2. 오른쪽면 */
+ .iphone span:nth-child(2){
+    background-image: url(../images/ip03.png);
+    width: var(--phone-side);
+    right: calc(var(--phone-side)/-2);
+
+    /* y축 회전 : 그림자 위치*/
+    transform: rotateY(var(--rotate-deg));
+}
+/* 3. 왼쪽면 */
+ .iphone span:nth-child(3){
+    background-image: url(../images/ip04.png);
+    width: var(--phone-side);
+    left: calc(var(--phone-side)/-2);
+
+    /* y축 회전 */
+    transform: rotateY(calc(var(--rotate-deg)*-1));
+ }
+/* 4. 윗면 */
+ .iphone span:nth-child(4){
+    background-image: url(../images/ip06.png);
+    height: var(--phone-side);
+    top: calc(var(--phone-side)/-2);
+
+    /* x축 회전 */
+    transform: rotateX(calc(var(--rotate-deg)*-1));
+ }
+/* 5. 아래쪽면 */
+ .iphone span:nth-child(5){
+    background-image: url(../images/ip05.png);
+    height: var(--phone-side);
+    bottom: calc(var(--phone-side)/-2);
+
+    /* 평면회전 : 180도 + x축회전 : 90도*/
+    transform: rotate(calc(var(--rotate-deg)*2)) rotateX(var(--rotate-deg));
+ }
+/* 6. 뒷면 */
+ .iphone span:nth-child(6){
+    background-image: url(../images/ip02.png);
+
+    /* z축 밀기 + y축회전 : 180도*/
+    transform: translateZ(calc(var(--phone-side)/-2)) rotateY(calc(var(--rotate-deg)*2)) ;
+ }
+
+ /* 아이폰 회전 클래스 */
+ .ip-ani{
+    animation: iphone-ani 1.5s ease-in-out 1s 2 alternate;
+ }
+
+ /* 아이폰 회전 키프레임 */
+ @keyframes iphone-ani {
+    to{
+        transform: rotateX(370deg) rotateY(-330deg);
+        /* x축 10도 에서 시작, y축은 30도에서 시작
+        -> x축은 정방향이므로 더하고 y축은 역방향이므로 뺌 */
+    }
+ }
+
+ /* 흘러가는 글자박스 */
+ .fbx{
+    position: absolute;
+    width: 100vw;
+ }
+ /* 내부 흘러가는 박스 */
+ .tbx{
+    position: relative;
+    left: 0;
+
+    /* 크기는 부모박스의 2배수 */
+    width: 200vw;
+
+    display: flex;
+    /* 하위 ul박스 옆으로 흐름 */
+ }
+
+ /* .tbx ul */
+ .tbx ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    /* .tbx의 자식으로 등분할 */
+    flex: 1;
+
+    display: flex;
+    /* 하위 li 옆으로 흐르기 */
+ }
+
+ /* 글자를 담고 있는 li 등분할 */
+ .tbx li{
+    flex: 1;
+
+    /* 글자 설정 */
+    text-align: center;
+    font-family: 'Anton';
+    font-size: 4vw;
+    color: #fac193;
+    text-shadow: 2px 2px 2px rgb(0 0 0 / .6);
+
+    /* outline: 2px dotted red; */
+ }
+
+ /* 흘러가는 글자 클래스 1 */
+ .txt-ani1{
+    animation: txt-ani1 10s linear infinite;
+ }
+ /* 흘러가는 글자 키프레임 */
+ @keyframes txt-ani1 {
+    to{
+        left: -100%;
+    }
+    
+ }
+
+ /* 반대방향 글자박스 */
+ .f2{
+    top: 15vh;
+ }
+ /* 오른쪽으로 흘러가게 */
+ .f2 .tbx{
+    left: -100%;
+ }
+
+ /* 흘러가는 글자 클래스 2 */
+ .txt-ani2{
+    animation: txt-ani2 10s linear infinite;
+ }
+ /* 흘러가는 글자 키프레임 */
+ @keyframes txt-ani2 {
+    to{
+        left: 0;
+    }
+    
+ }
+ /* 흘러가는 글자 클래스 3 
+ -> 기본단위 크기가 5688px이므로 left 하나당 크기는 5688px
+ -> 절반크기로 이동해야 반복시키기 가능 */
+ .txt-ani3{
+    animation: txt-ani3 20s linear infinite;
+ }
+ /* 흘러가는 글자 키프레임 */
+ @keyframes txt-ani3 {
+    to{
+        left: calc(5688px/-2);
+    }
+    
+ }
+
+ /* 장문 글자박스 */
+ .f3{
+    bottom: 5vh;
+ }
+ .f3 .tbx{
+    width: 5688px;
+ }
+ .f3 span{
+    display: block;
+
+    /* 글자 설정 */
+    font-family: 'Anton';
+    font-size: 30px;
+    color: #fac193;
+    text-shadow: 2px 2px 2px rgb(0 0 0 / .6);
+ }
+
+ /* 아이폰 따라보기 이벤트 박스 */
+ .evt-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+
+    /* 플렉스박스 */
+    display: flex;
+    /* 랩핑박스 */
+    flex-wrap: wrap;
+}
+
+.evt-box div{
+    width: 20%;
+    height: 50%;
+    outline: 1px dashed green;
+}
