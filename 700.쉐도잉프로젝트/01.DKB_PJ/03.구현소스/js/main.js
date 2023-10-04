@@ -303,7 +303,7 @@ function moveClip(){
     // 이동한계수를 체크하여 이동수를 증가시킴
     mvNum++;
     // 마지막한계수를 넘어가면 마지막 수에 고정!
-    if(mvNum > LIMIT_MOVE) {
+    if(mvNum > LIMIT_MOVE-1) {
       // 마지막수 고정
       mvNum = LIMIT_MOVE
       // 마지막 버튼 숨기기
@@ -318,7 +318,7 @@ function moveClip(){
     // 이동한계수를 체크하여 이동수를 감소시킴
     mvNum--;
     // 첫번째한계수를 넘어가면 0에 고정!
-    if(mvNum < 0) {
+    if(mvNum < 1) {
       // 0에 고정
       mvNum = 0
       // 첫번째 버튼 숨기기
