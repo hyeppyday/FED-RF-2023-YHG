@@ -77,7 +77,7 @@ body{
     /* background-color: rgba(255, 0, 0, 0.344); */
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100% 100%;
+    background-size: 100% 100% ;
  }
 
 /* 2. 오른쪽면 */
@@ -250,7 +250,7 @@ body{
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 0;
     height: 100vh;
     z-index: 999;
 
@@ -258,10 +258,19 @@ body{
     display: flex;
     /* 랩핑박스 */
     flex-wrap: wrap;
+    /* 커서 이미지로 보이기
+    cursor : url(이미지경로),auto
+    사이즈 등의 이유로 안나올 수 있음
+    때를 대비하여 auto/pointer등 대체항목을 url() 뒤에 콤마하고 써주기
+    - 커서 이미지의 기본위치는 맨위/왼쪽끝 이다
+    - 이 위치를 변경하는 옵션이 있다 ! cursor : url(이미지경로) x위치 y위치,auto 
+    - 숫자만 써줘도 px처리, 이미지 한계값을 넘어가면 처리 안됨 */
+    cursor: url(../images/깨꾹이.png) 20 30,auto;
+
 }
 
 .evt-box div{
     width: 20%;
-    height: 50%;
-    outline: 1px dashed green;
+    height: 33.33%;
+    /* outline: 1px dashed green; */
 }
