@@ -1,6 +1,6 @@
 // JS4-4. 배열의 정렬과 검색 JS
 
-import dFn from './dom.js';
+import dFn from "./dom.js";
 
 /***************************************************** 
 
@@ -105,98 +105,199 @@ const arrString = ["파", "타", "하", "가", "바", "사", "다", "라", "차"
 
 // 배열데이터 화면 출력하기 /////////////////////////////////////////////////////
 
-// 1. 숫자로만 된 배열의 화면 출력
+// 1. 숫자로만 된 배열의 화면 출력 /////////////////////////////////////////////
 // map()메서드로 배열값을 태그로 감싸서 출력하기
 
 // (1) 출력대상 : .showNum
-const showNum = dFn.qs('.showNum');
+const showNum = dFn.qs(".showNum");
 
 // (2) 배열숫자데이터 만큼 이미지로 변환하여 출력
 // map().join() 맵쪼잉 !
-const showScreen =()=>
-showNum.innerHTML = arrNumber.map(val=>
-    `<img src="./images/num/num_0${val}.png" alt="숫자${val}이미지">`).join('');
+const showScreen = () =>
+  (showNum.innerHTML = arrNumber
+    .map(
+      (val) => `<img src="./images/num/num_0${val}.png" alt="숫자${val}이미지">`
+    )
+    .join(""));
 
 // 최초출력 -> 원본 배열 출력
 showScreen();
 
 // (3) 정렬 기준에 선택박스 변경 이벤트 발생시 정렬 변경하기 (오름차순/내림차순)
 // (3-1) 대상 : #sel
-const selBox = dFn.qs('#sel');
+const selBox = dFn.qs("#sel");
 // (3-2) 이벤트 연결하기 : change
-dFn.addEvt(selBox,'change',function(){
-    // 1. 선택 option value값 불러오기
-    let optVal = this.value;
-    console.log('숫자정렬변경:',optVal);
-    // 2. 정렬 분기하기 (1 - 오름차순 / 2 - 내림차순)
-    if(optVal==1){
+dFn.addEvt(selBox, "change", function () {
+  // 1. 선택 option value값 불러오기
+  let optVal = this.value;
+  console.log("숫자정렬변경:", optVal);
+  // 2. 정렬 분기하기 (1 - 오름차순 / 2 - 내림차순)
+  if (optVal == 1) {
+    // [sort() 메서드 내부함수 사용법]
+    // a > b 일때 true이면 1로 처리 -> 순서를 바꿈
+    arrNumber.sort((a, b) => (a == b ? 0 : a > b ? 1 : -1));
 
-        // [sort() 메서드 내부함수 사용법]
-        // a > b 일때 true이면 1로 처리 -> 순서를 바꿈
-        arrNumber.sort((a,b)=>a==b?0:a>b?1:-1);
+    // sort() 빼기연산처리 : 앞수-뒷수
+    //  arrNumber.sort((a,b)=>a-b);
+  } else if (optVal == 2) {
+    // [sort() 메서드 내부함수 사용법]
+    // a > b 일때 true이면 -1로 처리 -> 순서를 안바꿈
+    arrNumber.sort((a, b) => (a == b ? 0 : a > b ? -1 : 1));
 
-         // sort() 빼기연산처리 : 앞수-뒷수
-        //  arrNumber.sort((a,b)=>a-b);
-    }
-    else if(optVal==2){
+    // sort() 빼기연산처리 : 뒷수-앞수
+    // arrNumber.sort((a,b)=>b-a);
+  }
 
-        // [sort() 메서드 내부함수 사용법]
-        // a > b 일때 true이면 -1로 처리 -> 순서를 안바꿈
-        arrNumber.sort((a,b)=>a==b?0:a>b?-1:1);
-        
-        // sort() 빼기연산처리 : 뒷수-앞수
-        // arrNumber.sort((a,b)=>b-a);
-    }
+  // (4) 화면 출력 -> 원본 배열의 정렬이 변경된 후 다시 출력된것
+  showScreen();
+}); ///////// change 이벤트 함수 ///////////////////////////////
 
-// (4) 화면 출력 -> 원본 배열의 정렬이 변경된 후 다시 출력된것
-showScreen();
-
-}) ///////// change 이벤트 함수 ///////////////////////////////
-
-// 1. 문자로만 된 배열의 화면 출력
+// 2. 문자로만 된 배열의 화면 출력 //////////////////////////////////////////////
 // map()메서드로 배열값을 태그로 감싸서 출력하기
 
 // (1) 출력대상 : .showNum2
-const showNum2 = dFn.qs('.showNum2');
+const showNum2 = dFn.qs(".showNum2");
 
 // (2) 배열문자데이터 만큼 이미지로 변환하여 출력
 // map().join() 맵쪼잉 !
-const showScreen2 =()=>
-showNum2.innerHTML = arrString.map(val=>
-    `<span>${val}</span>`).join('');
+const showScreen2 = () =>
+  (showNum2.innerHTML = arrString.map((val) => `<span>${val}</span>`).join(""));
 
 // 최초출력 -> 원본 배열 출력
 showScreen2();
 
 // (3) 정렬 기준에 선택박스 변경 이벤트 발생시 정렬 변경하기 (오름차순/내림차순)
 // (3-1) 대상 : #sel2
-const selBox2 = dFn.qs('#sel2');
+const selBox2 = dFn.qs("#sel2");
 // (3-2) 이벤트 연결하기 : change
-dFn.addEvt(selBox2,'change',function(){
-    // 1. 선택 option value값 불러오기
-    let optVal = this.value;
-    console.log('문자정렬변경:',optVal);
-    // 2. 정렬 분기하기 (1 - 오름차순 / 2 - 내림차순)
-    if(optVal==1){
+dFn.addEvt(selBox2, "change", function () {
+  // 1. 선택 option value값 불러오기
+  let optVal = this.value;
+  console.log("문자정렬변경:", optVal);
+  // 2. 정렬 분기하기 (1 - 오름차순 / 2 - 내림차순)
+  if (optVal == 1) {
+    // [sort() 메서드 내부함수 사용법]
+    // a > b 일때 true이면 1로 처리 -> 순서를 바꿈
+    arrString.sort((a, b) => (a == b ? 0 : a > b ? 1 : -1));
 
-        // [sort() 메서드 내부함수 사용법]
-        // a > b 일때 true이면 1로 처리 -> 순서를 바꿈
-        arrString.sort((a,b)=>a==b?0:a>b?1:-1);
+    // 오름차순 기본 메서드 sort()
+    //  arrString.sort();
+  } else if (optVal == 2) {
+    // [sort() 메서드 내부함수 사용법]
+    // a > b 일때 true이면 -1로 처리 -> 순서를 안바꿈
+    arrString.sort((a, b) => (a == b ? 0 : a > b ? -1 : 1));
 
-        // 오름차순 기본 메서드 sort()
-        //  arrString.sort();
-    }
-    else if(optVal==2){
+    // 내림차순 기본 메서드 reverse()
+    // arrString.reverse();
+  }
 
-        // [sort() 메서드 내부함수 사용법]
-        // a > b 일때 true이면 -1로 처리 -> 순서를 안바꿈
-        arrString.sort((a,b)=>a==b?0:a>b?-1:1);
+  // (4) 화면 출력 -> 원본 배열의 정렬이 변경된 후 다시 출력된것
+  showScreen2();
+}); ///////// change 이벤트 함수 ///////////////////////////////
 
-        // 내림차순 기본 메서드 reverse()
-        // arrString.reverse();
-    }
+// 3. 객체 데이터 배열의 정렬 ///////////////////////////////////
 
-// (4) 화면 출력 -> 원본 배열의 정렬이 변경된 후 다시 출력된것
-showScreen2();
+// (1)데이터
+const list1 = [
+  {
+    idx: 8,
+    tit: "나는 누구?",
+    cont: "공동구매) 슬로건 공구 (계좌와 네이버폼)",
+  },
+  {
+    idx: 4,
+    tit: "여기는 어디?",
+    cont: "총공 공지] 오늘부터 일 2회, 총공 진행합니다",
+  },
+  {
+    idx: 1,
+    tit: "나야나",
+    cont: "연합 갈라 서포트 계좌오픈",
+  },
+  {
+    idx: 15,
+    tit: "이제 얼마나 남은거니?",
+    cont: "음악프로그램에 출연 요청글도 써볼까요?",
+  },
+]; /////////////// list1 /////////////
 
-}) ///////// change 이벤트 함수 ///////////////////////////////
+// (2) html코드 생성하여 출력하는 함수 만들기
+console.log(list1);
+
+// 대상 : .showList3
+const showList3 = dFn.qs(".showList3");
+
+const upCode = () => {
+  // 반복코드 만들기
+  // 대상코드 : list1 배열
+  let hcode = list1.map(
+    (val) => `
+            <tr>
+                <td>${val.idx}</td>
+                <td>${val.tit}</td>
+                <td>${val.cont}</td>
+            </tr>
+    `
+  );
+
+  // 기본 테이블 모양 넣기
+  showList3.innerHTML = `
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${hcode.join("")}
+        </tbody>
+    </table>
+    `;
+}; ///////////////////// upCode //////////////////////////////////
+
+// (3) 요소에 데이터 코드 넣기 함수호출 : 기본출력
+upCode();
+
+// (4) 정렬변경 이벤트 발생시 실제 정렬 변경하기 ///
+// 이벤트 대상 : .sel3
+const sel3 = dFn.qs(".sel3");
+
+// 정렬 기준 대상 : .cta3
+const cta3 = dFn.qs(".cta3");
+
+// 이벤트 설정하기
+dFn.addEvt(sel3, "change", sortingFn);
+
+function sortingFn() {
+  // 1. 선택값 담기
+  let optVal = this.value;
+
+  // 2. 정렬 기준값 읽기
+  let cta = cta3.value;
+
+  console.log("바꿔!", optVal,cta);
+
+  // 2. 분기하기
+  // 데이터 대상 : list1 배열
+  if (optVal == 1) {
+    list1.sort((a, b) => {
+        // a,b는 모두 객체 데이터
+        // 따라서 내부 속성을 구체적으로 비교해야함
+        // idx,tit,cont 세가지 중 하나로 비교!
+        return a[cta] == b[cta] ? 0 : a[cta] > b[cta] ? 1 : -1;
+    });
+  } else if (optVal == 2) {
+    list1.sort((a, b) => {
+        // a,b는 모두 객체 데이터
+        // 따라서 내부 속성을 구체적으로 비교해야함
+        // idx,tit,cont 세가지 중 하나로 비교!
+        return a[cta] == b[cta] ? 0 : a[cta] > b[cta] ? -1 : 1;
+    });
+  }
+  console.log(list1)
+
+  // 리스트 코드 반영하기
+  upCode();
+}

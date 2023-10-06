@@ -115,12 +115,19 @@ const mydata = [
 // 출력형식 : 
 // <li>배우명 : 영화명</li>
 // 배열변수 .map()을 사용하자!
+// -> JS map()과는 다른 별도의 출력처리가 이루어지므로 join 사용 안해도됨
 
 const myEle5 = (
     <React.Fragment>
         <h2>[ 배우리스트 ]</h2>
         <ul>
-            {mydata.map(v=><li>{v.name}:{v.movie}</li>)}
+            {mydata.map(v=>
+            <li>
+                {v.name}:
+                {v.movie} : 
+                {v.idx==3?"예뻐💞":"멋져💯"}
+            </li>
+            )}
         </ul>
     </React.Fragment>
 );
@@ -128,4 +135,81 @@ const myEle5 = (
 // 다섯번째에 출력하기
 ReactDOM.render(
     myEle5, document.querySelectorAll('#root>div')[4]
+);
+
+/***************************************************** 
+    [ JSX는 홀로태그라도 끝에 닫기를 해줘야한다! ]
+    예) <br> -> <br />
+        <input type="text"> -> <input type="text" />
+*****************************************************/
+
+// 6. 홀로태그 출력해 보기
+const myEle6 = <input type="text" value="홀로태그는 스스로 닫아라!"/>;
+
+// 여섯번째에 출력하기
+ReactDOM.render(
+    myEle6, document.querySelectorAll('#root>div')[5]
+);
+
+
+/***************************************************** 
+    [ JSX에서 속성 클래스는 className 으로 표기한다! ]
+    <태그 class="클래스명">
+    class는 JS에서 키워드이므로 사용못함! 대신...
+    <태그 className="클래스명">
+*****************************************************/
+
+// 7. 속성으로 클래스 셋팅하여 사용하기
+const myEle7 = 
+<h1 className="myclass">
+    className속성으로 클래스 주기
+</h1>;
+
+// 일곱번째에 출력하기
+ReactDOM.render(
+    myEle7, document.querySelectorAll('#root>div')[6]
+);
+
+/***************************************************** 
+    [ JSX에서 조건문 사용하기 - if문 ]
+    리액트는 if명령문을 지원하지만
+    JSX내부에서는 지원하지 않는다!!!
+
+    JSX에서 조건문을 사용하려면?
+    JSX 외부에서 if문을 사용하거나
+    아니면 내부에서 삼항연산자를 사용할 수 있다!
+*****************************************************/
+
+// 8. JSX외부에서 if문 사용하여 출력하기
+const x = 100000;
+let txt = '이 돈으로는 충분히 살수 있어';
+if(x < 10000){
+    txt = '돈이 부족해서 살 수 없어!';
+}
+// 출력변수
+const myEle8 = (
+    <div>
+        <h1>현재 내가 가진돈은 ${x}원!</h1>
+        <h1>{txt}</h1>
+    </div>
+);
+
+// 여덟번째 출력하기
+ReactDOM.render(
+    myEle8, document.querySelectorAll('#root>div')[7]
+);
+
+// 9. JSX의 표현식에 삼항연산자 사용하여 출력하기
+let time = 10;
+
+const myEle9 = (
+    <React.Fragment>
+        <h1>지금 몇시지?{time}시야!</h1>
+        <h1>{time>9?"지금 집에 들어와!":"더 놀다와~"}</h1>
+    </React.Fragment>
+);
+
+// 아홉번째 출력하기
+ReactDOM.render(
+    myEle9, document.querySelectorAll('#root>div')[8]
 );

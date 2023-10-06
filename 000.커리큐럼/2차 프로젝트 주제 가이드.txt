@@ -61,5 +61,39 @@ https://hanok.seoul.go.kr/front/hanokWeek.do 서울 한옥위크 행사
 https://trailseoul157k.com/ 서울 둘레길 걷기
 
 
+https://www.airbnb.co.kr/ 에어비앤비
+https://www.nelson.travel/ 참고사이트
+https://www.niarratravel.com/
+https://www.doimocucine.com/
 
+
+<메인> (https://www.doimocucine.com/)
+넷플릭스 인트로처럼 로고 중앙에 나타나고 상단에 고정
+
+<상단바>
+메뉴 오버시 카테고리 한번에 보이게 모두 나열 (원래 페이지에 있는거)
+
+<상단바 아래 컨텐츠 구성>
+에어비앤비 한줄평같은거 쓰고(여행은살아보는거야 등)
+https://www.youtube.com/watch?v=zTdvwUe25lQ 이 영상 넣고
+그 아래에 '어떤 숙소를 찾으시나요? -> 카테고리' 빠르게 넘어가도록 구성
+예) https://www.pixelflakes.com/ 사이트 메인 참고
+
+누구와 여행하시나요?
+https://www.niarratravel.com/ 
+Find travel inspiration by style 참고 !
+
+
+서브 구성
+- 장소에 따라 (산, 바다, 시내중심)
+- 목적에 따라 (가족, 커플, 친구, 혼자)
+- 날짜에 따라 
+- 여행 테마에 따라 (인기
+예술 및 문화
+야외
+산맥
+해변
+카테고리
+즐길 거리)
+- 여행 관련 체험
 
