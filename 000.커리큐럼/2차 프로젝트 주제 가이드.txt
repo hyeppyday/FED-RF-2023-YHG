@@ -65,12 +65,15 @@ https://www.airbnb.co.kr/ 에어비앤비
 https://www.nelson.travel/ 참고사이트
 https://www.niarratravel.com/
 https://www.doimocucine.com/
+https://www.pixelflakes.com/
+https://www.alamancefoods.com/
 
 
 <메인> (https://www.doimocucine.com/)
 넷플릭스 인트로처럼 로고 중앙에 나타나고 상단에 고정
 
 <상단바>
+메뉴 오른쪽 위에 표시
 메뉴 오버시 카테고리 한번에 보이게 모두 나열 (원래 페이지에 있는거)
 
 <상단바 아래 컨텐츠 구성>
@@ -78,22 +81,29 @@ https://www.doimocucine.com/
 https://www.youtube.com/watch?v=zTdvwUe25lQ 이 영상 넣고
 그 아래에 '어떤 숙소를 찾으시나요? -> 카테고리' 빠르게 넘어가도록 구성
 예) https://www.pixelflakes.com/ 사이트 메인 참고
+(영상부분과 아래 글자부분이 한줄평 위로 지나가면서 쓸어넘기듯이 올라가고, 그다음 컨텐츠 1이 등장
+메뉴랑 로고는 픽스되어 보이게)
+예) https://www.alamancefoods.com/ 메인화면 참고
 
 <컨텐츠1>
-둘러보세요!
-숙소이미지 랜덤 그리드로 배치 후 사진 오버시 오른쪽에 크게 뜨게
-클릭시에 숙소 상세 서브페이지로 이동
-https://www.pixelflakes.com/about/  팀 소개 참고
+(등장할때 한곳에 모여있다가 스크롤시 퍼지면서 나열)
+예) https://www.alamancefoods.com/ 메인 아래 'what can we whip for you?' 참고
 
-<컨텐츠2>
 누구와 여행하시나요?
 이미지 클릭시 '목적에따라' 각 서브페이지로 이동
 https://www.niarratravel.com/ 
 Find travel inspiration by style 참고 !
 
+<컨텐츠2>
+둘러보세요!
+숙소이미지 랜덤 그리드로 배치 후 사진 오버시 오른쪽에 크게 뜨게
+클릭시에 숙소 상세 서브페이지로 이동
+https://www.pixelflakes.com/about/  팀 소개 참고
+
 <하단>
 다음 여행을 위한 추천여행지 (원래 사이트 하단 참고)
 세계지도 넣어서 각 여행지 카테고리 클릭시 세계지도에 표시되게 
+http://m.dmzfesta.co.kr/page/map
 (인기, 예술 및 문화, 야외, 산맥, 해변, 즐길거리)
 
 
@@ -105,5 +115,15 @@ Find travel inspiration by style 참고 !
 - 여행 관련 체험
 
 
-<서브페이지>
+<서브페이지1>
+
+1. 숙소 소개 목록
+2. 목적 변경시 추천숙소 목록
+3. 장소 변경시 추천숙소 목록
+4. 숙소 근처 관련 체험 목록
+
+<서브페이지2 - 숙소 선택시>
+
+1. 사진/숙소설명
+2. 다른 숙소 추천목록
 
