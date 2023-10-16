@@ -46,13 +46,13 @@ let inj = `<img src="./images/inj.png" alt="주사기" class="inj">`;
 // (6) 메시지 배열셋팅
 const msgTxt = [
     // 0번방
-    "",
+    `도와줘요!!!`,
     // 1번방
-    "",
+    `이제 곧 탈출이닷!`,
     // 2번방
-    "",
+    `이제 조금만 더<br>가면 탈출이닷!`,
     // 3번방
-    "",
+    `어서 윗층으로 가자!`,
     // 4번방
     [
       ['무','무.','무.서','무.서.','무.서.워','무.서.워.','무.서.워..','무.서.워...'],
@@ -112,9 +112,9 @@ $('.mz').hide();
 
 // 2. 버튼셋팅하기
 // 대상 : .btns button -> btns 변수
-btns.hide().first().show();
+// btns.hide().first().show();
 // 버튼들.숨겨().첫번째().보여(); -> 직관적으로 쓰면 바로 나타내주는 제이쿼리
-// btns.hide().eq(4).show(); -> eq는 몇번째 버튼이 보여질지 정해줌
+btns.hide().eq(7).show(); //-> eq는 몇번째 버튼이 보여질지 정해줌
 
 
 // 3. 미니언즈 공통 기능 함수 /////////////////
@@ -309,16 +309,20 @@ btns
             // right값을 li width값 만큼 이동!
             right: room.eq(7).width()*1.2+'px'
           },1000,'easeOutBounce',()=>{
-            // 물린 후 대사
-            msg.html(msgTxt[4][1]).css({left:"80%"});
-
-            // 미니언즈 좀비 이미지 변경(1초후)
+            
+            // 미니언즈 좀비 이미지 흑백처리(1초후)
             setTimeout(()=>{
-              mi.find('img').attr('src','images/mz1.png')
-              .css({filter:'grayscale(100%)'}); // 흑백 변경필터
-
+              mi.find('img').css({filter:'grayscale(100%)'}); // 흑백 변경필터
+            },1000)
+            // 미니언즈 좀비 이미지 변경(2초후)
+            setTimeout(()=>{
+              mi.find('img').attr('src','images/mz1.png');
+              // 물린 후 대사
+              msg.html(msgTxt[4][1]).css({left:"-84%"});
+              
+              // 다음버튼 보이기;
               showNextBtn(this);
-            },1200)
+            },2000)
           })
         })
        
@@ -328,3 +332,144 @@ btns
     // 미니언즈 공통함수 호출
     actMini(this, 4, fn);
   }) //// "무서우니 윗층으로!" 버튼 끝 //////////
+
+
+  // 9. "치료주사방으로!" 버튼 클릭시 /////////////
+  // 위의 버튼에서 이어짐!
+  .next() // 여섯번째버튼
+  .click(function () {
+    // 하위 이벤트함수 this의미!
+    // ()=>{
+
+    // 버튼별 콜백함수 만들기 ////////
+    let fn =
+      // function(){ -> this가 mi임!
+      () => {
+        // 주사기 돌리기
+        //animate는 트랜스폼 적용안됨 따라서 CSS로 처리!!
+
+        //  .css({
+        //   transform:"rotate(-150deg)", // 반시계방향
+        //   transition: ".5s .5s", // 0.5초후 0.5초간 애니메이션
+        //   zIndex:"9999" // 미니언즈(999)보다 위
+        // })
+
+        $('.inj')
+        .css({zIndex:"9999"})
+        .delay(500)
+        .animate({
+          rotate:"-150deg",
+        },500,"easeInOutCirc",()=>{
+          // 주사기회전후 콜백함수
+          // 미니언즈 이미지 변경하기
+          // attr(속성명,값) -> 값 설정하기 / attr(속성명) -> 값 읽어오기
+          mi.find('img')
+          .attr('src','images/m2.png') // 이미지 변경
+          .css({filter:"grayscale(0)"}); // 다시 컬러로 변경
+
+          // 주사기 없애기
+          $('.inj').hide();
+
+          // 대사 : 2번방
+          msg.html(msgTxt[2]).fadeIn(200)
+
+          showNextBtn(this);
+        })
+        
+        /* 
+        jquery.rotate.js 는
+        jQuery animate메서드에 transform rotate를 사용할 수 있도록 
+        해주는 플러그인임!
+        [ 사용법(animate css설정에 씀)-> rotate:"각도deg" ]
+        */
+       
+       
+        
+      }; ////////// 콜백함수 /////////////
+
+    // 미니언즈 공통함수 호출
+    actMini(this, 2, fn);
+  }) //// "치료주사방으로!" 버튼 끝 //////////
+
+  // 10. "3번방으로!" 버튼 클릭시 /////////////
+  // 위의 버튼에서 이어짐!
+  .next() // 일곱번째버튼
+  .click(function () {
+    // 하위 이벤트함수 this의미!
+    // ()=>{
+
+    // 버튼별 콜백함수 만들기 ////////
+    let fn =
+      // function(){ -> this가 mi임!
+      () => {
+        // 메시지 보이기
+        msg.html(msgTxt[3]).fadeIn(300)
+       
+        showNextBtn(this);
+      }; ////////// 콜백함수 /////////////
+
+    // 미니언즈 공통함수 호출
+    actMini(this, 3, fn);
+  }) //// "3번방으로!" 버튼 끝 //////////
+  
+
+  // 11. "1번방으로!" 버튼 클릭시 /////////////
+  // 위의 버튼에서 이어짐!
+  .next() // 여덟번째버튼
+  .click(function () {
+    // 하위 이벤트함수 this의미!
+    // ()=>{
+
+    // 버튼별 콜백함수 만들기 ////////
+    let fn =
+      // function(){ -> this가 mi임!
+      () => {
+        // 메시지 보이기
+        msg.html(msgTxt[1]).fadeIn(300)
+       
+        showNextBtn(this);
+       
+        
+      }; ////////// 콜백함수 /////////////
+
+    // 미니언즈 공통함수 호출
+    actMini(this, 1, fn);
+  }) //// "1번방으로!" 버튼 끝 //////////
+
+  // 12. "헬기를 호출!" 버튼 클릭시 /////////////
+  // 위의 버튼에서 이어짐!
+  .next() // 아홉번째버튼
+  .click(function () {
+    // 하위 이벤트함수 this의미!
+    // ()=>{
+
+    // 버튼별 콜백함수 만들기 ////////
+    let fn =
+      // function(){ -> this가 mi임!
+      () => {
+
+        // 메시지 보이기
+        msg.html(msgTxt[0]).fadeIn(300);
+       
+        // 1번방 단체 좀비 달려들기!
+        room.eq(1).find('.mz')
+        .fadeIn(300)
+        .animate({
+          right : room.eq(1).width() + "px"
+        },3000,"easeInCirc")
+        
+        // 헬기 등장해서 탈출
+        $('.heli')
+        .animate({
+          left : '23%'
+        },4000,'easeOutBack')
+
+        showNextBtn(this);
+       
+        
+      }; ////////// 콜백함수 /////////////
+
+    // 미니언즈 공통함수 호출
+    actMini(this, 0, fn);
+  }) //// "헬기를 호출!" 버튼 끝 //////////
+
