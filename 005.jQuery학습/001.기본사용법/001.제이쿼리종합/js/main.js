@@ -114,7 +114,7 @@ $('.mz').hide();
 // 대상 : .btns button -> btns 변수
 // btns.hide().first().show();
 // 버튼들.숨겨().첫번째().보여(); -> 직관적으로 쓰면 바로 나타내주는 제이쿼리
-btns.hide().eq(7).show(); //-> eq는 몇번째 버튼이 보여질지 정해줌
+btns.hide().eq(0).show(); //-> eq는 몇번째 버튼이 보여질지 정해줌
 
 
 // 3. 미니언즈 공통 기능 함수 /////////////////
@@ -461,9 +461,89 @@ btns
         // 헬기 등장해서 탈출
         $('.heli')
         .animate({
-          left : '23%'
-        },4000,'easeOutBack')
+          left : '25%',
+          rotate:'20deg'
+        },3000,'easeOutQuint')
+        .animate({
+          left:'23%',
+          rotate:'0deg'
+        },100,"easeInOutSine",
+        function(){ // 헬기 이동완료 후 콜백함수
+          // 헬기 이미지 변경하기(this -> function(){}사용시)
+          $(this)
+         .attr('src','images/heli2.png');
+         // 원본 미니언즈 사라지기
+         mi.hide();
+        })
+        .delay(500) // 0.5초 쉬었다가
+        .animate({
+          left:'70%', // 다시 오른쪽 끝으로
+        },4000,'easeInOutCirc',
+        function(){
+          // 애니 후 콜백함수
+          // 끝쪽에서 조종사를 좀비로 변경
+          $(this).attr('src','images/heli3.png');
+        })
+        .delay(300)
+        .animate({
+          left :'100%'
+        },8000,'linear',()=>{
+          // 헬기 나간후 콜백함수
+          // 간판 떨어지기
+          let tit = $('.tit');
+          // 1. 클래스 'on' 주기
+          tit.addClass('on')
+          // 2. 클래스 'on2' 주기
+          setTimeout(()=>{tit.addClass('on2')},3000);
+          // 건물 무너지기
+          // - 간판떨어진 후 (6초후)
+          setTimeout(()=>{
+            room.parent().addClass('on');
+            // parent()-> 부모요소인 .building
+            // -> JS의 parentElement와 유사함!
+            // $('.building').addClass('on')
+          },6000);
 
+          setTimeout(()=>{
+        // 건물 기울기 원상복귀 (좀비가 똑바로 올라올 수 있게)
+        room.parent().attr('style','transform:rotate(0deg) !important')
+        // 9번방 좀비 지표로 올라오기 / 기다리기 / 오른쪽으로 나가기
+        room.eq(9).find('.mz').animate({
+        // 올라오기
+          top: room.eq(1).height()*-6 + 'px'
+        },3000)
+        // 기다리기
+        .delay(3000)
+        // 나가기
+        .animate({
+          right:'-220%'
+        },5000,()=>{
+          // 마지막 좀비 퇴장 후 The End 화면 중앙 출력
+          // body에 append 하여 태그 출력하기
+          $('body').append(`<h1 class="ending">THE END</h1>`);
+          
+          $('.ending').css({
+            position:'fixed',
+            top:'50%',
+            left:'50%',
+            transform:'translate(-50%,-50%)',
+            margin:'0',
+            padding:'0',
+            color:'white',
+            fontSize:'20vh',
+            textShadow:'0 0 5px #000',
+            fontFamily: 'Vladimir script'
+          }).hide()
+          .fadeIn(1000)
+          .animate({
+            color:'red'
+          },1000)
+          
+        });/////////// animate /////////////////
+
+        },15000) /////////////// setTimeout ////////////////
+
+        }) ////////////// animate //////////////////
         showNextBtn(this);
        
         
@@ -472,4 +552,22 @@ btns
     // 미니언즈 공통함수 호출
     actMini(this, 0, fn);
   }) //// "헬기를 호출!" 버튼 끝 //////////
+
+
+  // 간판에 마우스 오버/아웃시 색상변경하기
+  // hover(함수1,함수2)
+  // -> 오버시 함수1 호출, 아웃시 함수2 호출
+  $('.tit').hover(
+    function(){ // over
+      $(this).css({
+        backgroundColor:"blue",
+        color:"cyan"
+      })
+    },
+    function(){ // out
+      $(this).css({
+        backgroundColor:"pink",
+        color:"yellow"
+    });
+  });
 
