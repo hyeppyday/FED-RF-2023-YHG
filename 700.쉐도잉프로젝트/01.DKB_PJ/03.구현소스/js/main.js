@@ -50,7 +50,7 @@ desc_box.forEach((ele) => {
   ****************************************/
 // 1. 대상선정 : .grid-box (.live-box/.poster-box)
 const gridBox = dFn.qsa(".grid-box");
-//console.log("대상:", gridBox);
+////console.log("대상:", gridBox);
 
 // 2. 대상 코드넣기 함수 호출설정하기 ///////
 gridBox.forEach((ele,idx)=>makeGrid(ele,idx));
@@ -78,7 +78,7 @@ function makeGrid(ele,idx) {
 
   hcode += "</ul>";
 
-  //   //console.log(hcode);
+  //   ////console.log(hcode);
 
   // 2. 대상박스에 html코드 넣기
   ele.innerHTML = hcode;
@@ -92,7 +92,7 @@ function makeGrid(ele,idx) {
 // 서브메뉴 넣을 li는 하위 a요소의 텍스트가 gnbData 속성명 1차메뉴와
 // 일치하는 경우 하위 메뉴를 넣어준다!
 const gnbList = dFn.qsa(".gnb>ul>li");
-//console.log("메뉴:", gnbList, "/데이터:", gnbData);
+////console.log("메뉴:", gnbList, "/데이터:", gnbData);
 
 // 3. 대상에 하위메뉴 태그 만들기
 gnbList.forEach((ele) => {
@@ -101,14 +101,14 @@ gnbList.forEach((ele) => {
 
   // 2.GNB 데이터 읽기
   let gData = gnbData[atxt];
-  // //console.log('텍스트:',atxt,gData);
+  // ////console.log('텍스트:',atxt,gData);
 
   // 3.해당 서브 데이터가 있을 경우 태그 만들어 넣기
   // Array.isArray(gData)로 배열여부를 확인함!
   // 배열값은 태그를 만들어 그자리에 출력: 배열.map().join('')
   if (gData) {
     // 데이터없으면 undefined -> false처리!
-    //console.log("만들어!", atxt);
+    ////console.log("만들어!", atxt);
     ele.innerHTML += `
         <div class="smenu">
           <aside class="smbx">
@@ -151,16 +151,16 @@ gnb.forEach((ele) => {
 
 // 3.함수만들기
 function overFn() {
-  // //console.log('오버',this);
+  // ////console.log('오버',this);
   // 1.하위 .smbx 높이값 알아오기
   let hv = dFn.qsEl(this, ".smbx").clientHeight;
-  //console.log("높이:", hv);
+  ////console.log("높이:", hv);
   // 2.하위 서브메뉴박스 만큼 .smenu 높이값 주기
   dFn.qsEl(this, ".smenu").style.height = hv + "px";
 } //////////// overFn 함수 ////////////
 
 function outFn() {
-  // //console.log('아웃',this);
+  // ////console.log('아웃',this);
   // 서브메뉴 박스 높이값 0만들기!
   dFn.qsEl(this, ".smenu").style.height = "0px";
 } //////////// outFn 함수 ////////////
@@ -188,7 +188,7 @@ function showMv(){
   if(stsShowMv) return; // 돌아가!
   stsShowMv = 1; // 한번만실행
 
-  //console.log('보여줘~!!!!!');
+  ////console.log('보여줘~!!!!!');
   // 동영상 넣기
   // 대상: 나자신(.intro-mv-img)
   this.innerHTML = `
@@ -220,11 +220,11 @@ previewData.sort((x,y)=>{
   // 비?집:(눈?집:놀이동산)
 
 });
-//console.log(preNewData);
+////console.log(preNewData);
 
 // 2. 대상선정: .preview-box>div
 const preBox = dFn.qsa('.preview-box>div');
-//console.log(preBox);
+////console.log(preBox);
 
 // 3. 대상을 순회하여 태그 넣기
 // 데이터 : 역순정렬을 한 미리보기 데이터넣기
@@ -243,7 +243,7 @@ preBox.forEach((ele,idx)=>{
 //////// 최신동영상 영역 데이터 뿌리기 ////////////////////////
 // 대상 : .clip-box
 const clipBox = dFn.qs('.clip-box');
-console.log(clipBox);
+//console.log(clipBox);
 
 let clipCode='';
 
@@ -259,7 +259,7 @@ clipData.forEach(val=>{
   </li>`
 })
 
-console.log(clipCode);
+//console.log(clipCode);
 
 //코드 넣기
 clipBox.innerHTML = `<ul>${clipCode}</ul>`;
@@ -286,7 +286,7 @@ const BLOCK_NUM = 25.5;
 // 3-5.이동회수 : 단위만큼 이동할 횟수
 let mvNum = 0;
 
-// console.log(btnClip,clipList,'이동한개수:',LIMIT_MOVE);
+// //console.log(btnClip,clipList,'이동한개수:',LIMIT_MOVE);
 
 // 4. 이벤트 셋팅하기 /////////////////////////
 btnClip.forEach(ele=>{
@@ -332,7 +332,7 @@ function moveClip(){
 
   // 3) 이동반영하기 : - 단위수 * 이동수
   clipList.style.left = -(BLOCK_NUM*mvNum) + '%';
-  // console.log('나야나 ~',isR);
+  // //console.log('나야나 ~',isR);
 }
 
 
@@ -341,7 +341,7 @@ function moveClip(){
 // 하단링크 콤보 박스 바인딩하기
 // 1. 요구사항 - 콤보박스에 맞는 데이터를 바인딩한다
 // 2. 데이터 - linkData
-// console.log('하단콤보박스 데이터',linkData);
+// //console.log('하단콤보박스 데이터',linkData);
 
 // 3. 대상선정 : 바인딩할 콤보박스
 // #brand, #corp
@@ -349,7 +349,7 @@ const brandBox = dFn.qs('#brand');
 const corpBox = dFn.qs('#corp');
 
 
-console.log('콤보박스:',brandBox,corpBox);
+//console.log('콤보박스:',brandBox,corpBox);
 
 // 4. 데이터 바인딩하기
 // 4-1. 브랜드 바로가기 콤보박스 : 단순바인딩(option만)
@@ -364,7 +364,7 @@ linkData.brand.forEach(val=>{
 
 // 4-2. 계열사 바로가기 콤보박스 : 복합바인딩(optgroup>option)
 // 데이터는 객체형이므로 속성만 모아 배열로 변환하여 forEach사용
-// console.log('계열사 데이터:',corpData);
+// //console.log('계열사 데이터:',corpData);
 const corpData = Object.keys(linkData.corp);
 
 corpBox.innerHTML = '';
@@ -387,11 +387,52 @@ corpData.forEach(val=>{
 // 태그로만 연결된 순수한 태그 결과 문자열이 만들어진다
 
 
-/* 
+/*************************************************** 
   [복합바인딩 요소 구성형식]
   <optgroup label="Swedish Cars">
     <option value="volvo">Volvo</option>
     <option value="saab">Saab</option>
   </optgroup>
-*/
+***************************************************/
+
+// 제이쿼리로 기능 구현하기/////////////////////////
+// 1. 서브컨텐츠 보이기 기능구현 ////////////////
+// (1) 대상선정 : 
+// 이벤트대상 : .sub-view-box 하위 .partbox 또는 li
+const subViewBox =
+$('.sub-view-box .partbox,.sub-view-box li');
+// 변경대상 : .sub-cont
+const subContBox = $('.sub-cont');
+// console.log(subContBox)
+
+// (2) 이벤트 함수 만들기 //////////////////////////
+subViewBox.click(function(){
+  console.log('나야나!',this);
+
+  // 1. 제목 읽어오기
+  let subTit =
+  $(this).parents('.sub-view-box').prev().text();
+  //나자신.부모들(특정클래스).이전형제().글자읽기();
+
+  // 2. 내용 읽어오기
+  let subItem = 
+  $(this).text();
+
+  // 2. 서브박스 내용 넣기
+  subContBox.html(`
+    <button class="cbtn">×</button>
+    <div class="sub-inbox inbox>
+      <h1>${subTit}</h1>
+        <div class="sub-item">
+          ${subItem}
+        </div>
+    </div>
+  `);
+
+  // 3. 닫기버튼 이벤트 설정
+  $('.cbtn').click(()=>subContBox.hide())
+
+  // 4. 서브박스 보이기
+  subContBox.show();
+}) ////////////// click /////////////////////////
 

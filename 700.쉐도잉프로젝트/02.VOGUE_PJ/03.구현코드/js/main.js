@@ -3,6 +3,8 @@
 import dFn from "./dom.js";
 import { setPos, startSS } from "./smoothScroll23.js";
 
+// [1] 부드러운 스크롤 적용 //////////
+startSS();
 
 // [1] 메인 페이지 등장액션 클래스 넣기
 // 대상 : .main-area section
