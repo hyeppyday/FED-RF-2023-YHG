@@ -308,7 +308,7 @@ function ExpComp(props){
             }
         </React.Fragment>
     )
-}
+} ///////////////////// ExpComp ////////////////////////////////
 
 // 4-3. 개발자가 좋아하는 명화 출력하기 ///////////
 ReactDOM.render(<ExpComp isChange={false}/>,
