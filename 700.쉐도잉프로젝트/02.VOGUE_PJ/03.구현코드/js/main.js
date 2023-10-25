@@ -44,7 +44,7 @@ const tbtn = $('.tbtn');
 $(window).scroll(()=>{
     // 세로방향 스크롤 위치값
     let scTop = $(window).scrollTop();
-    console.log('스크롤!',scTop);
+    // console.log('스크롤!',scTop);
 
     // 1.스크롤 위치값이 100을 초과하면 슬림 상단 클래스 넣기
     if(scTop > 100) topArea.addClass('on');

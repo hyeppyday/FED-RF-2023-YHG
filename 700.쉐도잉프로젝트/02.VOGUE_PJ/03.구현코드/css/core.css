@@ -31,9 +31,9 @@ font-family: 'Roboto Condensed', sans-serif;
 */
 
 /* 공사중 표시 */
-body * {
+/* body * {
     outline: 1px dashed gray;
-}
+} */
 
 /************* 2. 공통 class *************/
 
@@ -130,6 +130,11 @@ body * {
     font-weight: normal;
     text-align: center;
     color: #fff;
+}
+
+/* 런웨이 파트 타이틀 중 small요소 */
+.cbx h2 small {
+    font-size: 14px;
 }
 
 /* 4. 스크롤 등장액션 클래스 */

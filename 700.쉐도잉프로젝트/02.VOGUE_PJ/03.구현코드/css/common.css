@@ -165,13 +165,19 @@ https://www.w3schools.com/cssref/tryit.php?filename=trycss_cursor */
 }
 
 /* GNB a요소 */
-.gnb a{
+.gnb a, .gnb i{
     /* 트랜지션 */
     transition: color .2s linear;
 }
 /* 오버시 a요소 */
-.gnb a:hover{
+.gnb a:hover,.gnb i:hover{
     color: red;
+}
+/* 돋보기는 i요소 */
+.gnb i{
+    font-weight: bold;
+    cursor: pointer;
+
 }
 
 /********************************************* 
