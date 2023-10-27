@@ -17,9 +17,13 @@
 
     <!-- 메인CSS -->
     <link rel="stylesheet" href="./css/main.css" />
+    <!-- 미디어쿼리 CSS -->
+    <link rel="stylesheet" href="./css/media.css">
     <!-- 제이쿼리 라이브러리 + UI -->
     <script src="./js/jquery-3.7.1.min.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
+    <!-- 모바일용 드래그/드롭 이벤트 전환 플러그인 -->
+    <script src="./js/jquery-touch-punch.min.js"></script>
     <!-- 메인 JS -->
     <script src="./js/main.js" type="module"></script>
   </head>
@@ -27,10 +31,10 @@
     <!-- 확장형 레이아웃 -->
     <!-- 1. 상단영역 -->
     <div id="header">
-      <header class="header inbox">
+      <header class="header inbox fx-box">
         <!-- 파트박스 2개 -->
         <!-- 1-1.로고박스영역 -->
-        <div class="partbox col-3">
+        <div class="partbox col-3 ">
           <!-- 메인로고 -->
           <h1 class="header__logo">
             <img src="./images/tvnlogo2.png" alt="" />
@@ -53,7 +57,7 @@
             </ul>
           </nav>
           <!-- 1-2-2.GNB메뉴 -->
-          <nav class="gnb">
+          <nav class="gnb scbar">
             <ul>
               <li>
                 <a href="#">About tvN</a>
@@ -85,6 +89,8 @@
             </ul>
           </nav>
         </div>
+        <!-- 모바일 햄버거버튼 -->
+        <button class="ham"></button>
       </header>
     </div>
     <!-- 2. 캐릭터소개영역 -->
@@ -262,12 +268,12 @@
             <a href="#">메인</a>
           </li>
           <li class="be-sub">
-            <a href="#">프로그램 소개</a>
+            <a href="#intro-part">프로그램 소개</a>
             <!-- 서브메뉴 -->
             <div class="dokebi-sub-menu">
               <ol>
                 <li>
-                  <a href="#">프로그램 소개</a>
+                  <a href="#intro-part">프로그램 소개</a>
                 </li>
                 <li>
                   <a href="#">인물 소개</a>
@@ -279,38 +285,38 @@
             </div>
           </li>
           <li>
-            <a href="#">미리보기</a>
+            <a href="#preview-part">미리보기</a>
           </li>
           <li>
-            <a href="#">동영상</a>
+            <a href="#clip-area">동영상</a>
           </li>
           <li class="be-sub">
-            <a href="#">사진첩</a>
+            <a href="#live-photo-area">사진첩</a>
             <!-- 서브메뉴 -->
             <div class="dokebi-sub-menu">
               <ol>
                 <li>
-                  <a href="#">현장 포토</a>
+                  <a href="#live-photo-area">현장 포토</a>
                 </li>
                 <li>
-                  <a href="#">대표 포스터</a>
+                  <a href="#poster-area">대표 포스터</a>
                 </li>
               </ol>
             </div>
           </li>
           <li>
-            <a href="#">OST</a>
+            <a href="#clip-area">OST</a>
           </li>
         </ul>
       </nav>
     </div>
     <!-- 3. 메인영역 -->
     <div id="main">
-      <main class="main inbox">
+      <main class="main inbox ">
         <!-- 파트그룹박스 5개 -->
-        <div class="intro-part group-part group-part-01">
+        <div class="intro-part group-part group-part-01 fx-box" id="intro-part">
           <!-- 파트박스 2개 -->
-          <div class="partbox col-6">
+          <div class="partbox col-6 col-s-12 ">
             <!-- 드라마 소개파트 제목 -->
             <h2 class="stit">도깨비</h2>
             <!-- 하위제목 + 아이콘 -->
@@ -358,7 +364,7 @@
             <!-- 인트로 버튼 -->
             <button class="intro-btn">방송 편성보기</button>
           </div>
-          <div class="partbox col-6">
+          <div class="partbox col-6 col-s-12">
             <figure class="intro-mv-box">
               <div class="intro-mv-img off">
                 <img
@@ -373,31 +379,31 @@
             </figure>
           </div>
         </div>
-        <div class="preview-part group-part group-part-02">
+        <div class="preview-part group-part group-part-02" id="preview-part">
           <h2 class="stit">미리보기</h2>
           <!-- 파트박스 8개 -->
-          <section class="preview-box sub-view-box">
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
-            <div class="partbox col-3"></div>
+          <section class="preview-box sub-view-box fx-box">
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
+            <div class="partbox col-3 col-s-6"></div>
           </section>
         </div>
         <!-- 현장포토 박스영역 -->
-        <div class="group-part group-part-03 live-photo-area">
+        <div class="group-part group-part-03 live-photo-area" id="live-photo-area">
           <h2 class="stit">현장포토</h2>
           <div class="grid-box live-box part-box col-12 sub-view-box"></div>
         </div>
         <!-- 대표이미지 박스영역 -->
-        <div class="group-part group-part-04 poster-area">
+        <div class="group-part group-part-04 poster-area" id="poster-area">
           <h2 class="stit">대표이미지</h2>
           <div class="grid-box poster-box part-box col-12 sub-view-box"></div>
         </div>
-        <div class="group-part group-part-05 clip-area">
+        <div class="group-part group-part-05 clip-area" id="clip-area">
           <h2 class="stit">최신동영상</h2>
           <div class="clip-box part-box col-12 sub-view-box"></div>
           <!-- 이동버튼박스 -->
@@ -413,50 +419,52 @@
       <footer class="footer inbox">
         <!-- 파트박스 5개 -->
         <!-- 하단링크박스 -->
-        <div class="partbox col-8">
-          <aside class="info-link">
-            <ul>
-              <li>
-                <a href="#">회사소개</a>
-              </li>
-              <li>
-                <a href="#">광고/제휴문의</a>
-              </li>
-              <li>
-                <a href="#">이용약관</a>
-              </li>
-              <li>
-                <a href="#">개인정보 처리방침</a>
-              </li>
-              <li>
-                <a href="#">청소년보호정책</a>
-              </li>
-              <li>
-                <a href="#">법적고지</a>
-              </li>
-              <li>
-                <a href="#">이메일무단수집거부</a>
-              </li>
-              <li>
-                <a href="#">큐톤표</a>
-              </li>
-              <li>
-                <a href="#">고객센터</a>
-              </li>
-              <li>
-                <a href="#">공지사항</a>
-              </li>
-            </ul>
-          </aside>
-        </div>
-        <!-- 바로가기 콤보박스 영역 -->
-        <div class="partbox col-4 combo-area">
-          <select name="brand" id="brand">
-            <option value="어쩌구">저쩌구</option>
-          </select>
-          <select name="corp" id="corp">
-            <option value="어쩌구">저쩌구</option>
-          </select>
+        <div class="fx-box">
+          <div class="partbox col-8 col-s-12">
+            <aside class="info-link">
+              <ul>
+                <li>
+                  <a href="#">회사소개</a>
+                </li>
+                <li>
+                  <a href="#">광고/제휴문의</a>
+                </li>
+                <li>
+                  <a href="#">이용약관</a>
+                </li>
+                <li>
+                  <a href="#">개인정보 처리방침</a>
+                </li>
+                <li>
+                  <a href="#">청소년보호정책</a>
+                </li>
+                <li>
+                  <a href="#">법적고지</a>
+                </li>
+                <li>
+                  <a href="#">이메일무단수집거부</a>
+                </li>
+                <li>
+                  <a href="#">큐톤표</a>
+                </li>
+                <li>
+                  <a href="#">고객센터</a>
+                </li>
+                <li>
+                  <a href="#">공지사항</a>
+                </li>
+              </ul>
+            </aside>
+          </div>
+          <!-- 바로가기 콤보박스 영역 -->
+          <div class="partbox col-4 col-s-12 combo-area">
+            <select name="brand" id="brand">
+              <option value="어쩌구">저쩌구</option>
+            </select>
+            <select name="corp" id="corp">
+              <option value="어쩌구">저쩌구</option>
+            </select>
+          </div>
         </div>
         <!-- 하단로고박스 -->
         <div class="partbox col-12">
@@ -476,7 +484,7 @@
           </address>
         </div>
         <!-- SNS박스 -->
-        <div class="partbox col-3">
+        <div class="partbox">
           <aside class="sns-box">
             <ul>
               <li>
