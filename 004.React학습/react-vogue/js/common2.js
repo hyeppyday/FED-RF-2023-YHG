@@ -32,12 +32,12 @@ const comArea = dFn.qsa('.common-area');
 // 상단영역 html 넣기
 // comArea[0].innerHTML = tData.topArea;
 // 하단영역 html 넣기
-comArea[1].innerHTML = tData.footerArea;
+// comArea[1].innerHTML = tData.footerArea;
 
 // 모바일 메뉴버튼 요소 추가로 넣기 : .top-area 맨끝추가
-comArea[0].innerHTML += tData.mobtn;
+// comArea[0].innerHTML += tData.mobtn;
 // 모바일 메뉴 박스 추가로 넣기 : #top-area 맨끝추가
-comArea[0].parentElement.innerHTML += tData.mobx;
+// comArea[0].parentElement.innerHTML += tData.mobx;
 
 // [2] 탑메뉴, 탑버튼 스크롤시 변경 적용하기 //////////
 // 스크롤 메뉴 적용대상 : #top-area
