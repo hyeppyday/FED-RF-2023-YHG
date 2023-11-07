@@ -1,5 +1,9 @@
 //////////// 상단영역 컴포넌트 ////////////////
 
+// 카테고리 컨텍스트 API 파일 불러오기
+import { catContext } from "./components/cat_context.jsx";
+
+// 링크 시스템 js 가져오기
 import { makeLink } from "./linksys2.js";
 
 /*********************************************** 
@@ -9,27 +13,15 @@ import { makeLink } from "./linksys2.js";
 export default function TopArea(props) {
   // 컴포넌트 요소 랜더링 직전 호출구역
   // 컴포넌트는 모두 만들어진 후 화면 뿌리기 직전(가랜더링)
-  React.useLayoutEffect(makeLink);
+  React.useEffect(makeLink,[]);
+  // useEffect(함수,[]) -> 뒤의 의존성변수 구역(대괄호)이 비어있으면
+  // 본 컴포넌트가 처음 실행될 때 한번만 실행된다!!
 
-  // GNB용 메뉴 배열변수
-  const gnbText = [
-    "FASHION",
-    "BEAUTY",
-    "LIVING",
-    "PEOPLE",
-    "VIDEO",
-    "RUNWAY",
-    "TIME & GEM",
-    "SHOPPING",
-  ];
+  // 다시 자식 컴포넌트로 함수를 만들어서 전달!
+  // const goFn = (v) => props.chgItem(v);
+  // -> 컨텍스트 API를 사용할때는 프롭스 펑션다운 불필요!!
 
-  // 메뉴 클릭시 변수 변경함수
-  const chgCat = (data) => {
-    // 전달된 부모함수 chgCat을 호출함
-    props.chgItem(data.toLowerCase());
-    console.log("나야나", data);
-  }; ////////////////// chgCat ///////////////////
-
+  
   return (
     <div id="top-area">
       <header className="top-area ibx common-area">
@@ -84,6 +76,55 @@ export default function TopArea(props) {
           </a>
         </h1>
         {/* 1-3.GNB박스 */}
+        <GnbMenu/>
+        {/* <GnbMenu gnbFn={goFn}/> 프롭스펑션다운 불필요*/}
+        {/* 모바일용 버튼 */}
+        <MobBtns />
+      </header>
+      {/* 모바일용 메뉴, 검색박스 */}
+      <MobBox />
+    </div>
+  );
+} /////////// TopArea ///////////////
+/*************************************** 
+    컴포넌트명 : GnbMenu
+    기능 : 모바일용 버튼 생성 컴포넌트
+    ***************************************/
+    function GnbMenu(props) {
+      // 여기 컴포넌트에서 컨텍스트 API를 사용할 것이므로
+      // 여기에 useContext(생성컨텍스트명) 을 셋팅한다!
+      const gnbContext = React.useContext(catContext);
+      // 할당된 변수에는 전역변수/함수가 들어있음!
+      // 부모의 컨텍스트 프로바이더 value에 셋팅된 이름으로 호출함!!
+
+      // GNB용 메뉴 배열변수
+  const gnbText = [
+    "FASHION",
+    "BEAUTY",
+    "LIVING",
+    "PEOPLE",
+    "VIDEO",
+    "RUNWAY",
+    "TIME & GEM",
+    "SHOPPING",
+  ];
+
+  // 메뉴 클릭시 변수 변경함수
+  const chgCat = (data) => {
+    // TopArea 컴포넌트에서 보낸 속성함수 호출
+    // props.gnbFn(data.toLowerCase())
+    // -> 컨텍스트API를 사용할땐 프롭스펑션다운 사용안함!!
+
+    // 전달된 부모함수 chgCat을 호출함
+    // props.chgItem(data.toLowerCase());
+    console.log("나야나", data);
+
+    // 컨텍스트 API로 전달된 부모컴포넌트 함수 호출
+    gnbContext.chgCat(data.toLowerCase());
+    
+  }; ////////////////// chgCat ///////////////////
+
+      return (
         <nav className="gnb">
           <ul>
             {gnbText.map((v) => (
@@ -101,14 +142,8 @@ export default function TopArea(props) {
             </li>
           </ul>
         </nav>
-        {/* 모바일용 버튼 */}
-        <MobBtns />
-      </header>
-      {/* 모바일용 메뉴, 검색박스 */}
-      <MobBox />
-    </div>
-  );
-} /////////// TopArea ///////////////
+      )
+    } ///////////////// GnbMenu ///////////////
 
 /*************************************** 
     컴포넌트명 : MobBtns

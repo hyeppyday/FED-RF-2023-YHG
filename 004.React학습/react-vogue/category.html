@@ -26,8 +26,6 @@
     <script src="./js/jquery-3.7.1.min.js"></script>
     <!-- 제이쿼리 UI -->
     <script src="./js/jquery-ui.min.js"></script>
-    <!-- 공통모듈 JS -카테고리 페이지용-->
-    <script type="module" src="./js/common2.js"></script>
     <!-- 링크시스템 JS는 리액트 상단영역 컴포넌트가 
       그려진 후 호출해야 적용된다!! 그래서 여기는 주석!-->
     <!-- <script type="module" src="./js/linksys.js"></script> -->
@@ -44,15 +42,37 @@
     ></script>
     <!-- 3.리액트 바벨 라이브러리 -->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
+    
     <!-- 링크 시스템 카테고리용 JS 
-       카테고리 JS보다 위에 둘것 !! -->
-    <script src="./js/linksys2.js" 
+      카테고리 JS보다 위에 둘것 !! -->
+      <script src="./js/linksys2.js" 
     data-plugins="transform-es2015-modules-umd" 
     type="text/babel"></script>
+    
+    <!-- common2.js에서 불러오는 dom.js/smoothScroll23.js
+    모두 윗쪽에서 불러올것! -->
+    <script
+      src="./js/dom.js"
+      data-plugins="transform-es2015-modules-umd"
+      type="text/babel"
+    ></script>
 
+    <script
+      src="./js/smoothScroll23.js"
+      data-plugins="transform-es2015-modules-umd"
+      type="text/babel"
+    ></script>
+    <script
+      src="./js/common2.js"
+      data-plugins="transform-es2015-modules-umd"
+      type="text/babel"
+    ></script>
     <!-- 카테고리 데이터 JS -->
     <script src="./js/data/category_data.js" 
+    data-plugins="transform-es2015-modules-umd" 
+    type="text/babel"></script>
+    <!-- 카테고리 페이지 컨텍스트 API 파일 -->
+    <script src="./js/components/cat_context.jsx" 
     data-plugins="transform-es2015-modules-umd" 
     type="text/babel"></script>
 
@@ -61,7 +81,7 @@
     data-plugins="transform-es2015-modules-umd" 
     type="text/babel"></script>
 
-    <!-- 하단영역 컴포넌트 -->
+    <!-- 메인영역 컴포넌트 -->
     <script src="./js/components/main_area.jsx" 
     data-plugins="transform-es2015-modules-umd" 
     type="text/babel"></script>

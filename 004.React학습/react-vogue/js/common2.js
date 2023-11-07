@@ -1,93 +1,85 @@
 // 보그 PJ - 공통 모듈 JS : common2.js
 // -> 상단메뉴를 컴포넌트화 하기에 이것을 빼고 뿌리는 JS
-// 난 category
+// 난 category 페이지용이다!
 
 // DOM 메서드
-import dFn from './dom.js';
-
-// 상단,하단 공통 데이터 불러오기
-import tData from './data/com_module.js';
+import dFn from "./dom.js";
 
 // 부드러운 스크롤 모듈
 import { startSS, setPos } from "./smoothScroll23.js";
 
-// 1. 부드러운 스크롤 적용 //////////
-startSS();
+/////////////////////////////////////////////////////
+export default function setJSTop() {
+  // 1. 부드러운 스크롤 적용 //////////
+  startSS();
 
-// 2. 스크롤바 트랙을 잡고 위치이동시 위치값 반영
-dFn.addEvt(window, "mouseup", () => setPos(window.scrollY));
-//////// mouseup /////////////
+  // 2. 스크롤바 트랙을 잡고 위치이동시 위치값 반영
+  dFn.addEvt(window, "mouseup", () => setPos(window.scrollY));
+  //////// mouseup /////////////
 
-// 3. 키보드 방향키 이동시 위치값 반영
-dFn.addEvt(window, "keyup", () => setPos(window.scrollY));
+  // 3. 키보드 방향키 이동시 위치값 반영
+  dFn.addEvt(window, "keyup", () => setPos(window.scrollY));
 
+  // [1] 상단 하단 공통모듈 넣기
 
-// [1] 상단 하단 공통모듈 넣기
+  // 대상선정: .common-area
+  const comArea = dFn.qsa(".common-area");
 
-// 대상선정: .common-area
-const comArea = dFn.qsa('.common-area');
+  // console.log(tData,comArea);
 
-// console.log(tData,comArea);
+  // 상단영역 html 넣기
+  // comArea[0].innerHTML = tData.topArea;
+  // 하단영역 html 넣기
+  // comArea[1].innerHTML = tData.footerArea;
 
-// 상단영역 html 넣기
-// comArea[0].innerHTML = tData.topArea;
-// 하단영역 html 넣기
-// comArea[1].innerHTML = tData.footerArea;
+  // 모바일 메뉴버튼 요소 추가로 넣기 : .top-area 맨끝추가
+  // comArea[0].innerHTML += tData.mobtn;
+  // 모바일 메뉴 박스 추가로 넣기 : #top-area 맨끝추가
+  // comArea[0].parentElement.innerHTML += tData.mobx;
 
-// 모바일 메뉴버튼 요소 추가로 넣기 : .top-area 맨끝추가
-// comArea[0].innerHTML += tData.mobtn;
-// 모바일 메뉴 박스 추가로 넣기 : #top-area 맨끝추가
-// comArea[0].parentElement.innerHTML += tData.mobx;
+  // [2] 탑메뉴, 탑버튼 스크롤시 변경 적용하기 //////////
+  // 스크롤 메뉴 적용대상 : #top-area
+  const topArea = $("#top-area");
 
-// [2] 탑메뉴, 탑버튼 스크롤시 변경 적용하기 //////////
-// 스크롤 메뉴 적용대상 : #top-area
-const topArea = $('#top-area');
+  // 탑버튼
+  const tbtn = $(".tbtn");
 
-// 탑버튼 
-const tbtn = $('.tbtn');
-
-$(window).scroll(()=>{
+  $(window).scroll(() => {
     // 세로방향 스크롤 위치값
     let scTop = $(window).scrollTop();
     // console.log('스크롤!',scTop);
 
     // 1.스크롤 위치값이 100을 초과하면 슬림 상단 클래스 넣기
-    if(scTop > 100) topArea.addClass('on');
-    else topArea.removeClass('on');
+    if (scTop > 100) topArea.addClass("on");
+    else topArea.removeClass("on");
 
     // 2. 맨위로 이동버튼 300 초과시 보이고 300미만일때 숨기기
     // 대상 : .tbtn
-    if(scTop>300) tbtn.addClass('on');
-    else tbtn.removeClass('on');
+    if (scTop > 300) tbtn.addClass("on");
+    else tbtn.removeClass("on");
+  }); ///////////// scroll ///////////////////
 
-}) ///////////// scroll ///////////////////
-
-// 맨위로 버튼 클릭시 맨위로 가기 //
-// 부드러운 스크롤 사용하므로 그쪽함수를 이용함
-tbtn.click((e)=>{
+  // 맨위로 버튼 클릭시 맨위로 가기 //
+  // 부드러운 스크롤 사용하므로 그쪽함수를 이용함
+  tbtn.click((e) => {
     // a요소 기본이동막기
     e.preventDefault();
     // 부드러운 스크롤 위치값 변경 0으로
     setPos(0);
-    console.log('나클릭!');
+    console.log("나클릭!");
+  }); /////////////click ////////////////////
 
-})/////////////click ////////////////////
+  // 모바일 버튼 클릭시 메뉴박스/검색박스 보이기/숨기기
 
-// 모바일 버튼 클릭시 메뉴박스/검색박스 보이기/숨기기
+  // 대상 : .hbtn(햄버거버튼) / .sbtn(검색버튼)
+  // 요구사항 : 햄버거 버튼은 .mobx보이기 / 검색버튼은 .mos보이기
+  // 제이쿼리 메서드 : click(), slideToggle()
+  $(".hbtn").click(() => $("#mobx").slideToggle(300));
+  $(".sbtn").click(() => $(".mos").slideToggle(300));
 
-// 대상 : .hbtn(햄버거버튼) / .sbtn(검색버튼)
-// 요구사항 : 햄버거 버튼은 .mobx보이기 / 검색버튼은 .mos보이기
-// 제이쿼리 메서드 : click(), slideToggle()
-$('.hbtn').click(()=>$('#mobx').slideToggle(300));
-$('.sbtn').click(()=>$('.mos').slideToggle(300));
-
-
-// 토글이라는 말은 두가지를 전환하는 버튼을 말함
-// 제이쿼리에 있는 토글 메서드 : 
-// toggle() -> show/hide 전환
-// slideToggle() -> slideDown/slideUp 전환
-// fadeToggle() -> fadeIn/fadeOut 전환
-
-
-
-
+  // 토글이라는 말은 두가지를 전환하는 버튼을 말함
+  // 제이쿼리에 있는 토글 메서드 :
+  // toggle() -> show/hide 전환
+  // slideToggle() -> slideDown/slideUp 전환
+  // fadeToggle() -> fadeIn/fadeOut 전환
+} ///////////////////// setJSTop /////////////////////////
