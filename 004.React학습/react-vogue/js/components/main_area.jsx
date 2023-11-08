@@ -12,7 +12,9 @@ export default function MainCategory(props) {
   // 카테고리 해당 데이터 선택하기
   // 카테고리 전체 객체 데이터 중 해당항목 선택
   const selData = catData[props.category];
-  const chgMenu = () => {}
+  const chgMenu = () => {
+  }
+  console.log('메인영역실행!')
 
   return (
     <div id="main-area">
@@ -74,7 +76,7 @@ function ItemList(props) {
 
   // 태그처리 구분 코드생성 함수
   const makeCode = (data) => {
-    console.log("배열인가?", Array.isArray(data));
+    // console.log("배열인가?", Array.isArray(data));
 
     // 배열데이터면 small 태그처리함
     if (Array.isArray(data)) {
