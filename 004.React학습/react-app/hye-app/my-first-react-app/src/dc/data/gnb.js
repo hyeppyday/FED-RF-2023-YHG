@@ -31,6 +31,6 @@ export const menu = [
         },
         {
             txt:"SWIPER",
-            link:"/swiper",
+            link:"/swiperapp",
         },
     ];
