@@ -1,22 +1,22 @@
 // index.js는 public/index.html 페이지에 적용되는 컴포넌트다! -> 루트 컴포넌트
 
 // css 불러오기
-import '../src/css/index.css';
+import './css/index.css';
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Form, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
-import { Layout } from "./dc/layout/Layout";
-import { Comics } from "./dc/contents/Comics";
-import { Movies } from "./dc/contents/Movies";
-import { Games } from "./dc/contents/Games";
-import { News } from "./dc/contents/News";
-import { Video } from "./dc/contents/Video";
-import { SwiperApp } from "./dc/plugin/SwiperApp";
-import { Main } from "./dc/contents/Main";
-import { Character } from "./dc/contents/Character";
+import { Layout } from "./components/layout/Layout";
+import { Comics } from "./components/pages/Comics";
+import { Movies } from "./components/pages/Movies";
+import { Games } from "./components/pages/Games";
+import { News } from "./components/pages/News";
+import { Video } from "./components/pages/Video";
+import { SwiperApp } from "./components/plugin/SwiperApp";
+import { Main } from "./components/pages/Main";
+import { Character } from "./components/pages/Character";
 
 /********************************************* 
     [ 리액트 라우터 ]

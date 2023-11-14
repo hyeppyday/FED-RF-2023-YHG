@@ -1,12 +1,13 @@
 // 캐릭터페이지 메인컨텐츠
 
-import { Banner } from "./Banner";
+import { Banner } from "../modules/Banner";
 
 export function Character(){
     return(
         <>
             <h1 style={{textAlign:'center'}}>캐릭터페이지</h1>
             <Banner category="CHARACTERS"/>
+            <Banner category="WONDER WOMAN"/>
         </>
     )
 } /////////////// Character //////////////////

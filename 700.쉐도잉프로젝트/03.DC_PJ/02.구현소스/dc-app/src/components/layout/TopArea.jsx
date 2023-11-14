@@ -1,7 +1,7 @@
 // 상단영역 컴포넌트
 // GNB 데이터
 import { menu } from "../data/gnb";
-import { Logo } from "../contents/Logo";
+import { Logo } from "../modules/Logo";
 import { Link } from "react-router-dom";
 
 /******************************************************* 
