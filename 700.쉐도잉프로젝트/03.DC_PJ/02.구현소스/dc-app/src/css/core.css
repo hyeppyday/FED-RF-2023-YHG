@@ -2,7 +2,7 @@
 
 /* Ubuntu */
 @font-face {
-    font-family: Ubuntu;
+    font-family: 'Ubuntu';
     src: url(../static/fonts/Ubuntu-Regular.woff2) format("woff2");
 }
 
