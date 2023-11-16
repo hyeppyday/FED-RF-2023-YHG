@@ -7,7 +7,7 @@ export function Character(){
         <>
             <h1 style={{textAlign:'center'}}>캐릭터페이지</h1>
             <Banner category="CHARACTERS"/>
-            <Banner category="WONDER WOMAN"/>
+           
         </>
     )
 } /////////////// Character //////////////////
