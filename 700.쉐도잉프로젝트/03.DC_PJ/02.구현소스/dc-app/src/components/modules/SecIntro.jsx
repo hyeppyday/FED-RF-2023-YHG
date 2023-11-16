@@ -7,7 +7,7 @@ import { secIntroData } from "../data/secintro";
 import "../../css/secintro.css";
 
 // 링크 이동을 위한 라우터 불러오기
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // 구조정의 :
 // Root > section > img Box + title Box + button Box
@@ -21,7 +21,7 @@ export function SecIntro() {
 
 
   return (
-    <>
+    
       <section className="sec-intro">
         {selData.map((v, i) => (
           <div key={i}>
@@ -41,6 +41,6 @@ export function SecIntro() {
           </div>
         ))}
       </section>
-    </>
+    
   );
 } ////////////// SecIntro 컴포넌트 ///////////
