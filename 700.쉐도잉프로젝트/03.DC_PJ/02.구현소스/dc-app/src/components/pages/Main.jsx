@@ -1,16 +1,18 @@
 // 메인페이지 메인컨텐츠
 
 import { Banner } from "../modules/Banner";
+import { CatList } from "../modules/CatList";
 import { SecIntro } from "../modules/SecIntro";
 import { VidIntro } from "../modules/VidIntro";
 import { VidSwipe } from "../modules/VidSwipe";
+
+
 
 export function Main() {
   // cat 속성으로 메뉴분류 전달
   return (
     <>
       {/* 1. 배너 컴포넌트 */}
-      <h1 style={{ textAlign: "center" }}>메인페이지</h1>
       <Banner category={"main" + Math.ceil(Math.random() * 3)} />
       {/* 1~3 중 임의의 난수를 발생함 
             Math.ceil(Math.random()*3)
@@ -25,7 +27,13 @@ export function Main() {
       <VidIntro cat="main" cls="off"/>
 
       {/* 4. 비디오스와이프 컴포넌트 */}
-      <VidSwipe tit="LATEST TRAILERS, CLIPS & MORE"/>
+      <VidSwipe cat="main"/>
+
+      {/* 5. 캐릭터 리스트 컴포넌트 */}
+      <CatList/>
+
+      {/* 6. 캐릭터 배너 컴포넌트 */}
+      <Banner category="CHARACTERS"/>
     </>
   );
 } /////////////// Main //////////////////

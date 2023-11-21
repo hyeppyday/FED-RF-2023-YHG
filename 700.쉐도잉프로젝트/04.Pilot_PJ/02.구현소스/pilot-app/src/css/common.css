@@ -1,6 +1,6 @@
 /* Pilot PJ 공통모듈 CSS - common.css */
 
-/* reset,core css 불러오기 */
+/* 리셋, 코아 CSS 불러오기 */
 @import url(./reset.css);
 @import url(./core.css);
 
@@ -210,7 +210,7 @@
 #info {
     position: relative;
     /* 부모자격 */
-    height: 50%;/* 회사정보 박스만 높이값 절반! */
+    height: 50vh;/* 회사정보 박스만 높이값 절반! */
     background-color: #101629;
 }
 

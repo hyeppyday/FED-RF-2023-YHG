@@ -23,9 +23,11 @@ import './css/swiper_vid.css';
 // 사용할 스와이퍼 모듈을 불러온다(여기서는 페이지네이션,네비게이션,자동넘)
 import { Navigation } from 'swiper/modules';
 
-export function SwiperVid() {
-  // 선택된 데이터
-  const selData = swVidData;
+export function SwiperVid(props) {
+  // props.cat - 카테고리명 (데이터 선택 객체속성명)
+
+  // 선택된 데이터 : 카테고리에 해당하는 데이터를 가져옴!!
+  const selData = swVidData[props.cat];
 
   // 비디오 보이기 함수 
   const showVid = (src,tit) =>{
@@ -65,7 +67,7 @@ export function SwiperVid() {
   return (
     <>
       <Swiper
-        slidesPerView={4}
+        // slidesPerView={4}
         spaceBetween={20}
         navigation={true}
         modules={[Navigation]}
