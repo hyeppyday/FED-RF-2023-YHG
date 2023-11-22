@@ -17,18 +17,7 @@ import { Pagination,Navigation,Autoplay } from "swiper/modules"
 import { useRef, useState } from "react";
 
 export function SwiperApp() {
-  // 불러올 이미지 리스트
-  const imgArr = [
-    "dcm28",
-    "dcm29",
-    "dcm30",
-    "dcm31",
-    "dcm32",
-    "dcm10",
-    "dcm11",
-    "dcm12",
-  ];
-
+  
 
   // 상태관리변수 : 멈춤상태 / 플레이상태
   const [sts,setSts] = useState(1);
@@ -86,13 +75,20 @@ export function SwiperApp() {
         /* 사용할 모듈을 여기에 적용시킨다 */
         modules={[Pagination,Navigation,Autoplay]}
         className="mySwiper"
-      >
-        {
-            imgArr.map((v,i)=>
-            <SwiperSlide key={i}>
-                <img src={"./images/"+v+".jpg"} alt="list image" />
-            </SwiperSlide>)
-        }        
+      >      
+            
+            <SwiperSlide>
+                <h2>나야나</h2>
+            </SwiperSlide>
+            <SwiperSlide>
+                <h2>나야나</h2>
+            </SwiperSlide>
+            <SwiperSlide>
+                <h2>나야나</h2>
+            </SwiperSlide>
+            <SwiperSlide>
+                <h2>나야나</h2>
+            </SwiperSlide>
       </Swiper>
       {/* 플레이/멈춤버튼 */}      
       <button 

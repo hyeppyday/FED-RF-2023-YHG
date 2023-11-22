@@ -22,14 +22,14 @@ export function TotalMenu() {
   // 코드리턴 /////////////////////
   return (
     <>
-      <div class="mbox">
+      <div className="mbox">
         <video
           src="images/disc2018.mp4"
           loop="loop"
           muted="muted"
-          class="bgm"
+          className="bgm"
         ></video>
-        <nav class="mlist">
+        <nav className="mlist">
           <dl>
             <dt>
               <a href="#" onClick={()=>goPage('men')}>MEN</a>
