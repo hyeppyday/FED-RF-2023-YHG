@@ -19,6 +19,7 @@ import { Main } from "./components/pages/Main";
 import { Character } from "./components/pages/Character";
 import { CatDetail } from './components/modules/CatDetail';
 import { Series } from './components/pages/Series';
+import { SchPage } from './components/pages/SchPage';
 
 /********************************************* 
     [ 리액트 라우터 ]
@@ -72,6 +73,7 @@ export default function App() {
         <Route path='video' element={<Video/>}/>
         <Route path='board' element={<SwiperApp/>}/>
         <Route path='detail' element={<CatDetail/>}/>
+        <Route path='schpage' element={<SchPage/>}/>
       </Route>
     </Routes>
   </BrowserRouter>
