@@ -4,12 +4,16 @@ import { menu } from "../data/gnb";
 import { Logo } from "../modules/Logo";
 import { Link, useNavigate } from "react-router-dom";
 
+// 컨텍스트 API
+import { dcCon } from "../modules/dcContext";
+
 // 폰트어썸 불러오기
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
 
 import $ from 'jquery';
-import { SchPage } from "../pages/SchPage";
+
 
 
 /******************************************************* 
@@ -25,8 +29,9 @@ import { SchPage } from "../pages/SchPage";
 
 export function TopArea() {
 
-  // 라우터 이동메서드 함수
-  const goNav = useNavigate();
+   // 컨텍스트 API사용
+   const myCon = useContext(dcCon);
+
 
   // 검색 관련 함수들 ///////////////////////////
 
@@ -40,15 +45,25 @@ export function TopArea() {
   // 2. 입력창에 엔터키를 누르면 검색함수 호출!
   const enterKey = e => {
     // console.log(e.key)
-    // 엔터키는 'Enter' 문자열을 리턴함!
-    if(e.key === 'Enter') goSearch();
+    if(e.key === 'Enter'){ 
+      // 입력창의 입력값 읽어오기 : val() 사용!
+      let txt = $(e.target).val().trim();
+      console.log(txt);
+      // 빈값이 아니면 검색함수 호출(검색어전달!)
+      if(txt!='') {
+        // 입력창 비우기 + 부모박스 닫기
+        $(e.target).val('').parent().hide();
+
+        // 검색 보내기
+        goSearch(txt)};
+    } ///////// if ///////
   } ///////////// enterKey ////////////
 
   // 3. 검색 페이지로 검색어와 함께 이동하기
-  const goSearch = () => {
+  const goSearch = (txt) => { // txt - 검색어
     // console.log('나는 검색하러 간다!!')
     // 라우터 이동함수로 이동하기
-    goNav('/schpage',{state:{keyword:''}})
+    myCon.chgPage('/schpage',{state:{keyword:txt}})
     
   } //////////// goSearch ////////////
 

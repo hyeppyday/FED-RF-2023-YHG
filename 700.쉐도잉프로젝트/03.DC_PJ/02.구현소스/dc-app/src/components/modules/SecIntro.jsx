@@ -29,30 +29,38 @@ export function SecIntro() {
 
   // // 라우터 이동함수 -> 컨텍스트 API 사용!
   // const chgPage = (txt) => goNav(txt); -> 여기서 사용안함
-  return (
-    
-      <section className="sec-intro">
-        {selData.map((v, i) => (
-          <div key={i}>
-            {/* 1. 이미지박스 */}
-            <div className="imbx">
-              <img src={v.isrc} alt={v.tit.split("^")[0]} />
+  return(
+    <>
+        <section className="sec-intro">
+        {
+            selData.map((v,i)=>
+            <div key={i}>
+                {/* 1. 이미지박스 */}
+                <div className="imbx">
+                    <img 
+                        src={v.isrc} 
+                        alt={v.tit.split('^')[0]} />
+                </div>
+                {/* 2. 타이틀박스 */}
+                <div className="titbx">
+                    <h3>{v.tit.split('^')[0]}</h3>
+                    <h2>{v.tit.split('^')[1].toUpperCase()}</h2>
+                </div>
+                {/* 3. 버튼박스 */}
+                <div className="btnbx">
+                    <button 
+                    onClick={()=>
+                    // 컨텍스트 API 함수호출!
+                    myCon.chgPage(v.link,{})}>
+                        {v.btn.toUpperCase()}
+                    </button>
+                </div>
+
             </div>
-            {/* 2. 타이틀박스 */}
-            <div className="titbx">
-              <h3>{v.tit.split("^")[0]}</h3>
-              <h2>{v.tit.split("^")[1].toUpperCase()}</h2>
-            </div>
-            {/* 3. 버튼박스 */}
-            <div className="btnbx">
-              
-              <button onClick={()=>
-                // 컨텍스트 API 함수 호출!
-                myCon.chgPage(v.link)}>{v.btn.toUpperCase()}</button>
-            </div>
-          </div>
-        ))}
-      </section>
-    
-  );
+            )
+        }   
+        </section>
+    </>
+);
+
 } ////////////// SecIntro 컴포넌트 ///////////
