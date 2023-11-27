@@ -5,24 +5,58 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { SchCatList } from "./SchCatList";
+import $ from 'jquery'
 
 import '../../css/searching.css'
+import { useState } from "react";
 
 export function Searching(props) {
   // props.kword - 검색어전달
   console.log("전달검색어:", props.kword);
+  
+  /////////////// 후크 상태관리 변수 ////////////////////
+  // 1. 검색어 후크 상태변수
+  const [kword,setKword] =useState(props.kword)
+  // 2. 출력개수 후크데이터로 셋팅!
+  const [cntNum,setCntNum] = useState(0);
+////////////////////////////////////////////////////////
+
+  // 검색어 업데이트 함수 ///////////
+  const chgKword = txt => setKword(txt);
+  // 넘어온 검색어와 셋팅된 검색어가 다르면 업데이트
+  // if(props.kword!=kword) chgKword(props.kword);
+
+  // 리스트 개수 출력함수 ////////////
+  const chgCnt = (num) => {
+    setCntNum(num);
+    // $('.cntNum').text(num);
+  } ////////////// chgCnt 함수 //////////////
+
 
   // 검색리스트 만들기 함수
-  const schList = () => {};
+  const schList = (e) => {
+    chgKword($(e.currentTarget).next().val())
+    // 아이콘 다음 요소가 input이고 그 값을 읽어와서 변경
+    // console.log(e.currentTarget)
+  };
 
   // 엔터키 반응 함수
-  const enterKey = () => {};
+  const enterKey = (e) => {
+    // 엔터키 일때만 반영함
+    if(e.key == 'Enter'){
+      let txt = $(e.target).val();
+      chgKword(txt)
+      console.log('여기야!',txt)
+    };
+    }
 
   // 체크박스검색 함수 ////////
   const chkSearch = () => {};
 
   // 리스트 정렬 함수 ///////
   const sortList = () => {};
+
+
 
   // 리턴 코드 ////////////////////////
   return (
@@ -46,7 +80,9 @@ export function Searching(props) {
               type="text"
               placeholder="Filter by Keyword"
               onKeyUp={enterKey}
-              value={props.kword}
+              defaultValue={kword}
+              /* input요소에서 리액트 value 속성은
+                defaultValue 속성을 사용한다! */
             />
           </div>
           {/* 1-2. 체크박스구역 */}
@@ -111,7 +147,7 @@ export function Searching(props) {
         <div className="listbx">
         {/* 2-1. 결과 타이틀 */}
         <h2 className="restit">
-        BROWSE CHARACTERS (total)
+        BROWSE CHARACTERS ({cntNum})
         </h2>
         {/* 2-2. 정렬선택박스 */}
         <aside className="sortbx">
@@ -120,8 +156,11 @@ export function Searching(props) {
             <option value="1">Z-A</option>
           </select>
         </aside>
-        {/* 2-3. 캐릭터 리스트 컴포넌트 */}
-        <SchCatList word={props.kword}/>
+        {/* 2-3. 캐릭터 리스트 컴포넌트 : 검색어를 후크상태변수로 연결 -> 데이터변경에 반영 */}
+        <SchCatList 
+        word={kword} 
+        chgCntFn={chgCnt}
+        />
         </div>
       </section>
     </>

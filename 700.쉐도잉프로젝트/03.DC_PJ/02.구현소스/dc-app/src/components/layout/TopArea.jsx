@@ -3,7 +3,7 @@
 import { menu } from "../data/gnb";
 import { Logo } from "../modules/Logo";
 import { Link, useNavigate } from "react-router-dom";
-
+import { memo } from "react";
 // 컨텍스트 API
 import { dcCon } from "../modules/dcContext";
 
@@ -27,16 +27,32 @@ import $ from 'jquery';
 
 *******************************************************/
 
-export function TopArea() {
+// 메모이제이션 적용하기!!!
+// 그러나, 단순히 적용하면 효과가 없음!
+// 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
+// 매번 새롭게 리랜더링 되므로 메모이제이션 갱신을 
+// 하게끔 하기에 효과가 없는것 !
+// -> 방법은? 컨텍스트 API를 사용하지 말고
+// props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!
+// -> React.memo는 전달속성이 변경됨을 기준하여
+// 메모이제이션 기능을 제공하기 때문이다!
+// -> 전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!
 
-   // 컨텍스트 API사용
-   const myCon = useContext(dcCon);
+export const TopArea= memo(({chgPageFn})=>{
+  // 보통 props등 전달변수만 쓰면 하위 속성명으로
+  // 값을 전달하지만 중괄호{}를 사용하면 속성명을 직접 사용할 수 있다!
+
+  // 컴포넌트 호출확인
+  console.log('상단영역이야!');
 
 
   // 검색 관련 함수들 ///////////////////////////
 
   // 1. 검색창 보이기 함수
-  const showSearch = ()=>{
+  const showSearch = (e)=>{
+    // 0. a요소 기능 막기
+    e.preventDefault();
+
     // 1. 검색창 보이기
     $('.searchingGnb').show();
     // 2. 입력창에 포커스 보내기
@@ -63,7 +79,7 @@ export function TopArea() {
   const goSearch = (txt) => { // txt - 검색어
     // console.log('나는 검색하러 간다!!')
     // 라우터 이동함수로 이동하기
-    myCon.chgPage('/schpage',{state:{keyword:txt}})
+    chgPageFn('/schpage',{state:{keyword:txt}})
     
   } //////////// goSearch ////////////
 
@@ -144,7 +160,7 @@ export function TopArea() {
       </header>
     </>
   );
-}
+})
 
 /* 
   map()을 사용하여 태그를 생성할때
