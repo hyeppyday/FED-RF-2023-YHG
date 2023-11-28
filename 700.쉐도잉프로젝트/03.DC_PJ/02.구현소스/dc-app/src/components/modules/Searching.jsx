@@ -9,6 +9,8 @@ import $ from 'jquery'
 
 import '../../css/searching.css'
 import { useState } from "react";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 export function Searching(props) {
   // props.kword - 검색어전달
@@ -21,10 +23,37 @@ export function Searching(props) {
   const [cntNum,setCntNum] = useState(0);
 ////////////////////////////////////////////////////////
 
+// 검색 케이스 구분변수(useRef -> 값유지!)
+const allow = useRef(1);
+// 1-상단검색허용 / 0-상단검색불허용
+// useRef 변수 사용은 변수명.current
+
+// 폰트어썸을 참조하는 테스트용 참조변수 /////////////////////
+const xx = useRef(null);
+useEffect(()=>{
+  // xx가 폰트어썸 컴포넌트를 담은 후 !
+  console.log(xx);
+  // 테두리 디자인 주기
+  xx.current.style.border = '5px dotted red'
+}) /////////////////// useRef참고용 ///////////////////////
+
+
+
   // 검색어 업데이트 함수 ///////////
   const chgKword = txt => setKword(txt);
-  // 넘어온 검색어와 셋팅된 검색어가 다르면 업데이트
-  // if(props.kword!=kword) chgKword(props.kword);
+  
+  // 상단검색 초기실행함수
+  const initFn = ()=>{
+    // 넘어온 검색어와 셋팅된 검색어가 다르면 업데이트
+    if(props.kword!=kword) {chgKword(props.kword);
+    // 모듈검색 input창에 같은 값 넣어주기
+    $('#schin').val(props.kword)
+  } //////////// if /////////////////
+ 
+  } ////////////// initFn ////////////////
+
+  // 만약 useRef변수값이 1이면(true면) initFn실행!
+  if(allow.current) initFn();
 
   // 리스트 개수 출력함수 ////////////
   const chgCnt = (num) => {
@@ -42,6 +71,11 @@ export function Searching(props) {
 
   // 엔터키 반응 함수
   const enterKey = (e) => {
+    // 상단 키워드 검색막기
+    allow.current =0;
+    // 잠시후 상태해제
+    setTimeout(()=>allow.current=1,100);
+    
     // 엔터키 일때만 반영함
     if(e.key == 'Enter'){
       let txt = $(e.target).val();
@@ -73,6 +107,7 @@ export function Searching(props) {
               className="schbtn"
               title="Open search"
               onClick={schList}
+              ref={xx}
             />
             {/* 입력창 */}
             <input
@@ -82,7 +117,11 @@ export function Searching(props) {
               onKeyUp={enterKey}
               defaultValue={kword}
               /* input요소에서 리액트 value 속성은
-                defaultValue 속성을 사용한다! */
+                defaultValue 속성을 사용한다! -> 처음입력값
+                ___________________________________________
+                value 속성을 쓰면 동적변경이 이루어지고
+                사용자가 입력하지 못하도록 readOnly(읽기전용)
+                설정이 되어있어야 한다! */
             />
           </div>
           {/* 1-2. 체크박스구역 */}

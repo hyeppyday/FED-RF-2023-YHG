@@ -15,8 +15,8 @@ export function Fashion(props) {
   // props.cat 서브카테고리명
 
   useEffect(() => {
-    // 스크롤바 생성
-    $('html,body').css({overflow:'visible'});
+    // 스크롤바 생성하기 (x축은숨김)
+    $('html,body').css({overflow:'visible',overflowX:'hidden'});
     
     // 로고 클릭시 페이지이동 : pgName 변경 -> chgPgName()
     $('#logo a').click(()=>myCon.chgPgName('main'));

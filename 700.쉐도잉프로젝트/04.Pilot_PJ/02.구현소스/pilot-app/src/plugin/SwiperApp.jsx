@@ -22,7 +22,7 @@ export function SwiperApp(props) {
     let temp = [];
     for (let x = 0; x < num; x++) {
       temp[x] = (
-        <SwiperSlide>
+        <SwiperSlide key={x}>
           <img
             src={"./images/sub/" + props.cat + "/banner/ban" + (x + 1) + ".png"}
           />
