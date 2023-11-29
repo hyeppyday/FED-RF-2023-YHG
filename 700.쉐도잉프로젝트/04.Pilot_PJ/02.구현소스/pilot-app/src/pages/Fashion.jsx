@@ -6,6 +6,7 @@ import { pCon } from "../modules/PilotContext";
 
 import $ from 'jquery';
 import { Sinsang } from "../modules/SinSang";
+import { ItmeDetail } from "../modules/itemDetail";
 
 // 공통패션 서브페이지 컨텐츠 컴포넌트
 export function Fashion(props) {
@@ -31,7 +32,9 @@ export function Fashion(props) {
         <Sinsang cat={myCon.pgName}/>
       </section>
       {/* 2-5. 상세보기박스 */}
-      <div className="bgbx"></div>
+      <div className="bgbx">
+        <ItmeDetail/>
+      </div>
       {/* 3. 패럴렉스 */}
       <section id="c2" className={"cont c2 " +myCon.pgName}></section>
       {/* 4. 단일상품영역 */}
