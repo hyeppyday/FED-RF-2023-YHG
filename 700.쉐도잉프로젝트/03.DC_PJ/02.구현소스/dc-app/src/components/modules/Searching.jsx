@@ -1,7 +1,7 @@
 // DC PJ 검색모듈 컴포넌트
 
 // 폰트어썸 불러오기
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faSitemap } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { catListData } from "../data/swipercat";
@@ -18,10 +18,11 @@ import { useEffect } from "react";
 // 이유 : 배열의 정렬정보가 컴포넌트에 포함될경우 
 // 컴포넌트 리랜더링시 초기화 되므로 정렬이 변경되지 않는다!
 // 따라서 컴포넌트 바깥쪽 위에서 정렬된 원본 배열 데이터를
-// 만들어준다!
-catListData.sort((a,b)=>{
-  return a.cname==b.cname?0:a.cname>b.cname?1:-1;
-})
+// 만들어준다! -> 외부검색어로 검색을 위해 여기는 주석!
+
+// catListData.sort((a,b)=>{
+//   return a.cname==b.cname?0:a.cname>b.cname?1:-1;
+// })
 
 
 export function Searching(props) {
@@ -29,20 +30,20 @@ export function Searching(props) {
   console.log("전달검색어:", props.kword);
 
   /////////////// 후크 상태관리 변수 ////////////////////
-  // 1. 검색어 후크 상태변수
-  const [kword, setKword] = useState(props.kword);
+  // 1. 검색어 후크 상태변수 : 초기값은 전달된 검색어 안넣음
+  const [kword, setKword] = useState(null);
 
   // 2. 출력개수 후크데이터로 셋팅!
   const [cntNum, setCntNum] = useState(0);
 
   // 3. 데이터 구성 상태변수 : [배열데이터,정렬상태]
-  const [selData,setSelData] =useState([catListData,2]);
+  const [selData,setSelData] =useState([[],2]);
   // - 정렬상태값 : 0-오름차순 / 1-내림차순 / 2-정렬전
   // 두가지 값을 같이 관리하는 이유는 데이터정렬만 변경될 경우
   // 배열자체가 변경된 것으로 인식하지 않기 때문이다!
 
   // 4. 데이터 건수 상태변수
-  const [cnt,setCnt] = useState(catListData.length);
+  const [cnt,setCnt] = useState(0);
   ////////////////////////////////////////////////////////
 
   // 검색어 업데이트 함수 ///////////
@@ -52,6 +53,9 @@ export function Searching(props) {
   const allow = useRef(1);
   // 1-상단검색허용 / 0-상단검색불허용
   // useRef 변수 사용은 변수명.current
+
+  // 처음상태 구분변수(랜더링이전 시점에 한번실행구분)
+  const firstSts = useRef(0);
 
   // 폰트어썸을 참조하는 테스트용 참조변수 /////////////////////
   const xx = useRef(null);
@@ -66,25 +70,54 @@ export function Searching(props) {
   const initFn = () => {
     // 넘어온 검색어와 셋팅된 검색어가 다르면 업데이트
     if (props.kword != kword) {
+      console.log('상단검색실행!',props.kword,kword);
+      // 키워드 상태변수에 업데이트
       chgKword(props.kword);
       // 모듈검색 input창에 같은 값 넣어주기
       $("#schin").val(props.kword);
       // 검색 리스트 만들기 함수 호출
-      // schList();
+      schList();
     } //////////// if /////////////////
   }; ////////////// initFn ////////////////
 
   // 만약 useRef변수값이 1이면(true면) initFn실행!
   if (allow.current) initFn();
 
-  // 리스트 개수 출력함수 ////////////
+  function firstDo (){
+    console.log('처음한번만~!',props.kword);
+    const firstTemp = catListData.filter(v=>{
+      if(v.cname.toLowerCase().indexOf(props.kword.toLowerCase())!==-1) return true;
+    })
+    
+    firstTemp.sort((a,b)=>{
+      return a.cname==b.cname?0:a.cname>b.cname?1:-1;
+    })
+  
+    console.log('처음결과:',firstTemp);
+    // 데이터변경 업데이트
+    setSelData([firstTemp,2]);
+    // 검색건수 상태관리변수 업데이트!
+    setCnt(firstTemp.length);
+    // 키워드 업데이트
+    chgKword(props.kword);
+  
+  } ///////////// firstDo 함수 ////////
+  
+  // 한번만 호출 ////
+  if(!firstSts.current) {
+    firstDo();
+    firstSts.current = 1;
+  } //// if /////////////
+  
+  useEffect(()=>{},[])
+  // 리스트 개수 변경함수 ////////////
   const chgCnt = (num) => {
     setCntNum(num);
     // $('.cntNum').text(num);
   }; ////////////// chgCnt 함수 //////////////
 
   // 검색리스트 만들기 함수 /////////////////
-  const schList = (e) => {
+  function schList (e){
     // 1. 검색어 읽어오기 -> 검색어 상태변수 kword 사용
     let keyword = $('#schin').val()
 

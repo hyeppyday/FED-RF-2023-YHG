@@ -55,6 +55,11 @@ import { SchPage } from './components/pages/SchPage';
 // 레이아웃 컴포넌트를 라우터에 입혀서 화면에
 // 출력해야하기 때문에 스스로 내보내기를 셋팅해야하는 것!
 export default function App() {
+
+  useEffect(() => {
+    initLightboxJS("Insert your License Key here", "Insert plan type here");
+  }, []);
+
   return (
   <BrowserRouter>
     <Routes>
