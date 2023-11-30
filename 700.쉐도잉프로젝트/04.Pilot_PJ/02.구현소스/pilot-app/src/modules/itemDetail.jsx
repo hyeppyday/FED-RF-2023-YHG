@@ -1,16 +1,75 @@
 // 상품상세보기 컴포넌트
 
-export function ItmeDetail() {
+// 신상품 데이터 가져오기
+import { useEffect } from "react";
+import { sinsangData } from "../data/sinsang";
+import $ from 'jquery'
+
+export function ItmeDetail({cat,goods}) {
+  // cat - 카테고리명(men/women/style)
+  // goods - 상품 아이템 정보 (속성코드 : m1,m2,....)
+
+  // 선택데이터 : 전체데이터[분류명][상품코드].split('^')
+  // -> 개별상품 배열이 된다!
+  // [상품명,상품코드,가격]
+  const selData = sinsangData[cat][goods].split('^');
+  console.log('선택데이터:',selData)
+
+  // 닫기 함수 //
+  const closeBox = (e) => {
+    e.preventDefault();
+    $('.bgbx').slideUp(400)};
+
+  // 랜더링 후 실행구역 
+  useEffect(()=>{
+    // 숫자출력 imput
+    const sum = $('#sum');
+    // 수량증감 이미지 버튼
+    const numBtn = $('.chg_num img')
+ 
+
+// 수량 증감 함수 //
+    numBtn.click(e=>{
+      // 이미지 순번
+      let seq = $(e.currentTarget).index();
+      // 기존값 읽기
+      let num = Number(sum.val());
+      seq?num--:num++;
+      // 한계값
+      if(num<1) num=1;
+      // 증감 반영
+      sum.val(num);
+      // 총합계 반영
+      // 기본값 : selData[2]
+      // 출력박스 : #total
+     $('#total').text(addComma(selData[2]*num)+'원')
+      
+      console.log('순번',seq,num)
+    })
+
+  },[])  
+  
+  // 리랜더링 실행구역 /////
+  useEffect(()=>{
+    // 수량 초기화
+    $('#sum').val('1');
+  })
+
+  //정규식함수(숫자 세자리마다 콤마해주는 기능)
+function addComma(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
   return (
     <>
-      <a href="#" class="cbtn">
-        <span class="ir">닫기버튼</span>
+      <a href="#" className="cbtn" onClick={closeBox}>
+        <span className="ir">닫기버튼</span>
       </a>
       <div id="imbx">
-        <div class="inx">
-          <section class="gimg">
-            <img src="./images/goods/men/m4.png" alt="큰 이미지" />
-            <div class="small">
+        <div className="inx">
+          <section className="gimg">
+            <img src={"./images/goods/"+cat+"/"+goods+".png"} alt="큰 이미지" />
+            <div className="small">
               <a href="#">
                 <img src="./images/goods/men/m1.png" alt="썸네일 이미지" />
                 <img src="./images/goods/men/m2.png" alt="썸네일 이미지" />
@@ -21,14 +80,14 @@ export function ItmeDetail() {
               </a>
             </div>
           </section>
-          <section class="gdesc scbar">
+          <section className="gdesc scbar">
             <h1>HOME &gt; MEN</h1>
             <div>
               <ol>
                 <li>
                   <img src="./images/dx_ico_new-28143800.gif" alt="new버튼" />
                 </li>
-                <li id="gtit">상품명: [남성]부분 스트라이프 PQ 티셔츠</li>
+                <li id="gtit">상품명:{selData[0]}</li>
                 <li>
                   <img src="./images/icon_type02_social01.gif" alt="페이스북" />
                   <img src="./images/icon_type02_social02.gif" alt="트위터" />
@@ -36,7 +95,7 @@ export function ItmeDetail() {
                   <img src="./images/btn_source_copy.gif" alt="URL복사" />
                 </li>
                 <li>
-                  <span>판매가</span> <span id="gprice">99,000원</span>
+                  <span>판매가</span> <span id="gprice">{selData[2]}</span>
                 </li>
                 <li>
                   <span>적립금</span>
@@ -56,7 +115,7 @@ export function ItmeDetail() {
                   </span>
                 </li>
                 <li>
-                  <span>상품코드</span> <span id="gcode">DMTS77731-NY</span>
+                  <span>상품코드</span> <span id="gcode">{selData[1]}</span>
                 </li>
                 <li>
                   <span>사이즈</span> <span>95 100 105 110</span>
@@ -65,7 +124,7 @@ export function ItmeDetail() {
                   <span>구매수량</span>
                   <span>
                     <input type="text" id="sum" value="1" />
-                    <b class="chg_num">
+                    <b className="chg_num">
                       <img src="./images/cnt_up.png" alt="증가" />
                       <img src="./images/cnt_down.png" alt="감소" />
                     </b>
@@ -77,15 +136,15 @@ export function ItmeDetail() {
                 <li>
                   <span>권장계절</span> <span>여름</span>
                 </li>
-                <li class="tot">
-                  <span>총합계</span> <span id="total">13,000</span>
+                <li className="tot">
+                  <span>총합계</span> <span id="total">{addComma(selData[2])}원</span>
                 </li>
               </ol>
             </div>
             <div>
-              <button class="btn btn1">BUY NOW</button>
-              <button class="btn">SHOPPING CART</button>
-              <button class="btn">WISH LIST</button>
+              <button className="btn btn1">BUY NOW</button>
+              <button className="btn">SHOPPING CART</button>
+              <button className="btn">WISH LIST</button>
             </div>
           </section>
         </div>

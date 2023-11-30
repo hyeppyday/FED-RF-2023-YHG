@@ -15,7 +15,7 @@ export function TotalMenu() {
   const goPage = (txt)=>{
     myCon.chgPgName(txt);
     // 전체박스(mbox)숨기기
-    document.querySelector('.mbox').style.display = 'none';
+    document.querySelector('.ham').click();
   } //////////// goPage 메서드 //////////////
 
 
