@@ -59,12 +59,12 @@ export default function App() {
   return (
 
     /* basename속성은 package.json의 "homepage"속성값을 읽어옴 */
-    // <BrowserRouter basename={process.env.PUBLIC_URL}>
-    // <BrowserRouter>
     
     /* basename 을 안써도 HashRouter는 package.json의 homepage 속성값을 
     자동으로 연결함 */
-    <HashRouter>
+    // <HashRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        {/* <BrowserRouter> */}
     <Routes>
       {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! */}
       <Route path="/" element={<Layout/>}>
@@ -85,7 +85,8 @@ export default function App() {
         <Route path='member' element={<Member/>}/>
       </Route>
     </Routes>
-  </HashRouter>
+    </BrowserRouter>
+  // </HashRouter>
   )
 } //////////////// App 컴포넌트 //////////////////
 
