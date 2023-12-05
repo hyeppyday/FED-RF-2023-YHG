@@ -5,7 +5,7 @@ import './css/index.css';
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 
 
 import { Layout } from "./components/layout/Layout";
@@ -64,7 +64,7 @@ export default function App() {
     
     /* basename 을 안써도 HashRouter는 package.json의 homepage 속성값을 
     자동으로 연결함 */
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter>
     <Routes>
       {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! */}
       <Route path="/" element={<Layout/>}>
@@ -85,7 +85,7 @@ export default function App() {
         <Route path='member' element={<Member/>}/>
       </Route>
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
   )
 } //////////////// App 컴포넌트 //////////////////
 
