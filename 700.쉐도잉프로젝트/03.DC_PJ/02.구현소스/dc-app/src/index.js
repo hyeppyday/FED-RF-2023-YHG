@@ -20,6 +20,7 @@ import { CatDetail } from "./components/modules/CatDetail";
 import { Series } from "./components/pages/Series";
 import { SchPage } from "./components/pages/SchPage";
 import { Member } from "./components/pages/Member";
+import { Login } from "./components/pages/Login";
 
 /********************************************* 
     [ 리액트 라우터 ]
@@ -56,13 +57,12 @@ import { Member } from "./components/pages/Member";
 // 출력해야하기 때문에 스스로 내보내기를 셋팅해야하는 것!
 export default function App() {
   return (
-    /* basename속성은 package.json의 "homepage"속성값을 읽어옴 */
-
-    /* basename 을 안써도 HashRouter는 package.json의 homepage 속성값을 
-    자동으로 연결함 */
-    // <BrowserRouter basename={process.env.PUBLIC_URL}>
-    // <BrowserRouter>
-    <HashRouter>
+    // /* basename속성은 package.json의 "homepage"속성값을 읽어옴 */
+<BrowserRouter basename={process.env.PUBLIC_URL}>
+    {/* <BrowserRouter> */}
+    { /* basename 을 안써도 HashRouter는 package.json의 homepage 속성값을 
+    자동으로 연결함 */ }
+    {/* <HashRouter> */}
       <Routes>
         {/* 중요!!! 레이아웃 컴포넌트를 루트로 설정! */}
         <Route path="/" element={<Layout />}>
@@ -81,10 +81,12 @@ export default function App() {
           <Route path="detail" element={<CatDetail />} />
           <Route path="schpage" element={<SchPage />} />
           <Route path="member" element={<Member />} />
+          <Route path="login" element={<Login />} />
+          
         </Route>
       </Routes>
-    </HashRouter>
-    // </BrowserRouter>
+    {/* </HashRouter> */}
+   </BrowserRouter>
   );
 } //////////////// App 컴포넌트 //////////////////
 

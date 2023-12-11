@@ -111,7 +111,7 @@ export function Banner(props) {
     return data.map((v, i) => (
       <li key={i}>
         {/* 배너이미지 */}
-        <img src={v.src} alt="하하" />
+        <img src={process.env.PUBLIC_URL+v.src} alt="ㅎㅎ" />
         {/* 배너정보 */}
           <section className="bantit">
             <h3>{v.tit1}</h3>

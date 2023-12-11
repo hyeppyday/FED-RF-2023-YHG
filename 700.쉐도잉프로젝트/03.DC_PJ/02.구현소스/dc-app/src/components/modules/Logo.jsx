@@ -51,11 +51,12 @@ export const Logo = (props) => {
     <h1 style={myStyle[props.logoStyle]} onClick={() => 
     // 컨텍스트 API 함수 호출!
     myCon.chgPage('/',{})}>
-      <img
-        src={isrc.logo}
-        alt="DC logo"
-        style={{ width: myStyleImg[props.logoStyle] }}
-      />
+      <img   
+                    src={process.env.PUBLIC_URL+isrc.logo} 
+                    alt="DC logo"
+                    style={{
+                        width: myStyleImg[props.logoStyle]
+                    }} />
     </h1>
   );
 }; /////////// Logo /////////////

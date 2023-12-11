@@ -15,6 +15,11 @@ export function ItmeDetail({cat,goods}) {
   // 카트 사용여부 상태변수 ////////
   const [csts,setCsts] = useState(0);
 
+   // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게함!
+   const [transData,setTransData] = useState(null);
+
+
+
   // 카트에 담기 버튼 클릭시 호출함수
   const useCart = () =>{
     
@@ -34,14 +39,17 @@ export function ItmeDetail({cat,goods}) {
     */
    // num 항목 추가하기 : 값은 #sum의 value값
    selData.num = $('#sum').val();
-   
+
+   // 로컬스 변환값 변수
+  let localD;
+
    console.log('카트쓸거야!',selData);
 
    // 1-2. 로컬스에 문자형변환 하여 담는다
    // (1) 기존 카트 로컬스가 없는 경우
    if(!localStorage.getItem('cart')){
     // 아무것도 없으면
-    let localD = [];
+    localD = [];
     localD.push(selData);
     localStorage.setItem('cart',JSON.stringify(localD));
    } ///////// if ////////////
@@ -54,7 +62,13 @@ export function ItmeDetail({cat,goods}) {
     localD.push(selData);
     // 다시 문자형 변환하여 넣기
     localStorage.setItem('cart',JSON.stringify(localD))
-  }
+
+    // localD변수에 담긴 로컬스 변환값을 transData에 담아
+    // CartList 컴포넌트에 전달한다!
+    setTransData(localD);
+
+    console.log(transData);
+  } /////// else ///////////
 
     setCsts(1);
   } //////////// useCart //////////////
@@ -219,7 +233,7 @@ function addComma(x) {
         {/* 카트리스트 */}
         {
           csts &&
-        <CartList />
+        <CartList selData={transData}/>
         }
     </>
   );

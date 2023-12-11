@@ -2,7 +2,6 @@
   "homepage":"https://hyeppyday.github.io/hg-dc-pj/",
   "name": "dc-app",
   "version": "0.1.0",
-  "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
