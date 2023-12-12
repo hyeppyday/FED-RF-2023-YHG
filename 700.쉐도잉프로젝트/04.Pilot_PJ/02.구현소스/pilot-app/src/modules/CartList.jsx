@@ -40,6 +40,7 @@ export const CartList=memo(({selData}) =>{
 
   // 리스트 보이기 함수
   const showList = ()=>{
+    console.log('열려라!',showList)
     $('#cartlist').animate({right:'0'},600);
   } /////// showList ////////////
 

@@ -3,7 +3,7 @@
 import { menu } from "../data/gnb";
 import { Logo } from "../modules/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { memo } from "react";
+import { memo, useState } from "react";
 // 컨텍스트 API
 import { dcCon } from "../modules/dcContext";
 
@@ -12,9 +12,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 
-import $ from 'jquery';
-
-
+import $ from "jquery";
 
 /******************************************************* 
     [ 리액트 라우터와 연결하여 사용되는 라우터 컴포넌트 ]
@@ -30,7 +28,7 @@ import $ from 'jquery';
 // 메모이제이션 적용하기!!!
 // 그러나, 단순히 적용하면 효과가 없음!
 // 이유는? 컨텍스트 API가 전역적인 함수/변수를 전달하고 있어서
-// 매번 새롭게 리랜더링 되므로 메모이제이션 갱신을 
+// 매번 새롭게 리랜더링 되므로 메모이제이션 갱신을
 // 하게끔 하기에 효과가 없는것 !
 // -> 방법은? 컨텍스트 API를 사용하지 말고
 // props로 전달하는 방식으로 전환하면 효과를 볼 수 있다!
@@ -38,56 +36,59 @@ import $ from 'jquery';
 // 메모이제이션 기능을 제공하기 때문이다!
 // -> 전달되는 함수가 반드시 useCallback() 처리가 되어야 한다!
 
-export const TopArea= memo(({chgPageFn})=>{
+export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
   // 보통 props등 전달변수만 쓰면 하위 속성명으로
   // 값을 전달하지만 중괄호{}를 사용하면 속성명을 직접 사용할 수 있다!
 
   // 컴포넌트 호출확인
-  console.log('상단영역이야!');
+  console.log("상단영역이야!");
 
+  
 
   // 검색 관련 함수들 ///////////////////////////
 
   // 1. 검색창 보이기 함수
-  const showSearch = (e)=>{
+  const showSearch = (e) => {
     // 0. a요소 기능 막기
     e.preventDefault();
 
     // 1. 검색창 보이기
-    $('.searchingGnb').show();
+    $(".searchingGnb").show();
     // 2. 입력창에 포커스 보내기
-    $('#schinGnb').focus();
-  } ////////////// showSearch /////////////////
+    $("#schinGnb").focus();
+  }; ////////////// showSearch /////////////////
   // 2. 입력창에 엔터키를 누르면 검색함수 호출!
-  const enterKey = e => {
+  const enterKey = (e) => {
     // console.log(e.key)
-    if(e.key === 'Enter'){ 
+    if (e.key === "Enter") {
       // 입력창의 입력값 읽어오기 : val() 사용!
       let txt = $(e.target).val().trim();
       console.log(txt);
       // 빈값이 아니면 검색함수 호출(검색어전달!)
-      if(txt!='') {
+      if (txt != "") {
         // 입력창 비우기 + 부모박스 닫기
-        $(e.target).val('').parent().hide();
+        $(e.target).val("").parent().hide();
 
         // 검색 보내기
-        goSearch(txt)};
+        goSearch(txt);
+      }
     } ///////// if ///////
-  } ///////////// enterKey ////////////
+  }; ///////////// enterKey ////////////
 
   // 3. 검색 페이지로 검색어와 함께 이동하기
-  const goSearch = (txt) => { // txt - 검색어
+  const goSearch = (txt) => {
+    // txt - 검색어
     // console.log('나는 검색하러 간다!!')
     // 라우터 이동함수로 이동하기
-    chgPageFn('/schpage',{state:{keyword:txt}})
-    
-  } //////////// goSearch ////////////
-
+    chgPageFn("/schpage", { state: { keyword: txt } });
+  }; //////////// goSearch ////////////
 
   return (
     <>
       {/* 1. 상단영역 */}
       <header className="top-area">
+        {/* 로그인 환영 메시지 박스 */}
+        <div className="logmsg">{logMsg}</div>
         {/* 네비게이션 GNB파트 */}
         <nav className="gnb">
           <ul>
@@ -96,63 +97,81 @@ export const TopArea= memo(({chgPageFn})=>{
               <Logo logoStyle="top" />
             </li>
             {/* 2. GNB메뉴 데이터기반으로 li태그 생성하기 */}
-            {
-              menu.map((v, i) => (
-                <li key={i}>
-                  {
-                    // 하위 메뉴가 있으면 일반a 요소에 출력
-                    // 없으면 Link 라우팅 출력
-                    v.sub? <a href="#">{v.txt}</a>:
-                  <Link to={v.link}>{v.txt}</Link>
-                  }
-                  {
-                    // 서브메뉴 데이터가 있으면 하위 그리기
-                    v.sub && (
-                      <div className="smenu">
-                        <ol>
-                          {v.sub.map((v,i) => (
-                            <li key={i}>
-                                <Link to={v.link}>{v.txt}</Link>
-                            </li>
-                          ))}
-                        </ol>
-                      </div>
-                    )
-                  }
-                </li>
-              ))  
-            }
+            {menu.map((v, i) => (
+              <li key={i}>
+                {
+                  // 하위 메뉴가 있으면 일반a 요소에 출력
+                  // 없으면 Link 라우팅 출력
+                  v.sub ? (
+                    <a href="#">{v.txt}</a>
+                  ) : (
+                    <Link to={v.link}>{v.txt}</Link>
+                  )
+                }
+                {
+                  // 서브메뉴 데이터가 있으면 하위 그리기
+                  v.sub && (
+                    <div className="smenu">
+                      <ol>
+                        {v.sub.map((v, i) => (
+                          <li key={i}>
+                            <Link to={v.link}>{v.txt}</Link>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )
+                }
+              </li>
+            ))}
             {/* 3. 검색, 회원가입, 로그인 링크 */}
-            <li style={{marginLeft:'auto'}}>
+            <li style={{ marginLeft: "auto" }}>
               {/* 검색입력박스 */}
               <div className="searchingGnb">
-              {/* 검색버튼 돋보기 아이콘 */}
-              <FontAwesomeIcon icon={faSearch}
-              className="schbtnGnb"
-              title="Open search"
-              />
-              {/* 입력창 */}
-              <input 
-              id="schinGnb"
-              type="text"
-              placeholder="Filter by Keyword"
-              onKeyUp={enterKey}
-              />
-
+                {/* 검색버튼 돋보기 아이콘 */}
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className="schbtnGnb"
+                  title="Open search"
+                />
+                {/* 입력창 */}
+                <input
+                  id="schinGnb"
+                  type="text"
+                  placeholder="Filter by Keyword"
+                  onKeyUp={enterKey}
+                />
               </div>
 
               {/* 검색기능링크 - 클릭시 검색창보이기 */}
               <a href="#" onClick={showSearch}>
-              <FontAwesomeIcon icon={faSearch}/>
+                <FontAwesomeIcon icon={faSearch} />
               </a>
             </li>
-            {/* 회원가입, 로그인은 로그인 아닌 상태일때 나옴 */}
-            <li>
-              <Link to="/member">JOIN US</Link>
-            </li>
-            <li>
-              <Link to = "/login">LOGIN</Link>
-            </li>
+            {
+              /* 회원가입, 로그인은 로그인 아닌 상태일때 나옴 */
+              logSts === null && (
+                <>
+                  <li>
+                    <Link to="/member">JOIN US</Link>
+                  </li>
+                  <li>
+                    <Link to="/login">LOGIN</Link>
+                  </li>
+                </>
+              )
+            }
+
+            {
+              /* 회원가입, 로그인은 로그인 아닌 상태일때 나옴 */
+              logSts !== null && (
+                <>
+                  <li>
+                    <a href="#" onClick={logOut}>LOGOUT</a>
+                  </li>
+                </>
+              )
+            }
           </ul>
           {/* 모바일용 햄버거 버튼 */}
           <button className="hambtn"></button>
@@ -160,7 +179,7 @@ export const TopArea= memo(({chgPageFn})=>{
       </header>
     </>
   );
-})
+});
 
 /* 
   map()을 사용하여 태그를 생성할때
