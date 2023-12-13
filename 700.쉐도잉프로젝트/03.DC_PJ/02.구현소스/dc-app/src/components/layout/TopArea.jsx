@@ -3,14 +3,13 @@
 import { menu } from "../data/gnb";
 import { Logo } from "../modules/Logo";
 import { Link, useNavigate } from "react-router-dom";
-import { memo, useState } from "react";
+import { memo, useEffect, useState,useContext } from "react";
 // 컨텍스트 API
 import { dcCon } from "../modules/dcContext";
 
 // 폰트어썸 불러오기
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useContext } from "react";
 
 import $ from "jquery";
 
@@ -61,6 +60,9 @@ export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
   const enterKey = (e) => {
     // console.log(e.key)
     if (e.key === "Enter") {
+
+       // 모바일에서 열린 메뉴창 닫기
+       $(".top-area").removeClass('on');
       // 입력창의 입력값 읽어오기 : val() 사용!
       let txt = $(e.target).val().trim();
       console.log(txt);
@@ -83,6 +85,19 @@ export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
     chgPageFn("/schpage", { state: { keyword: txt } });
   }; //////////// goSearch ////////////
 
+  // 햄버거용 함수 : 전체메뉴 보이기
+  const showMenu = ()=>$(".top-area").toggleClass('on');
+
+  // 랜더링 후 실행구역 
+  useEffect(()=>{
+    // GNB a요소 클릭시 전체메뉴 닫기
+    // 대상 : .gnb a[href!="#"] -> href가 '#'이 아닌 gnb 하위 모든 a 요소
+    // -> != 은 제이쿼리 전용 연산자!!
+    $('.gnb a[href!="#"]').on('click',()=>{
+      $('.top-area').removeClass('on');
+    })
+  },[]); /////////// useEffect ////////////
+
   return (
     <>
       {/* 1. 상단영역 */}
@@ -90,7 +105,7 @@ export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
         {/* 로그인 환영 메시지 박스 */}
         <div className="logmsg">{logMsg}</div>
         {/* 네비게이션 GNB파트 */}
-        <nav className="gnb">
+        <nav className="gnb" >
           <ul>
             {/* 1. 로고컴포넌트 */}
             <li>
@@ -125,7 +140,7 @@ export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
               </li>
             ))}
             {/* 3. 검색, 회원가입, 로그인 링크 */}
-            <li style={{ marginLeft: "auto" }}>
+            <li style={{ marginLeft: "auto",marginRight:"25px" }}>
               {/* 검색입력박스 */}
               <div className="searchingGnb">
                 {/* 검색버튼 돋보기 아이콘 */}
@@ -174,7 +189,7 @@ export const TopArea = memo(({ chgPageFn, logSts,logMsg,logOut }) => {
             }
           </ul>
           {/* 모바일용 햄버거 버튼 */}
-          <button className="hambtn"></button>
+          <button className="hambtn" onClick={showMenu}></button>
         </nav>
       </header>
     </>

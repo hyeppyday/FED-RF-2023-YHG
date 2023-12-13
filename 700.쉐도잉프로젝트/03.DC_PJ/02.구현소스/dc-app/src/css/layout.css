@@ -184,10 +184,12 @@ ol.bmenu{
 
 /* 1320px이하 미디어쿼리 */
 @media screen and (max-width:1320px) {
+    html,body{
+        overflow-x: hidden;
+    }
     body{
         padding-top: 58px;
         /* 첫번째 컨텐츠 가려짐방지 패딩 */
-        overflow-x: hidden;
     }
     .top-area{
         /* 보이는 화면고정 */
@@ -198,7 +200,7 @@ ol.bmenu{
         padding: 0 20px;
         box-sizing: border-box;
         z-index: 9999;
-        overflow: hidden;
+        
         transition: .4s ease-out;
     }
     .top-area.on{
@@ -209,6 +211,15 @@ ol.bmenu{
 
 /* 1024px 이하 미디어쿼리 */
 @media screen and (max-width:1024px) {
+    .top-area{
+        overflow: hidden;
+    }
+    /* 로그인 환영메시지박스 */
+    .logmsg {
+        top: 18px;
+    }
+
+    /* GNB박스 */
     .gnb{
         background-color: #fff;
     }
@@ -281,6 +292,10 @@ ol.bmenu{
         font-size: 11px;
         vertical-align: 2px;
         margin-left: 5px;
+    }
+     /* 서브메뉴 들어쓰기 없앰 */
+    .smenu{
+        text-indent: 0;
     }
     /* 검색박스 */
     .searchingGnb{

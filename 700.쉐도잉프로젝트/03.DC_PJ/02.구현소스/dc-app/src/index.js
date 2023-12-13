@@ -13,7 +13,6 @@ import { Movies } from "./components/pages/Movies";
 import { Games } from "./components/pages/Games";
 import { News } from "./components/pages/News";
 import { Video } from "./components/pages/Video";
-import { SwiperApp } from "./components/plugin/SwiperApp";
 import { Main } from "./components/pages/Main";
 import { Character } from "./components/pages/Character";
 import { CatDetail } from "./components/modules/CatDetail";
@@ -21,6 +20,8 @@ import { Series } from "./components/pages/Series";
 import { SchPage } from "./components/pages/SchPage";
 import { Member } from "./components/pages/Member";
 import { Login } from "./components/pages/Login";
+import { Board } from "./components/pages/Board";
+
 
 /********************************************* 
     [ 리액트 라우터 ]
@@ -73,11 +74,11 @@ export default function App() {
           <Route path="character" element={<Character />} />
           <Route path="comics" element={<Comics />} />
           <Route path="movies" element={<Movies />} />
-          <Route path="series" element={<Series />} />
+          <Route path="movies/series" element={<Series />} />
           <Route path="games" element={<Games />} />
           <Route path="news" element={<News />} />
           <Route path="video" element={<Video />} />
-          <Route path="board" element={<SwiperApp />} />
+          <Route path="board" element={<Board />} />
           <Route path="detail" element={<CatDetail />} />
           <Route path="schpage" element={<SchPage />} />
           <Route path="member" element={<Member />} />

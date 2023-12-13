@@ -143,8 +143,11 @@ export function Login() {
           // 2. 컨텍스트 API에 공개된 로그인 상태 업데이트하기
           myCon.setLogSts(localStorage.getItem('minfo'))
 
+          // 유저아이콘
+          const usrIcon = ["🦸‍♂","🦸‍♀","🕵️‍♂️","👨‍🚀","🧙‍♂️","🧜‍♂️"]
+
           // 3. 컨텍스트 API에 공개된 로그인 메세지 업데이트하기
-          myCon.setLogMsg("Welcome " + findD.unm + "🙍‍♂️");
+          myCon.setLogMsg("Welcome " + findD.unm + usrIcon[Math.floor(Math.random()*5)]);
 
           // 4. 라우팅 페이지 이동하기 (useNavigate)
           // 컨텍스트 API 함수호출!
