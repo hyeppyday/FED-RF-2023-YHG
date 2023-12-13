@@ -1,7 +1,7 @@
 // 상품상세보기 컴포넌트
 
 // 신상품 데이터 가져오기
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gdata from "../data/glist-items";
 
 import { sinsangData } from "../data/sinsang";
@@ -15,11 +15,27 @@ export function ItmeDetail({ cat, goods }) {
   // 카트 사용여부 상태변수 ////////
   const [csts, setCsts] = useState(0);
 
+  // 자식 카트 컴포넌트와 함께 상태값 공유할 변수
+  const flag = useRef(true);
+  // -> true일때만 새로추가하는 데이터가 반영됨
+  // -> false이면 카트 컴포넌트의 삭제 등 자체기능이 작동됨
+  // useRef를 사용한 이유는?
+  // -> 리랜더링시에도 값을 유지하면서 이 값이 변경되어도
+  // 리랜더링 되지 않아야하기 때문에 선택함!!!
+  // -> 자식컴포넌트에게 속성값으로 보내주면 값 설정이 공유됨
+  
+
   // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게함!
   const [transData, setTransData] = useState(null);
 
   // 카트에 담기 버튼 클릭시 호출함수
   const useCart = () => {
+    // 카트 선택 아이템만 추가하기 위해
+    // 카트 컴포넌트와 공유한 useRef 참조변수인 flag값을
+    // true로 업데이트 한다!!!
+    flag.current = true;
+
+
     // 1. 선택된 상품을 로컬스토리지에 담기!
     /* 
     데이터 구성 :
@@ -274,7 +290,11 @@ export function ItmeDetail({ cat, goods }) {
         </div>
       </div>
       {/* 카트리스트 */}
-      {csts && <CartList selData={transData} />}
+      {csts && <CartList selData={transData} flag={flag}/>
+        // useRef변수인 flag를 보내면 자식 컴포넌트에서도
+        // 이 값을 참조할 뿐만 아니라 변경도 가능하다!!!
+        // 주의 : useRef변수는 사용시 변수명.current를 꼭 쓴다!!
+      }
     </>
   );
 } ///////////////// ItmeDetail ////////////////////
