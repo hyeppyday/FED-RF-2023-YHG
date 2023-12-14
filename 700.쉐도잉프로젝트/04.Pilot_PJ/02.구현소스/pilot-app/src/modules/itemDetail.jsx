@@ -260,7 +260,7 @@ export function ItmeDetail({ cat, goods }) {
                 <li>
                   <span>구매수량</span>
                   <span>
-                    <input type="text" id="sum" value="1" />
+                    <input type="text" id="sum" defaultValue="1" />
                     <b className="chg_num">
                       <img src="./images/cnt_up.png" alt="증가" />
                       <img src="./images/cnt_down.png" alt="감소" />

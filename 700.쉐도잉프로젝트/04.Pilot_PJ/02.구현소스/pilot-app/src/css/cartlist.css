@@ -90,9 +90,45 @@
   font-weight: bold;
   color: darkblue;
   opacity: 0;
-  
 }
 #mycart.on .cntBx {
   opacity: 1;
-  transition: .4s 2.5s;
+  transition: 0.4s 2.5s;
+}
+
+/* 수량증감 박스 */
+.cnt-part span,
+.cnt-part > div {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+/* 입력창 */
+.item-cnt {
+  width: 20px;
+}
+/* 증감이미지 버튼 */
+#cartlist .btn-cnt img {
+  width: 20px;
+  display: block;
+}
+/* 반영 버튼 */
+.btn-insert {
+  position: absolute;
+  margin-left: 90px;
+  top: 1px;
+ 
+  white-space: nowrap;
+  padding: 0;
+  overflow: hidden;
+  width: 0;
+  transition: .2s .3s;
+  /* display: none; */
+}
+/* 입력창에 포커스 갈때 다음형제요소 반영버튼 보이기 */
+.item-cnt:focus + .btn-insert {
+  /* outline: 1px dotted red; */
+  /* display: inline-block;  */
+  transition: none;
+  width: 34px;
 }
