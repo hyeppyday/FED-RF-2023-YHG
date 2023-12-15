@@ -12,9 +12,7 @@ export function ItmeDetail({ cat, goods }) {
   // cat - 카테고리명(men/women/style)
   // goods - 상품 아이템 정보 (속성코드 : m1,m2,....)
 
-  // 카트 사용여부 상태변수 ////////
-  const [csts, setCsts] = useState(0);
-
+  
   // 자식 카트 컴포넌트와 함께 상태값 공유할 변수
   const flag = useRef(true);
   // -> true일때만 새로추가하는 데이터가 반영됨
@@ -24,10 +22,22 @@ export function ItmeDetail({ cat, goods }) {
   // 리랜더링 되지 않아야하기 때문에 선택함!!!
   // -> 자식컴포넌트에게 속성값으로 보내주면 값 설정이 공유됨
   
-
+  
   // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게함!
   const [transData, setTransData] = useState(null);
-
+  
+  // 카트 사용여부 초기값은 로컬스 'cart'가 있으면 1
+  // 없으면 0 으로 셋팅해준다!
+  
+  let stsVal = 0;
+  if(localStorage.getItem('cart')){
+    stsVal=1;
+    setTransData(JSON.parse(localStorage.getItem('cart')))
+  }
+  
+  // 카트 사용여부 상태변수 ////////
+  const [csts, setCsts] = useState(stsVal);
+  
   // 카트에 담기 버튼 클릭시 호출함수
   const useCart = () => {
     // 카트 선택 아이템만 추가하기 위해
