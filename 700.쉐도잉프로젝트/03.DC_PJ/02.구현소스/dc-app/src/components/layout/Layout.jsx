@@ -8,6 +8,7 @@ import { useCallback, useLayoutEffect, useState } from "react";
 
 // Context API 불러오기
 import { dcCon } from "../modules/dcContext";
+import { useEffect } from "react";
 
 export function Layout() {
 
@@ -27,7 +28,7 @@ export function Layout() {
     // 3. 로그인 메시지 업데이트
     setLogMsg(null);
     // 4. 첫페이지로 이동
-    chgPage("/",{});
+    // chgPage("/",{});
   },[]);///////////// logOut ///////////////
 
     // 랜더링 후(화면보이기전) 실행구역 //////////
@@ -35,6 +36,20 @@ export function Layout() {
     // 페이지 이동시 스크롤위치 상단이동
     window.scrollTo(0,0);
   }); /////////// useEffect ///////////
+  
+  // 랜더링 후 실행구역 한번만 ///
+  useEffect(()=>{
+      // 로그인 로컬스가 있으면 환영메시지 넣기
+        if(localStorage.getItem('minfo')){
+          const minfo = JSON.parse(localStorage.getItem('minfo'));
+          // 유저아이콘
+          const usrIcon = ["🦸‍♂","🦸‍♀","🕵️‍♂️","👨‍🚀","🧙‍♂️","🧜‍♂️"]
+          // 3. 컨텍스트 API에 공개된 로그인 메세지 업데이트하기
+          setLogMsg("Welcome " + minfo.unm + usrIcon[Math.floor(Math.random()*5)]);
+    
+        }
+    
+  },[])
 
 
   // 라우터 이동객체설정
@@ -51,11 +66,12 @@ export function Layout() {
    /********************************** 
    [컨텍스트 API 공유값 설정]
    1. chgPage 함수 : 라우터 이동기능   
-   2. setLogSts : 로그인 상태값 업데이트
-   3. setLogMsg : 로그인 환영 메세지 업데이트
+   2. logSts : 로그인 상태값
+   3. setLogSts : 로그인 상태값 업데이트
+   4. setLogMsg : 로그인 환영 메세지 업데이트
    **********************************/
   return (
-    <dcCon.Provider value={{ chgPage, setLogSts,setLogMsg }}>
+    <dcCon.Provider value={{ chgPage, logSts, setLogSts,setLogMsg }}>
       {/* 메모이제이션 관리를 위해 함수를
       컨텍스트 방식이 아닌 속성으로 직접보냄! */}
       <TopArea 
