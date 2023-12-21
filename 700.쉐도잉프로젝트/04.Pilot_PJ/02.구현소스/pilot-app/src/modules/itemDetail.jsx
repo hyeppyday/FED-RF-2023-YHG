@@ -1,55 +1,27 @@
 // 상품상세보기 컴포넌트
 
 // 신상품 데이터 가져오기
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect } from "react";
 import gdata from "../data/glist-items";
+// 컨텍스트 API 불러오기
+import { pCon } from "./PilotContext";
 
-import { sinsangData } from "../data/sinsang";
 import $ from "jquery";
-import { CartList } from "./CartList";
 
 export function ItmeDetail({ cat, goods }) {
   // cat - 카테고리명(men/women/style)
   // goods - 상품 아이템 정보 (속성코드 : m1,m2,....)
+  
+  // 컨텍스트 API 사용하기
+  const myCon = useContext(pCon);
 
-  
-  // 자식 카트 컴포넌트와 함께 상태값 공유할 변수
-  const flag = useRef(true);
-  // -> true일때만 새로추가하는 데이터가 반영됨
-  // -> false이면 카트 컴포넌트의 삭제 등 자체기능이 작동됨
-  // useRef를 사용한 이유는?
-  // -> 리랜더링시에도 값을 유지하면서 이 값이 변경되어도
-  // 리랜더링 되지 않아야하기 때문에 선택함!!!
-  // -> 자식컴포넌트에게 속성값으로 보내주면 값 설정이 공유됨
-  
-  
-  
-  // 카트 사용여부 초기값은 로컬스 'cart'가 있으면 1
-  // 없으면 0 으로 셋팅해준다!
-  
-  let stsVal = 0;
-  let transVal=null;
-  // 카트셋팅에 필요한 데이터를 로컬스에 따라 셋팅함!
-  if(localStorage.getItem('cart')){
-    // 로컬스가 있으므로 객체화하기
-    transVal = JSON.parse(localStorage.getItem('cart'));
-    // 로컬스 객체화 데이터 개수가 0이 아닐때만 상태값 1로 노출하기
-    if(transVal.length!==0) stsVal=1;
-  }
-  console.log("로컬스있니?",stsVal)
-  
-  // 로컬스 변환값 변수 - 상태변수로 리랜더링시 값을 유지하게함!
-  const [transData, setTransData] = useState(transVal);
-  
-  // 카트 사용여부 상태변수 ////////
-  const [csts, setCsts] = useState(stsVal);
   
   // 카트에 담기 버튼 클릭시 호출함수
   const useCart = () => {
     // 카트 선택 아이템만 추가하기 위해
     // 카트 컴포넌트와 공유한 useRef 참조변수인 flag값을
     // true로 업데이트 한다!!!
-    flag.current = true;
+    myCon.flag.current = true;
 
 
     // 1. 선택된 상품을 로컬스토리지에 담기!
@@ -84,11 +56,11 @@ export function ItmeDetail({ cat, goods }) {
       // localD변수에 담긴 로컬스 변환값을
       // transData에 담아
       // CartList 컴포넌트에 전달한다!
-      setTransData(localD);
+      myCon.setTransData(localD);
 
-      console.log(transData);
+      console.log(myCon.transData);
 
-      setCsts(1);
+      myCon.setCsts(1);
 
       // 쇼핑카트버튼 초기화
       $("#mycart")
@@ -125,11 +97,11 @@ export function ItmeDetail({ cat, goods }) {
         // localD변수에 담긴 로컬스 변환값을
         // transData에 담아
         // CartList 컴포넌트에 전달한다!
-        setTransData(localD);
+        myCon.setTransData(localD);
 
-        console.log(transData);
+        console.log(myCon.transData);
 
-        setCsts(1);
+        myCon.setCsts(1);
 
         // 쇼핑카트버튼 초기화
         $("#mycart")
@@ -195,14 +167,7 @@ export function ItmeDetail({ cat, goods }) {
       console.log("순번", seq, num);
     });
 
-    // 카트가 생성된 경우 버튼 보이기
-    // 카트 부모박스 .bgbx 보이기
-    if(csts===1) {
-      // 전체 보여라
-      $('.bgbx').show()
-      // 카트 사이드에 나와라!
-      $('#mycart').addClass('on')
-    }
+    
   }, []);
 
   // 리랜더링 실행구역 /////
@@ -232,12 +197,13 @@ export function ItmeDetail({ cat, goods }) {
             />
             <div className="small">
               <a href="#">
-                <img src="./images/goods/men/m1.png" alt="썸네일 이미지" />
-                <img src="./images/goods/men/m2.png" alt="썸네일 이미지" />
-                <img src="./images/goods/men/m3.png" alt="썸네일 이미지" />
-                <img src="./images/goods/men/m4.png" alt="썸네일 이미지" />
-                <img src="./images/goods/men/m5.png" alt="썸네일 이미지" />
-                <img src="./images/goods/men/m6.png" alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m1.png"} alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m2.png"} alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m3.png"} alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m4.png"} alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m5.png"} alt="썸네일 이미지" />
+                <img src={"./images/goods/"+cat+"/m6.png"} alt="썸네일 이미지" />
+               
               </a>
             </div>
           </section>
@@ -314,12 +280,7 @@ export function ItmeDetail({ cat, goods }) {
           </section>
         </div>
       </div>
-      {/* 카트리스트 */}
-      {csts && <CartList selData={transData} flag={flag}/>
-        // useRef변수인 flag를 보내면 자식 컴포넌트에서도
-        // 이 값을 참조할 뿐만 아니라 변경도 가능하다!!!
-        // 주의 : useRef변수는 사용시 변수명.current를 꼭 쓴다!!
-      }
+      
     </>
   );
 } ///////////////// ItmeDetail ////////////////////
