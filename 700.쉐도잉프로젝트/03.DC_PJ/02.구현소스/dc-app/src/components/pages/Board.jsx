@@ -40,12 +40,25 @@ let orgData;
 if (localStorage.getItem("bdata"))
   orgData = JSON.parse(localStorage.getItem("bdata"));
 // 로컬스가 없으면 제이슨 데이터 넣기
-else orgData = baseData;
+else {
+  orgData = baseData;
+}
 
 // ////console.log(org);
 
+
 ///////////////// Board 컴포넌트 시작 !! /////////////////////////////
 export function Board() {
+  
+  // 보드데이터에 로컬스가 없으면 생성하기!
+  if(!localStorage.getItem('bdata')){ // ! 연산자로 false일때 실행
+    // 로컬스 'bdata'가 없으므로 여기서 최초 생성하기
+    // -> 조회수 증가시 로컬스 데이터로 확인하기 때문!
+    localStorage.setItem('bdata',JSON.stringify(baseData));
+
+  } ////////////// if /////////////////
+
+
   // 기본 사용자 정보 셋업 함수 호출
   initData();
 

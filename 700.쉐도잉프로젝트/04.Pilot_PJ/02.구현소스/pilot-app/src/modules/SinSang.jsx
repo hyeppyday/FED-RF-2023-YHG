@@ -1,15 +1,19 @@
 // 신상품 컴포넌트 ////////
 
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import $ from 'jquery'
 
 // 신상품 데이터 가져오기
 import { sinsangData } from "../data/sinsang";
+import { pCon } from "./PilotContext";
 
 
 export function Sinsang({cat,chgItemFn}) {
   //props.cat - 카테고리 분류명
   // props.chgItemFn - 선택상품정보 변경 부모함수 
+
+  // 컨텍스트 API사용하기
+  const myCon = useContext(pCon);
 
   // 선택데이터 : 해당카테고리 상품데이터만 가져온다!
   const selData = sinsangData[cat];
@@ -104,11 +108,6 @@ function addComma(x) {
     setTimeout(()=>flowList(ele),40)
   } /////////// flowList /////////////
 
-  // 오버/아웃시 이동제어함수
-  const flowOut = ()=>{
-
-  } ///////// flowOut //////////
-
   // 랜더링 후 실행구역
   useEffect(()=>{
     // 대상선정: .flist
@@ -121,7 +120,9 @@ function addComma(x) {
     <>
       <h2 className="c1tit ">
         NEW MEN'S ARRIVAL
-        <button >전체리스트</button>
+        <button onClick={()=>myCon.chgPgName('glist')}>
+          전체리스트
+          </button>
       </h2>
       <div className="flowbx " 
       onMouseEnter={()=>callSts=0} 

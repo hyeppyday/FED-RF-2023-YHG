@@ -79,7 +79,7 @@ export const CartList = memo(({ selData, flag }) => {
   // 리스트 숨기기 함수
   const hideList = (e) => {
     e.preventDefault();
-    $("#cartlist").animate({ right: "-60%" }, 600);
+    $("#cartlist").animate({ right: "-61%" }, 600);
   }; /////// hideList ////////////
 
   // 리스트 삭제 함수 ///////////////
