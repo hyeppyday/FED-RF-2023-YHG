@@ -54,7 +54,7 @@ export function Board() {
   if(!localStorage.getItem('bdata')){ // ! 연산자로 false일때 실행
     // 로컬스 'bdata'가 없으므로 여기서 최초 생성하기
     // -> 조회수 증가시 로컬스 데이터로 확인하기 때문!
-    localStorage.setItem('bdata',JSON.stringify(baseData));
+    localStorage.setItem('bdata',JSON.stringify(orgData));
 
   } ////////////// if /////////////////
 
@@ -571,7 +571,7 @@ export function Board() {
     // 세션스 파싱!
     let cntIdx = JSON.parse(sessionStorage.getItem('cnt-idx'));
 
-    console.log(Array.isArray(cntIdx));
+    console.log(Array.isArray(cntIdx), cntIdx);
 
     // [ 3. 카운트 증가하기 조건검사 ]/////////
     // 3-1. 세션스에 등록된 글번호만큼 돌다가 같은 글이면
@@ -644,38 +644,60 @@ export function Board() {
   return (
     <>
       {
-        /* 1. 게시판 리스트 : 게시판 모드 'L' 일때 출력 */
+        /* 1. 게시판 리스트 : 게시판 모드 'L'일때 출력 */
         bdMode === "L" && (
-          <table className="dtbl" id="board">
-            <caption>OPINION</caption>
-            {/* 상단 컬럼명 표시영역 */}
-            <thead>
-              <tr>
-                <th>Number</th>
-                <th>Title</th>
-                <th>Writer</th>
-                <th>Date</th>
-                <th>Hits</th>
-              </tr>
-            </thead>
+          <>
+          {/* 전체 타이틀 */}
+            <h1 className="tit">OPINION</h1>
+            
+            {/* 검색옵션박스 */}
+            <div className="selbx">
+              <select name="cta" id="cta" className="cta">
+                <option value="tit">Title</option>
+                <option value="cont">Contents</option>
+                <option value="unm">Writer</option>
+              </select>
+              <select name="sel" id="sel" className="sel">
+                <option value="0">JungYeol</option>
+                <option value="1">Ascending</option>
+                <option value="2">Descending</option>
+              </select>
+              <input id="stxt" type="text" maxLength="50" />
+              <button className="sbtn">Search</button>
+            </div>
 
-            {/* 중앙 레코드 표시부분 */}
-            <tbody>{bindList()}</tbody>
+            {/* 리스트 테이블 */}
+            <table className="dtbl" id="board">
+              {/* <caption></caption> */}
+              {/* 상단 컬럼명 표시영역 */}
+              <thead>
+                <tr>
+                  <th>Number</th>
+                  <th>Title</th>
+                  <th>Writer</th>
+                  <th>Date</th>
+                  <th>Hits</th>
+                </tr>
+              </thead>
 
-            {/* 하단 페이징 표시부분 */}
-            <tfoot>
-              <tr>
-                <td colSpan="5" className="paging">
-                  {/* 페이징번호 위치  */}
-                  {pagingLink()}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              {/* 중앙 레코드 표시부분 */}
+              <tbody>{bindList()}</tbody>
+
+              {/* 하단 페이징 표시부분 */}
+              <tfoot>
+                <tr>
+                  <td colSpan="5" className="paging">
+                    {/* 페이징번호 위치  */}
+                    {pagingLink()}
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </>
         )
       }
       {
-        /* 2. 글쓰기 테이블 : 게시판 모드 'C' 일때 출력 */
+        /* 2. 글쓰기 테이블 : 게시판 모드 'C'일때 출력 */
         bdMode === "C" && (
           <table className="dtblview writeone">
             <caption>OPINION : Write</caption>
@@ -721,7 +743,7 @@ export function Board() {
         )
       }
       {
-        /* 3. 읽기 테이블 : 게시판 모드 'R' 일때 출력 */
+        /* 3. 읽기 테이블 : 게시판 모드 'R'일때 출력 */
         bdMode === "R" && (
           <table className="dtblview readone">
             <caption>OPINION : Read</caption>
@@ -734,7 +756,7 @@ export function Board() {
                     className="name"
                     size="20"
                     readOnly
-                    defaultValue={cData.current.unm}
+                    value={cData.current.unm}
                   />
                 </td>
               </tr>
@@ -746,7 +768,7 @@ export function Board() {
                     className="subject"
                     size="60"
                     readOnly
-                    defaultValue={cData.current.tit}
+                    value={cData.current.tit}
                   />
                 </td>
               </tr>
@@ -758,7 +780,7 @@ export function Board() {
                     cols="60"
                     rows="10"
                     readOnly
-                    defaultValue={cData.current.cont}
+                    value={cData.current.cont}
                   ></textarea>
                 </td>
               </tr>
@@ -767,7 +789,7 @@ export function Board() {
         )
       }
       {
-        /* 4. 수정(삭제) 테이블 : 게시판 모드 'U' 일때 출력 */
+        /* 4. 수정(삭제) 테이블 : 게시판 모드 'U'일때 출력 */
         bdMode === "U" && (
           <table className="dtblview updateone">
             <caption>OPINION : Modify</caption>
@@ -780,20 +802,21 @@ export function Board() {
                     className="name"
                     size="20"
                     readOnly
-                    defaultValue={cData.current.unm}
+                    value={cData.current.unm}
                   />
+                  {/* value는 수정불가! */}
                 </td>
               </tr>
               <tr>
                 <td>Title</td>
                 <td>
-                  {/* defaultValue로 써야 수정가능 ! */}
                   <input
                     type="text"
                     className="subject"
                     size="60"
                     defaultValue={cData.current.tit}
                   />
+                  {/* defaultValue로 써야 수정가능! */}
                 </td>
               </tr>
               <tr>
@@ -805,6 +828,7 @@ export function Board() {
                     rows="10"
                     defaultValue={cData.current.cont}
                   ></textarea>
+                  {/* defaultValue로 써야 수정가능! */}
                 </td>
               </tr>
             </tbody>
@@ -819,7 +843,7 @@ export function Board() {
           <tr>
             <td>
               {
-                // 리스트 모드 (L)
+                // 리스트 모드(L)
                 bdMode === "L" && myCon.logSts !== null && (
                   <button onClick={chgMode}>
                     <a href="#">Write</a>
@@ -827,7 +851,7 @@ export function Board() {
                 )
               }
               {
-                // 글쓰기 모드 (C)
+                // 글쓰기 모드(C)
                 bdMode === "C" && (
                   <>
                     <button onClick={chgMode}>
@@ -840,7 +864,7 @@ export function Board() {
                 )
               }
               {
-                // 읽기 모드 (R)
+                // 읽기 모드(R)
                 bdMode === "R" && (
                   <>
                     <button onClick={chgMode}>
@@ -848,7 +872,7 @@ export function Board() {
                     </button>
                     {
                       /* btnSts 상태변수가 true일때 보임
-                      -> 글쓴이 = 로그인 사용자 일때 업데이트!!(true변경) */
+                      -> 글쓴이===로그인사용자 일때 true변경 */
                       btnSts && (
                         <button onClick={chgMode}>
                           <a href="#">Modify</a>
@@ -859,7 +883,7 @@ export function Board() {
                 )
               }
               {
-                // 수정(삭제) 모드 (U)
+                // 수정 모드(U)
                 bdMode === "U" && (
                   <>
                     <button onClick={chgMode}>
@@ -880,4 +904,4 @@ export function Board() {
       </table>
     </>
   );
-} ///////////// Board 컴포넌트 /////////////////
+} //////////// Board 컴포넌트 /////////////

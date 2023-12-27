@@ -6,7 +6,7 @@ import { pCon } from "../modules/PilotContext";
 
 import $ from 'jquery';
 import { Sinsang } from "../modules/SinSang";
-import { ItmeDetail } from "../modules/itemDetail";
+import { ItmeDetail } from "../modules/ItemDetail";
 
 // 공통패션 서브페이지 컨텐츠 컴포넌트
 export function Fashion(props) {

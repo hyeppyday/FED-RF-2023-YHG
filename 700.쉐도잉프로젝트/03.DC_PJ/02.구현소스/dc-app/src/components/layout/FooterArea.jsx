@@ -3,6 +3,7 @@
 import { Logo } from "../modules/Logo";
 import React from "react";
 import { bmData } from "../data/bmenu.js";
+import Weather from "../modules/Weather";
 
 
 // 아주 간단한 컴포넌트 메모이제이션 하기!
@@ -39,6 +40,8 @@ export const FooterArea = React.memo(()=>{
         </li>
         <li>© & ™ DC. ALL RIGHTS RESERVED</li>
       </ul>
+      {/* 날씨정보 컴포넌트 */}
+      <Weather/>
     </footer>
   );
 } ///////////// FooterArea ////////////////

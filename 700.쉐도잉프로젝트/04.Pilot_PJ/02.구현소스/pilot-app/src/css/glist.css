@@ -3,7 +3,10 @@
 /* 전체 웹폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Ubuntu&display=swap');
 #cont{
+    background-color: #f1f1f1;
     font-family: 'Ubuntu','Nanum Gothic';
+    /* 최소높이(하단영역높이뺌) */
+    min-height: calc(100vh - 477px);
 }
 /* 상세보기 내부박스 디자인변경 */
 .inx{
