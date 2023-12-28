@@ -55,7 +55,7 @@ class Weather extends Component {
       .get(url) // 파일로딩
       .then((res) => {
         // 파일형식에 맞는 파싱 자동!
-        console.log(res);
+        // console.log(res);
         // 주의 : 로그에서 확인한 바와 같이
         // data속성에 실제 데이터가 담긴다!
         // 들어오는 변수인 res.data 해야함!

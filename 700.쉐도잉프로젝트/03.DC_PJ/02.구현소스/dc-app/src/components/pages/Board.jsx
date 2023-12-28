@@ -44,20 +44,17 @@ else {
   orgData = baseData;
 }
 
-// ////console.log(org);
-
+// ////////console.log(org);
 
 ///////////////// Board 컴포넌트 시작 !! /////////////////////////////
 export function Board() {
-  
   // 보드데이터에 로컬스가 없으면 생성하기!
-  if(!localStorage.getItem('bdata')){ // ! 연산자로 false일때 실행
+  if (!localStorage.getItem("bdata")) {
+    // ! 연산자로 false일때 실행
     // 로컬스 'bdata'가 없으므로 여기서 최초 생성하기
     // -> 조회수 증가시 로컬스 데이터로 확인하기 때문!
-    localStorage.setItem('bdata',JSON.stringify(orgData));
-
+    localStorage.setItem("bdata", JSON.stringify(orgData));
   } ////////////// if /////////////////
-
 
   // 기본 사용자 정보 셋업 함수 호출
   initData();
@@ -67,14 +64,14 @@ export function Board() {
   // -> 현재 로그인 된 아이디 정보를 사용 가능(컨텍스트로 Layout컴포넌트에서 logSts 가져옴)
   const myCon = useContext(dcCon);
 
-  console.log("로그인상태:", myCon.logSts);
+  //console.log("로그인상태:", myCon.logSts);
 
   // [컴포넌트 전체 공통변수] /////////////
   // 1. 페이지 단위수 : 한 페이지 당 레코드수
   const pgBlock = 7;
   // 2. 전체 레코드수 : 배열데이터 총개수
-  const totNum = baseData.length;
-  ////console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
+  const totNum = orgData.length;
+  //////console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
 
   // [ 상태관리 변수 셋팅 ] /////////////
 
@@ -82,7 +79,7 @@ export function Board() {
   const [pgNum, setPgNum] = useState(1);
 
   // 2. 데이터 변경변수 : 리스트에 표시되는 실제 데이터셋
-  const [currData, setCurrData] = useState(null);
+  // const [currData, setCurrData] = useState(null);
 
   // 3. 게시판 모드관리변수 (5가지 상태값 : CRUD+L)
   const [bdMode, setBdMode] = useState("L");
@@ -92,6 +89,9 @@ export function Board() {
 
   // 4. 버튼공개 여부 관리변수 : 수정버튼
   const [btnSts, setBtnSts] = useState(false);
+
+  // 5. 강제 리랜더링 관리변수 : 값을 랜덤값으로 변경하여 사용
+  const [force, setForce] = useState(null);
 
   // 리랜더링 루프에 빠지지 않도록 랜더링 후 실행구역에
   // 변경코드를 써준다! 단, logSts에 의존성을 설정해 준다!
@@ -111,7 +111,7 @@ export function Board() {
     기능 : 페이지별 리스트를 생성하여 바인딩함
   *************************************/
   const bindList = () => {
-    // ////console.log("다시바인딩!",pgNum);
+    // //////console.log("다시바인딩!",pgNum);
     // 데이터 선별하기
     const tempData = [];
 
@@ -133,7 +133,7 @@ export function Board() {
     // 한계값
     let limitNum = pgBlock * pgNum;
 
-    //console.log("시작값:", initNum, "\n한계값:", limitNum);
+    ////console.log("시작값:", initNum, "\n한계값:", limitNum);
 
     // 데이터 선별용 for문 : 원본데이터(orgData)로부터 생성
     for (let i = initNum; i < limitNum; i++) {
@@ -143,10 +143,10 @@ export function Board() {
       tempData.push(orgData[i]);
     } ///////////// for /////////////
 
-    //console.log("결과셋:", tempData);
+    ////console.log("결과셋:", tempData);
 
     // 데이터가 없는 경우 출력 ///
-    if (tempData.length === 0) {
+    if (orgData.length === 0) {
       return (
         <tr>
           <td colSpan="5">There is no data.</td>
@@ -191,7 +191,7 @@ export function Board() {
     // 최종 한계수 -> 여분레코드 존재에 따라 1더하기
     const limit = blockCnt + (blockPad === 0 ? 0 : 1);
 
-    // console.log(
+    // //console.log(
     //   "블록개수:",
     //   blockCnt,
     //   "\n블록나머지:",
@@ -231,7 +231,7 @@ export function Board() {
   *************************************/
   const chgList = (e) => {
     let currNum = e.target.innerText;
-    //console.log("번호:", currNum);
+    ////console.log("번호:", currNum);
     // 현재 페이지번호 업데이트 -> 리스트 업데이트됨!
     setPgNum(currNum);
 
@@ -290,7 +290,7 @@ export function Board() {
       setBdMode("R");
       // 1. a링크의 'data-idx'값 읽어오기
       let cidx = $(e.target).attr("data-idx");
-      console.log("읽기처리", cidx);
+      //console.log("읽기처리", cidx);
 
       // 2. 해당정보 가져오기 : orgData에서 조회함
       // 전역 참조변수에 저장하여 리랜더링시 리턴코드에
@@ -298,11 +298,11 @@ export function Board() {
       cData.current = orgData.find((v) => {
         if (v.idx === cidx) return true;
         if (Number(v.idx) === Number(cidx)) {
-          console.log("내순번:", v.idx);
+          //console.log("내순번:", v.idx);
           return true;
         }
       });
-      console.log("현재Data:", cData.current);
+      //console.log("현재Data:", cData.current);
       // 로그인 사용자와 글쓴이가 같으면 btnSts상태값 true
       // 상태업데이트 함수호출!(uid를 보냄)
       compUsr(cData.current.uid);
@@ -354,7 +354,7 @@ export function Board() {
 
     // 3-4. 글쓰기 서브밋
     else if (modeTxt === "S" && bdMode === "C") {
-      console.log("글쓰기 서브밋");
+      //console.log("글쓰기 서브밋");
 
       // 제목/내용 입력요소
       const subEle = $(".writeone .subject");
@@ -383,9 +383,9 @@ export function Board() {
         let arrIdx = orgTemp.map((v) => parseInt(v.idx));
         // 최대값
         let maxNum = Math.max(...arrIdx);
-        console.log("idx배열:", arrIdx);
-        console.log("최대값:", maxNum);
-        console.log("다른방법최대값:", Math.max.apply(null, arrIdx));
+        //console.log("idx배열:", arrIdx);
+        //console.log("최대값:", maxNum);
+        //console.log("다른방법최대값:", Math.max.apply(null, arrIdx));
         // 스프레드 연산자 나오기 전에는 항상 apply메서드 사용함
         // apply(this객체, 배열값) ->this 객체전달 없으므로 null씀
         // 배열값 내부의 값을 하나씩 전달하기
@@ -398,10 +398,10 @@ export function Board() {
         // let aa = [1,15];
         // let bb = [3000,5000];
         // let cc = [...aa,...bb];
-        // console.log('합친배열:',cc)
+        // //console.log('합친배열:',cc)
 
         // let test = Math.max(1,2,3,4,5);
-        // console.log('1-5사이최대값:',test)
+        // //console.log('1-5사이최대값:',test)
         // 4. 임시변수에 입력할 객체 데이터 생성하기
         let temp = {
           idx: maxNum + 1,
@@ -413,11 +413,11 @@ export function Board() {
           unm: logData.current.unm,
           cnt: "0",
         };
-        // console.log('입력전 준비데이터:',temp)
+        // //console.log('입력전 준비데이터:',temp)
 
         // 5. 원본임시변수 배열데이터 값 push하기
         orgTemp.push(temp);
-        // console.log('최종반영 전체데이터:',orgTemp);
+        // //console.log('최종반영 전체데이터:',orgTemp);
 
         // 6. 로컬스에 반영하기
         localStorage.setItem("bdata", JSON.stringify(orgTemp));
@@ -428,7 +428,7 @@ export function Board() {
     }
     // 3-4. 수정모드
     else if (modeTxt === "U") {
-      console.log("수정모드");
+      //console.log("수정모드");
       setBdMode("U");
     }
     // 3-6. 수정하기 서브밋 ////
@@ -509,24 +509,24 @@ export function Board() {
     if (myCon.logSts !== null) {
       // 1. 로컬스 원본데이터 조회
       const info = JSON.parse(localStorage.getItem("mem-data"));
-      console.log(info);
+      //console.log(info);
 
       // 2. 원본으로 부터 해당 사용자 정보 조회 하여
       // 글쓴이와 로그인 사용자가 같으면 btnSts값을 true로 업데이트
       const cUser = info.find((v) => {
         if (v.uid === usr) return true;
       });
-      console.log(cUser);
+      //console.log(cUser);
 
       // 3. 로그인사용자 정보와 조회하기
       // 아이디로 조회함!
-      if(cUser){
+      if (cUser) {
         // 할당안되면 undefined이므로 할당되었을때만 if문 처리
         const currUsr = JSON.parse(myCon.logSts);
         if (currUsr.uid === cUser.uid) setBtnSts(true);
         else setBtnSts(false);
-      }////// if ////////
-      else{
+      } ////// if ////////
+      else {
         // 사용자 비교값이 없는 경우
         setBtnSts(false);
       } /////// else ////////
@@ -538,8 +538,7 @@ export function Board() {
     } /////// else /////////
   }; ////////////// compUsr /////////////
 
-
-   /************************************* 
+  /************************************* 
     * 함수명 : plusCnt
     * 기능 : 게시판 조회수 증가 반영하기
     * 조건 : 
@@ -552,93 +551,121 @@ export function Board() {
 
     *업데이트 시점 : 글 읽기 모드에 들어간 후
   *************************************/
-  const plusCnt=()=>{
+  const plusCnt = () => {
     // [ 0. 처음에 통과상태 설정하기 ]///////////////
     let isOK = true;
     // 세션스에 등록된 글 or 로그인 사용자 글 이면 false로 처리
 
-
     // [ 1. 현재읽은 글은 cData.current로 읽어옴! ]///////////
     let cidx = cData.current.idx;
-    console.log('조회수증가체크 idx:',cidx);
+    //console.log('조회수증가체크 idx:',cidx);
 
     // [ 2. 세션스에 등록된 글 idx가 있는지 여부 확인하기 ]///////////
     // 세션스에 'cnt-idx' 없으면 만들기//////
 
-    if(!sessionStorage.getItem('cnt-idx'))
-    sessionStorage.setItem('cnt-idx','[]')
+    if (!sessionStorage.getItem("cnt-idx"))
+      sessionStorage.setItem("cnt-idx", "[]");
 
     // 세션스 파싱!
-    let cntIdx = JSON.parse(sessionStorage.getItem('cnt-idx'));
+    let cntIdx = JSON.parse(sessionStorage.getItem("cnt-idx"));
 
-    console.log(Array.isArray(cntIdx), cntIdx);
+    //console.log(Array.isArray(cntIdx), cntIdx);
 
     // [ 3. 카운트 증가하기 조건검사 ]/////////
     // 3-1. 세션스에 등록된 글번호만큼 돌다가 같은 글이면
     // isOk값을 false로 처리함!
     // 주의 : cntIdx는 숫자로만 된 배열이다!
-    cntIdx.some(v=>{
-      if(Number(v)===Number(cidx)){
+    cntIdx.some((v) => {
+      if (Number(v) === Number(cidx)) {
         isOK = false;
         // 여기서 나감! (break역할)
         return true;
       }
-    })
+    });
 
     // 3-2. 로그인한 사용자일 경우 로그인 사용자 계정과 같은 글이면 증가하지 않는다!
-    if(localStorage.getItem('minfo')){
+    if (localStorage.getItem("minfo")) {
       // 사용자 로그인정보 로컬스
-      let minfo = JSON.parse(localStorage.getItem('minfo'));
+      let minfo = JSON.parse(localStorage.getItem("minfo"));
       // 로그인 아이디
       let cUid = minfo.uid;
-      console.log('로그인사용자검사',cUid);
+      //console.log('로그인사용자검사',cUid);
       // 로그인 아이디 === 현재글 아이디 검사 통과시
       // isOK값 false처리로 조회수 증가 막기!
-      if(cUid === cData.current.uid) isOK = false;
+      if (cUid === cData.current.uid) isOK = false;
     }
 
     // [ 4. 카운트 증가하기 ] /////////////////
-    if(isOK){
+    if (isOK) {
       // 로컬스 'bdata'에서 조회하여 업데이트함!
-      let data = JSON.parse(localStorage.getItem('bdata'));
-      data.some(v=>{
-        if(Number(v.idx)===Number(cidx)){
+      let data = JSON.parse(localStorage.getItem("bdata"));
+      data.some((v) => {
+        if (Number(v.idx) === Number(cidx)) {
           // 기존 cnt항목의 숫자를 1증가하여 업데이트!
-          v.cnt = Number(v.cnt)+1;
+          v.cnt = Number(v.cnt) + 1;
           // 여기서 나감! (break역할)
           return true;
         }
-      })
+      });
 
       // 원본 데이터에 반영하기 : 꼭 해야만 리스트가 업데이트 된다!!
       orgData = data;
       // 반영된 배열 데이터를 다시 'bdata' 로컬스에 넣기
-      localStorage.setItem('bdata',JSON.stringify(data));
-
+      localStorage.setItem("bdata", JSON.stringify(data));
     }
 
     // [ 5.현재글 세션스에 처리하기 ]/////////////
-    if(isOK){ // 조회수 증가일 경우에만 글번호 세션스 등록!
+    if (isOK) {
+      // 조회수 증가일 경우에만 글번호 세션스 등록!
       // 세션스 배열에 idx값 넣기
       cntIdx.push(Number(cidx));
-  
-      console.log('넣은후:',cntIdx);
-  
+
+      //console.log('넣은후:',cntIdx);
+
       // 세션스에 저장하기
-      sessionStorage.setItem('cnt-idx',JSON.stringify(cntIdx))
-
+      sessionStorage.setItem("cnt-idx", JSON.stringify(cntIdx));
     }
+  }; ////////////////// plusCnt //////////////////
 
+  // 검색기능 수행 함수 ///////////////////////////
+  const searchList = () => {
+    // 1. 검색 기준값 읽어오기 
+    const cta = $("#cta").val();
 
+    // 2. 검색어 읽어오기 : 소문자 변환
+    const inpVal = $("#stxt").val().toLowerCase().trim();
+    // 3. 검색어 입력 안한경우 경고창 & return
+    if (inpVal === "") {
+      alert("write down keyword.");
+      return;
+    } ////////// if ///////////
 
+    console.log("검색시작~!", cta, inpVal);
+    // 원본데이터로 검색하지 않고 로컬스토리지 데이터 사용!
+    console.log("원본데이터:", orgData);
+    
+    // 로컬스 데이터 가져오기
+    const storageData = JSON.parse(localStorage.getItem('bdata'));
+    
+    // 4. 전체 로컬스 데이터에서 검색 기준값으로 검색하기
+    const resData = storageData.filter((v) => {
+      // 원본 문자데이터 소문자변환!
+      let compTxt = v[cta].toLowerCase();
+      // 검색기준이 동적으로 변수에 담기므로
+      // 대괄호로 객체값을 읽어온다!
+      // indexOf() 로 like 검색함!
+      if (compTxt.indexOf(inpVal) !== -1) 
+        return true;
+    });
+    console.log('검색데이터!:',resData);
 
+    // 5. 리스트 업데이트 하기
+    orgData = resData;
 
+    // 6. 강제 리랜더링하기
+    setForce(Math.random());
 
-
-  } ////////////////// plusCnt //////////////////
-
-
-
+  }; //////////////// searchList ////////////////////
 
   // 리턴코드 //////////////////////////
   return (
@@ -647,9 +674,9 @@ export function Board() {
         /* 1. 게시판 리스트 : 게시판 모드 'L'일때 출력 */
         bdMode === "L" && (
           <>
-          {/* 전체 타이틀 */}
+            {/* 전체 타이틀 */}
             <h1 className="tit">OPINION</h1>
-            
+
             {/* 검색옵션박스 */}
             <div className="selbx">
               <select name="cta" id="cta" className="cta">
@@ -663,7 +690,9 @@ export function Board() {
                 <option value="2">Descending</option>
               </select>
               <input id="stxt" type="text" maxLength="50" />
-              <button className="sbtn">Search</button>
+              <button className="sbtn" onClick={searchList}>
+                Search
+              </button>
             </div>
 
             {/* 리스트 테이블 */}
@@ -845,9 +874,14 @@ export function Board() {
               {
                 // 리스트 모드(L)
                 bdMode === "L" && myCon.logSts !== null && (
+                  <>
+                  <button onClick={chgMode}>
+                      <a href="#">List</a>
+                    </button>
                   <button onClick={chgMode}>
                     <a href="#">Write</a>
                   </button>
+                  </>
                 )
               }
               {

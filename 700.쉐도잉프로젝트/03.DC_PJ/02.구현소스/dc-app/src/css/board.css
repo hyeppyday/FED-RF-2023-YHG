@@ -62,12 +62,13 @@
 }
 
 /* a요소 말줄임표시하기 */
-.dtbl tbody td a{
+#board tbody td a{
     display: block;
     white-space: nowrap;
     overflow: hidden;
     /* 말줄임표시 */
     text-overflow: ellipsis;
+    width: min(361px,40vw);
 }
 
 
