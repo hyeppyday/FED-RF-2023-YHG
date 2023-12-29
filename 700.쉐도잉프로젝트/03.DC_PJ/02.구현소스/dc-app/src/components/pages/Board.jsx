@@ -328,7 +328,7 @@ export function Board() {
       // 전역 참조변수에 저장하여 리랜더링시 리턴코드에
       // 이 값이 적용되게 해준다!!!
       cData.current = orgData.find((v) => {
-        if (v.idx === cidx) return true;
+        
         if (Number(v.idx) === Number(cidx)) {
           //console.log("내순번:", v.idx);
           return true;
@@ -483,7 +483,7 @@ export function Board() {
         // 3. 원본에 해당 데이터 찾아서 업데이트하기
         //some() 메서드는 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
         orgTemp.some((v) => {
-          if (cData.current.idx === Number(v.idx)) {
+          if (Number(cData.current.idx) === Number(v.idx)) {
             // 제목과 내용 업데이트
             v.tit = subEle.val().trim();
             v.cont = contEle.val().trim();
@@ -937,6 +937,7 @@ export function Board() {
                     <button onClick={()=>{
                     rawData();
                     setForce(Math.random());
+                    $('#stxt').val('');
                     }}>
                       <a href="#">List</a>
                     </button>
