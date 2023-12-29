@@ -697,7 +697,7 @@ export function Board() {
     // 6. 강제 리랜더링하기
     // 조건 : 기존 1페이지 일때만 실행
     // 다른페이지에서 검색하면 1페이지로 변경(이때 리랜더링 됨)
-    if(pgNum==-1)setForce(Math.random());
+    if(pgNum===1) setForce(Math.random());
     else setPgNum(1);
   }; //////////////// searchList ////////////////////
 
