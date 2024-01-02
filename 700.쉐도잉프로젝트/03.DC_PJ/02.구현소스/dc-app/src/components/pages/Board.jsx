@@ -96,6 +96,11 @@ export function Board() {
   // 6. 검색상태 관리변수 : 값유지만 하도록 참조변수로 생성
   const searchSts = useRef(false);
 
+  // 6. 최초 랜더링시 상태관리변수  :처음 한번만 내림차순하기
+  const firstSts = useRef(true);
+  // 주의: 참조변수는 최초 랜더링시에만 초기값 셋팅되고
+  // 리랜더링시엔 다시 셋팅되지 않는다!!!
+
   // 리랜더링 루프에 빠지지 않도록 랜더링 후 실행구역에
   // 변경코드를 써준다! 단, logSts에 의존성을 설정해 준다!
   // 만약 로그아웃하면 버튼 상태값 false로 변경하기!
@@ -113,7 +118,7 @@ export function Board() {
     함수명 : sortData
     기능 : 내림차순 정렬
   *************************************/
-  const sortData = (data,arr) => {
+  function sortData  (data,arr)  {
     // arr은 배열값으로 내림차순은 [-1,1]
     // 오름차순은 [1,-1]을 보내준다!!
     return data.sort((a, b) => {
@@ -131,14 +136,22 @@ export function Board() {
   *************************************/
  const rawData = () =>{
   // orgData를 로컬스 데이터로 덮어쓰기
-  orgData = sortData(JSON.parse(localStorage.getItem('bdata'),[-1,1]))
+  // orgData = sortData(JSON.parse(localStorage.getItem('bdata'),[-1,1]))
+  orgData = JSON.parse(localStorage.getItem('bdata'),[-1,1])
  } ///////////// rawData ///////////////
+
+// 최초랜더링 시에만 한번 실행하기
+if(firstSts.current)
+sortData(orgData,[-1,1]);
 
   /************************************* 
     함수명 : bindList
     기능 : 페이지별 리스트를 생성하여 바인딩함
   *************************************/
   const bindList = () => {
+    // 바인드시 최초상태 false로 업데이트!
+    firstSts.current = false;
+    
     // //////console.log("다시바인딩!",pgNum);
     // 데이터 선별하기
     const tempData = [];
@@ -148,7 +161,7 @@ export function Board() {
     // 블록단위가 7일경우 첫페이지는 0~7, 7~14, ...
 
     // 내림차순 정렬 함수호출
-    sortData(orgData,[-1,1]);
+    // sortData(orgData,[-1,1]);
     // 시작값
     let initNum = (pgNum - 1) * pgBlock;
     // 한계값
@@ -706,6 +719,12 @@ export function Board() {
   // 이때 소멸자로 원본 데이터 초기화 셋팅 함수를
   // 호출해준다!!
   useEffect(()=>{
+    // 처음 한번 들어왔을때 내림차순 정렬은 효과있는가?
+    // sortData(orgData,[-1,1]);
+    // -> 화면 랜더링 전에 sorting(정렬)을 해야 바로 반영이되는데 
+    // useEffect구역에선 이미 다 랜더링 된 후 정렬을 해서 효과가 없음
+
+
     // 소멸자
     return(()=>{
       rawData();
@@ -736,7 +755,7 @@ export function Board() {
                 console.log('선택값:',opt)
                 // 선택에 따른 정렬호출
                 if(Number(opt)===0) sortData(orgData,[-1,1]);
-                else sortData(orgData[1,-1]);
+                else sortData(orgData,[1,-1]);
                 // 강제 리랜더링
                 setForce(Math.random())
               }}>
@@ -930,7 +949,7 @@ export function Board() {
           <tr>
             <td>
               {
-                // 리스트 모드(L)
+                // 리스트 모드(L) 
                 // 검색 상태관리 참조변수 searchSts값이 true일때만 출력!
                 bdMode === "L" && searchSts.current && (
                   <>
@@ -938,6 +957,7 @@ export function Board() {
                     rawData();
                     setForce(Math.random());
                     $('#stxt').val('');
+                    $('#cta').val('tit');
                     }}>
                       <a href="#">List</a>
                     </button>
