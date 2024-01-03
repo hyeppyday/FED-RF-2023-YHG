@@ -67,8 +67,10 @@ export function Board() {
   //console.log("로그인상태:", myCon.logSts);
 
   // [컴포넌트 전체 공통변수] /////////////
-  // 1. 페이지 단위수 : 한 페이지 당 레코드수
+  // 1-1. 페이지 단위수 : 한 페이지 당 레코드수
   const pgBlock = 7;
+  // 1-2. 페이징의 페이지 단위수 : 페이징 표시 개수
+  const pgPgBlock = 4;
   // 2. 전체 레코드수 : 배열데이터 총개수
   const totNum = orgData.length;
   //////console.log("페이지단위수:", pgBlock, "\n전체 레코드수:", totNum);
@@ -77,6 +79,8 @@ export function Board() {
 
   // 1. 현재 페이지 번호
   const [pgNum, setPgNum] = useState(1);
+  // 1-2. 페이징의 현재 페이지 번호 : 참조변수로 생성
+  const pgPgNum = useRef(1);
 
   // 2. 데이터 변경변수 : 리스트에 표시되는 실제 데이터셋
   // const [currData, setCurrData] = useState(null);
@@ -118,7 +122,7 @@ export function Board() {
     함수명 : sortData
     기능 : 내림차순 정렬
   *************************************/
-  function sortData  (data,arr)  {
+  function sortData(data, arr) {
     // arr은 배열값으로 내림차순은 [-1,1]
     // 오름차순은 [1,-1]을 보내준다!!
     return data.sort((a, b) => {
@@ -128,21 +132,29 @@ export function Board() {
         ? arr[0]
         : arr[1];
     });
-  }; /////////////// sortData //////////////
+  } /////////////// sortData //////////////
 
   /************************************* 
     함수명 : rawData
     기능 : 데이터 초기화하기 (전체데이터 업데이트)
   *************************************/
- const rawData = () =>{
-  // orgData를 로컬스 데이터로 덮어쓰기
-  // orgData = sortData(JSON.parse(localStorage.getItem('bdata'),[-1,1]))
-  orgData = JSON.parse(localStorage.getItem('bdata'),[-1,1])
- } ///////////// rawData ///////////////
+  const rawData = () => {
+    // orgData를 로컬스 데이터로 덮어쓰기
+    // orgData = sortData(JSON.parse(localStorage.getItem('bdata'),[-1,1]))
+    orgData = JSON.parse(localStorage.getItem("bdata"), [-1, 1]);
+  }; ///////////// rawData ///////////////
 
-// 최초랜더링 시에만 한번 실행하기
-if(firstSts.current)
-sortData(orgData,[-1,1]);
+  //////////////////////////////////////////////
+  // 최초랜더링 시에만 한번 실행하기//////////////
+  ///////////////////////////////////////////////
+  // -> 경우에 따라 내림차순 필요한 경우 firstSts값을
+  // true로만 변경하면 리랜더링시 bindList() 위에서 먼저 적용된다!
+  // (글쓰기 후 리스트오기/검색직후에 적용함!)
+  if (firstSts.current) {
+    sortData(orgData, [-1, 1]);
+    // 정렬선택박스 내림차순으로 변경하기
+    $("#sel").val("0");
+  } ///////////////// if ////////////////////
 
   /************************************* 
     함수명 : bindList
@@ -151,7 +163,7 @@ sortData(orgData,[-1,1]);
   const bindList = () => {
     // 바인드시 최초상태 false로 업데이트!
     firstSts.current = false;
-    
+
     // //////console.log("다시바인딩!",pgNum);
     // 데이터 선별하기
     const tempData = [];
@@ -225,6 +237,12 @@ sortData(orgData,[-1,1]);
     // 최종 한계수 -> 여분레코드 존재에 따라 1더하기
     const limit = blockCnt + (blockPad === 0 ? 0 : 1);
 
+    // 페이징의 페이징 한계수 구하기
+    const pgBlockCnt = Math.floor(totNum / pgPgBlock);
+    const pgBlockPad = limit % pgPgBlock;
+    const pgLimit = pgBlockCnt + (pgBlockPad === 0 ? 0 : 1);
+    // console.log('페이징의 페이징한계값:',pgLimit);
+
     // //console.log(
     //   "블록개수:",
     //   blockCnt,
@@ -234,13 +252,28 @@ sortData(orgData,[-1,1]);
     //   limit
     // );
 
+    // [ 페이징의 페이징 하기 ]
+    // [1] 페이징 블록 - 한 페이징블록수 : pgPgBlock 변수 (4)
+    // [2] 페이징 현재 페이지 번호 : pgPgNum 변수(기본값 : 1)
+
     // 리액트에서는 jsx문법 코드를 배열에 넣고
     // 출력하면 바로 코드로 변환된다!!
     let pgCode = [];
     // 리턴 코드 //////////
     // 만약 빈태그 묶음에 key를 심어야 할 경우
     // 빈태그에는 불가하므로 Fragment 조각 가상태그를 쓰고 쓰면 된다!
-    for (let i = 0; i < limit; i++) {
+
+    // 시작값 : 페페넘 -1 * 페페블럭
+    let initNum = (pgPgNum.current - 1) * pgPgBlock;
+    // 한계값 : 페페넘 * 페페블럭
+    let limitNum = pgPgNum.current * pgPgBlock;
+
+    for (let i = initNum; i < limitNum; i++) {
+      // 맨끝 페이지 번호보다 크면 나가라
+      if(i >=limit) break;
+
+
+      // 1. 페이징 링크 만들기
       pgCode[i] = (
         <Fragment key={i}>
           {pgNum - 1 === i ? (
@@ -251,13 +284,67 @@ sortData(orgData,[-1,1]);
             </a>
           )}
 
-          {i < limit - 1 ? " | " : ""}
+          { // 매번 페이징의 페이징에서 끝번호 뒤 바생략
+          // 또는 전체 한계값 페이지값과 같으면 바 생략
+          (i < limitNum -1 && i < limit -1)? " | " : ""
+        }
+
         </Fragment>
       );
     } /////// for ///////
 
+    // pgPgNum.current = 2;
+
+    /* 2. 페이징 이전블록이동 버튼 */
+    {
+      // 기준 : 1페이지가 아니면 보임!
+      pgCode.unshift(
+        pgPgNum.current === 1 ? (
+          ""
+        ) : (
+          <Fragment key={-1}>
+            
+            <a href="#" onClick={(e)=>{
+              e.preventDefault();
+              goPaging(-1)
+            }}>◀</a>
+          </Fragment>
+        )
+      );
+    }
+    /* 3. 페이징 다음블록이동 버튼 */
+    {
+      // 기준 : 페이징의 페이징 블록 끝번호가 아니면 보임!
+      pgCode.push(
+        pgPgNum.current === pgLimit ? (
+          ""
+        ) : (
+          <Fragment key={-2}>
+            
+            <a href="#" onClick={(e)=>{
+              e.preventDefault();
+              goPaging(1)
+            }}>▶</a>
+          </Fragment>
+        )
+      );
+    }
+
     return pgCode;
   }; /////////// pagingLink 함수 ////////
+
+  // 페이징의 페이징 이동함수 ///////////
+  const goPaging = (dir) =>{
+    // dir - 이동방향 (오른쪽은 +1, 왼쪽은 -1)
+    const newPgPgNum = pgPgNum.current + dir
+    // 새 페이지번호 : (전페이지 끝번호) + 1
+    const newPgNum = ((newPgPgNum-1) * pgPgBlock) +1;
+    
+    // 페이징의 페이징번호 업데이트
+    pgPgNum.current = newPgPgNum;
+    // 이동할 페이지 번호 : 다음 블록의 첫페이지로 이동
+    setPgNum(newPgNum); // -> 리랜더링!
+  }
 
   /************************************* 
     함수명 : chgList
@@ -289,14 +376,13 @@ sortData(orgData,[-1,1]);
     e.preventDefault();
 
     // 만약 검색 상태였다면 searchSts가 true이므로
-    // 이때 false로 업데이트하면서 orgData도 초기화해주기 
+    // 이때 false로 업데이트하면서 orgData도 초기화해주기
     // 검색 상태가 아니므로 검색 상태값 false로 업데이트
-    if(searchSts.current){
+    if (searchSts.current) {
       // false로 업데이트
       searchSts.current = false;
       // 초기화
       rawData();
-      
     }
     // 1. 해당 버튼의 텍스트 읽어오기
     let btxt = $(e.target).text();
@@ -341,7 +427,6 @@ sortData(orgData,[-1,1]);
       // 전역 참조변수에 저장하여 리랜더링시 리턴코드에
       // 이 값이 적용되게 해준다!!!
       cData.current = orgData.find((v) => {
-        
         if (Number(v.idx) === Number(cidx)) {
           //console.log("내순번:", v.idx);
           return true;
@@ -467,7 +552,12 @@ sortData(orgData,[-1,1]);
         // 6. 로컬스에 반영하기
         localStorage.setItem("bdata", JSON.stringify(orgTemp));
 
-        // 7. 리스트 페이지로 이동하기
+        // 내림차순 정렬하도록 firstSts 값을 true로 변경하면
+        // 리랜더링시 정렬 적용될까? bindList 전에 적용되어야 함!
+        firstSts.current = true; // -> 효과있음!
+        // bindList()위의 내림차순 코드가 실행됨!
+
+        // 7. 리스트 페이지로 이동하기 : 리랜더링됨!
         setBdMode("L");
       } /////// else ///////
     }
@@ -707,30 +797,33 @@ sortData(orgData,[-1,1]);
     // 5. 리스트 업데이트 하기
     orgData = resData;
 
+    // 내림차순 정렬하도록 firstSts 값을 true로 변경하면
+    // 리랜더링시 정렬 적용될까? bindList 전에 적용되어야 함!
+    firstSts.current = true; // -> 효과있음!
+    // bindList()위의 내림차순 코드가 실행됨!
+
     // 6. 강제 리랜더링하기
     // 조건 : 기존 1페이지 일때만 실행
     // 다른페이지에서 검색하면 1페이지로 변경(이때 리랜더링 됨)
-    if(pgNum===1) setForce(Math.random());
+    if (pgNum === 1) setForce(Math.random());
     else setPgNum(1);
   }; //////////////// searchList ////////////////////
 
-   // 검색을 실행하고 다른페이지로 이동할 경우
+  // 검색을 실행하고 다른페이지로 이동할 경우
   // 데이터가 검색된 것으로 남아 있으므로
   // 이때 소멸자로 원본 데이터 초기화 셋팅 함수를
   // 호출해준다!!
-  useEffect(()=>{
+  useEffect(() => {
     // 처음 한번 들어왔을때 내림차순 정렬은 효과있는가?
     // sortData(orgData,[-1,1]);
-    // -> 화면 랜더링 전에 sorting(정렬)을 해야 바로 반영이되는데 
+    // -> 화면 랜더링 전에 sorting(정렬)을 해야 바로 반영이되는데
     // useEffect구역에선 이미 다 랜더링 된 후 정렬을 해서 효과가 없음
 
-
     // 소멸자
-    return(()=>{
+    return () => {
       rawData();
-    }) 
-  },[])
-  
+    };
+  }, []);
 
   // 리턴코드 //////////////////////////
   return (
@@ -749,24 +842,33 @@ sortData(orgData,[-1,1]);
                 <option value="cont">Contents</option>
                 <option value="unm">Writer</option>
               </select>
-              <select name="sel" id="sel" className="sel" onChange={(e)=>{
-                // 선택값읽기
-                let opt = $(e.currentTarget).val();
-                console.log('선택값:',opt)
-                // 선택에 따른 정렬호출
-                if(Number(opt)===0) sortData(orgData,[-1,1]);
-                else sortData(orgData,[1,-1]);
-                // 강제 리랜더링
-                setForce(Math.random())
-              }}>
-              
+              <select
+                name="sel"
+                id="sel"
+                className="sel"
+                onChange={(e) => {
+                  // 선택값읽기
+                  let opt = $(e.currentTarget).val();
+                  console.log("선택값:", opt);
+                  // 선택에 따른 정렬호출
+                  if (Number(opt) === 0) sortData(orgData, [-1, 1]);
+                  else sortData(orgData, [1, -1]);
+                  // 강제 리랜더링
+                  setForce(Math.random());
+                }}
+              >
                 <option value="0">Descending</option>
                 <option value="1">Ascending</option>
               </select>
-              <input id="stxt" type="text" maxLength="50" onKeyUp={(e)=>{
-                // 엔터칠때 검색실행!
-                if(e.code==='Enter')searchList();
-              }}/>
+              <input
+                id="stxt"
+                type="text"
+                maxLength="50"
+                onKeyUp={(e) => {
+                  // 엔터칠때 검색실행!
+                  if (e.code === "Enter") searchList();
+                }}
+              />
               <button className="sbtn" onClick={searchList}>
                 Search
               </button>
@@ -949,16 +1051,18 @@ sortData(orgData,[-1,1]);
           <tr>
             <td>
               {
-                // 리스트 모드(L) 
+                // 리스트 모드(L)
                 // 검색 상태관리 참조변수 searchSts값이 true일때만 출력!
                 bdMode === "L" && searchSts.current && (
                   <>
-                    <button onClick={()=>{
-                    rawData();
-                    setForce(Math.random());
-                    $('#stxt').val('');
-                    $('#cta').val('tit');
-                    }}>
+                    <button
+                      onClick={() => {
+                        rawData();
+                        setForce(Math.random());
+                        $("#stxt").val("");
+                        $("#cta").val("tit");
+                      }}
+                    >
                       <a href="#">List</a>
                     </button>
                   </>
