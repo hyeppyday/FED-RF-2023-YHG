@@ -270,8 +270,7 @@ export function Board() {
 
     for (let i = initNum; i < limitNum; i++) {
       // 맨끝 페이지 번호보다 크면 나가라
-      if(i >=limit) break;
-
+      if (i >= limit) break;
 
       // 1. 페이징 링크 만들기
       pgCode[i] = (
@@ -284,11 +283,11 @@ export function Board() {
             </a>
           )}
 
-          { // 매번 페이징의 페이징에서 끝번호 뒤 바생략
-          // 또는 전체 한계값 페이지값과 같으면 바 생략
-          (i < limitNum -1 && i < limit -1)? " | " : ""
-        }
-
+          {
+            // 매번 페이징의 페이징에서 끝번호 뒤 바생략
+            // 또는 전체 한계값 페이지값과 같으면 바 생략
+            i < limitNum - 1 && i < limit - 1 ? " | " : ""
+          }
         </Fragment>
       );
     } /////// for ///////
@@ -303,11 +302,26 @@ export function Board() {
           ""
         ) : (
           <Fragment key={-1}>
-            
-            <a href="#" onClick={(e)=>{
+              <a href="#" 
+            title="맨앞으로" 
+            style={{marginRight:'10px'}} 
+            onClick={(e)=>{
               e.preventDefault();
-              goPaging(-1)
-            }}>◀</a>
+              goPaging(1,false);
+            }}>«</a>
+            <a
+              href="#"
+              title="앞으로"
+              style={{marginRight:'10px'}} 
+              onClick={(e) => {
+                e.preventDefault();
+                goPaging(-1, true);
+                
+              }}
+            >
+              ◀
+            </a>
+           
           </Fragment>
         )
       );
@@ -320,11 +334,24 @@ export function Board() {
           ""
         ) : (
           <Fragment key={-2}>
-            
-            <a href="#" onClick={(e)=>{
-              e.preventDefault();
-              goPaging(1)
-            }}>▶</a>
+            &nbsp;&nbsp;
+            <a
+              href="#"
+              title="뒤로"
+              style={{marginLeft:'10px'}}
+              onClick={(e) => {
+                e.preventDefault();
+                goPaging(1,true);
+              }} 
+              
+              >▶</a>
+              <a href="#" 
+              style={{marginLeft:'10px'}}
+              title="맨뒤로" 
+              onClick={(e)=>{
+                e.preventDefault();
+                goPaging(pgLimit,false);
+              }}>»</a>
           </Fragment>
         )
       );
@@ -334,17 +361,24 @@ export function Board() {
   }; /////////// pagingLink 함수 ////////
 
   // 페이징의 페이징 이동함수 ///////////
-  const goPaging = (dir) =>{
+  // 전달변수 : dir은 페이지 더하기/빼기 가능
+  // 전달변수 : opt는 ture이면 일반이동/false이면 맨앞, 맨뒤 이동
+  const goPaging = (dir,opt) => {
     // dir - 이동방향 (오른쪽은 +1, 왼쪽은 -1)
-    const newPgPgNum = pgPgNum.current + dir
+    let newPgPgNum;
+
+    // opt가 true이면 일반이동
+    if(opt) newPgPgNum = pgPgNum.current + dir;
+    // opt가 false이면 맨끝이동
+    else newPgPgNum = dir; // dir에 첫번호/끝번호옴!
     // 새 페이지번호 : (전페이지 끝번호) + 1
-    const newPgNum = ((newPgPgNum-1) * pgPgBlock) +1;
-    
+    const newPgNum = (newPgPgNum - 1) * pgPgBlock + 1;
+
     // 페이징의 페이징번호 업데이트
     pgPgNum.current = newPgPgNum;
     // 이동할 페이지 번호 : 다음 블록의 첫페이지로 이동
     setPgNum(newPgNum); // -> 리랜더링!
-  }
+  };
 
   /************************************* 
     함수명 : chgList
