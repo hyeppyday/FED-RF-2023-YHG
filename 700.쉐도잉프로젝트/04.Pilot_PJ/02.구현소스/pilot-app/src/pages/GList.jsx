@@ -45,8 +45,15 @@ export function GList() {
   const pgBlock = 10;
   // 2. 전체 레코드수 : 배열데이터 총개수
   const totNum = gdata.length;
-  // 1. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
+  // 3. 현재 페이지 번호 : 가장중요한 리스트 바인딩의 핵심!
   const [pgNum, setPgNum] = useState(1);
+  // 4. 더보기 블록단위수 : 한번에 보여주는 레코드 수 
+  const moreBlock = 5;
+  // 5. 더보기 블록개수 : 참조변수로 숫자 유지하기
+  const [moreNum,setMoreNum] = useState(1);
+  // 6. 더보기 블록개수 한계수 계산
+  const moreLimit =
+    Math.floor(totNum / moreBlock) + (totNum % moreBlock !== 0 ? 1 : 0);
 
   // 리스트 만들기 함수
   const makeList = () => {
@@ -148,6 +155,61 @@ export function GList() {
         );
       }
     } ////////////// else if ////////////////
+
+    // 3. More List ///////////////
+    else if (myCon.gMode === "M") {
+
+      // 데이터 초기화하기 /////////////////
+      // moreNum이 1이 아니면 초기화!
+      // 단, 모드를 변경하는 상단메뉴일때만 적용해야함!
+      // 컨텍스트 API의 gInit 참조변수가 true일때만 적용함!
+      if(moreNum !== 1 && myCon.gInit.current){
+        setMoreNum(1);
+        
+      }
+
+      // 리턴할 배열을 새로 할당함
+      retVal = []; //배열형 할당!!
+
+    // 한계값 : 더보기 블록단위수*더보기 블록개수
+    let limitNum = moreBlock * moreNum;
+    // 한계값이 전체 레코드 수(totNum)보다 커지면 
+    // 전체 레코드 수(totNum)로 고정 
+    if(limitNum>totNum) limitNum = totNum;
+
+      for (let i = 0; i < limitNum; i++) {
+        // 마지막 페이지 한계수체크
+        if (i >= totNum) break;
+        // 순회하며 데이터 넣기
+        retVal.push(
+          <div key={i}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                showDetail(gdata[i].ginfo[0], gdata[i].cat);
+              }}
+            >
+              [{i + 1}]
+              <img
+                src={
+                  "./images/goods/" +
+                  gdata[i].cat +
+                  "/" +
+                  gdata[i].ginfo[0] +
+                  ".png"
+                }
+                alt="dress"
+              />
+              <aside>
+                <h2>{gdata[i].ginfo[1]}</h2>
+                <h3>{addComma(gdata[i].ginfo[3])}원</h3>
+              </aside>
+            </a>
+          </div>
+        );
+      }
+    }
     // 분기문 결과 리턴하기
     return retVal;
   }; //////// makeList ////////
@@ -202,6 +264,9 @@ export function GList() {
     return pgCode;
   }; /////////// pagingLink 함수 ////////
 
+
+
+  
   /************************************* 
     함수명 : chgList
     기능 : 페이지 링크 클릭시 리스트 변경
@@ -389,9 +454,21 @@ export function GList() {
         myCon.gMode === "M" && (
           <section>
             <div className="grid">{makeList()}</div>
+            {
+            /* 더보기 블록개수가 한계수가 아닐때만 버튼출력 */
+            
+            moreNum !== moreLimit && (
+
             <div id="more">
-              <button class="more">MORE</button>
+              <button class="more" onClick={()=>{
+                // 부모 클릭 상태변수값 false변경
+                myCon.gInit.current = false;
+                let temp = moreNum;
+                setMoreNum(++temp);
+              }}>MORE</button>
             </div>
+            )
+            }
           </section>
         )
       }
