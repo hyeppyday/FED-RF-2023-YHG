@@ -17,4 +17,59 @@ export const fsData = {
         ialt:["여자스타일","공유스타일"],
         tit:[["MEN'S","STYLE"],["WOMEN'S","STYLE"]]
     },
+    // 서브 정보 구성하기 ////////////
+    submen1:{
+        isrc: "./images/sub/men/03.disc.png",
+        ialt: "공유가 해변에있다!",
+        tit: ["MEN'S", "BEACH STYLE"],
+    },
+    // 서브페이지용 데이터는 구성이 다름
+  sub: {
+    men: [
+      {
+        isrc: "./images/sub/men/03.disc.png",
+        ialt: "공유가 해변에있다!",
+        tit: ["MEN'S", "BEACH STYLE"],
+      },
+      {
+        isrc: ["./images/sub/men/04.disc.png", "./images/sub/men/05.disc.png"],
+        ialt: ["스포츠 스타일", "라이프 스타일"],
+        tit: [
+          ["MEN'S", "SPORT STYLE"],
+          ["MEN'S", "LIFE STYLE"],
+        ],
+      },
+    ],
+    women: [
+      {
+        isrc: "./images/women01.png",
+        ialt: "여자",
+        tit: ["WOMEN'S", "ESSENTIALS"],
+      },
+      {
+        isrc: ["./images/style02.png", "./images/style03.png"],
+        ialt: ["여자스타일", "공유스타일"],
+        tit: [
+          ["MEN'S", "STYLE"],
+          ["WOMEN'S", "STYLE"],
+        ],
+      },
+    ],
+
+    style: [
+      {
+        isrc: "./images/women01.png",
+        ialt: "여자",
+        tit: ["WOMEN'S", "ESSENTIALS"],
+      },
+      {
+        isrc: ["./images/style02.png", "./images/style03.png"],
+        ialt: ["여자스타일", "공유스타일"],
+        tit: [
+          ["MEN'S", "STYLE"],
+          ["WOMEN'S", "STYLE"],
+        ],
+      },
+    ],
+  },
 }; //////////// fsData ////////////

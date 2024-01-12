@@ -42,7 +42,7 @@ export function FashionIntro(props) {
         <li className="txtc">
           {props.cat != "style" && (
             <h2>
-              <a href="#" onClick={()=>myCon.chgPgName(props.cat)}>
+              <a href="#" onClick={() => myCon.chgPgName(props.cat)}>
                 {selData.tit[0]} <br />
                 {selData.tit[1]}
               </a>
@@ -51,13 +51,13 @@ export function FashionIntro(props) {
           {/* 스타일 패션에서만 나오는 이미지 */}
           {props.cat == "style" && (
             <>
-              <h2 className="tm" onClick={()=>myCon.chgPgName(props.cat)}>
+              <h2 className="tm" onClick={() => myCon.chgPgName(props.cat)}>
                 <a href="#">
                   {selData.tit[0][0]} <br />
                   {selData.tit[0][1]}
                 </a>
               </h2>
-              <h2 className="tw" onClick={()=>myCon.chgPgName(props.cat)}>
+              <h2 className="tw" onClick={() => myCon.chgPgName(props.cat)}>
                 <a href="#">
                   {selData.tit[1][0]} <br />
                   {selData.tit[1][1]}
@@ -70,6 +70,22 @@ export function FashionIntro(props) {
           <li className="imgc">
             <img src={selData.isrc[1]} alt={selData.ialt[1]} />
           </li>
+        )}
+        {/* 서브 페이지용 구성 */}
+        {props.cat == "submen1" && (
+          <>
+            {/* 글자박스 */}
+            <h2>
+              <a href="#">
+                {selData.tit[0]} <br />
+                {selData.tit[1]}
+              </a>
+            </h2>
+            {/* 이미지 박스 */}
+            <li className="imgc">
+              <img src={selData.isrc} alt={selData.ialt} />
+            </li>
+          </>
         )}
       </ul>
     </div>

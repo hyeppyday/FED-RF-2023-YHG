@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { Banner } from "../modules/banner";
 
 import $ from "jquery";
@@ -12,6 +12,12 @@ import { FashionIntro } from "../modules/FashionIntro";
 
 // 메인페이지 컨텐츠 컴포넌트
 export function MainCont() {
+
+  // 처음 로딩시 스크롤 상단이동 ////////
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  },[]);
+  
   // 메인 페이지 일때만 자동스크롤 기능 적용함
   useEffect(() => {
     // 랜더링 후 한번만 적용!
