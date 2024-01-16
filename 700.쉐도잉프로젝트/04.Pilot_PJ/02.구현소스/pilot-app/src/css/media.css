@@ -171,6 +171,17 @@
     #info address {
         transform: none;
     }
+
+    /* 추가 미디어쿼리 */
+    /* 사이드 메뉴 없애기 */
+    .indic{
+        display: none;
+    }
+    /* 하단 스타일 크기조정 */
+    #style{
+        aspect-ratio: 2/1.5;
+    }
+
 }
 
 /* 미디어쿼리 800px이하  */

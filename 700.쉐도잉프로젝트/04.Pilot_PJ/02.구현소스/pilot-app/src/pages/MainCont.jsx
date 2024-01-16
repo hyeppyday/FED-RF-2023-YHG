@@ -5,19 +5,18 @@ import $ from "jquery";
 
 // 자동스크롤 JS 불러오기
 // import { autoScroll } from "../func/jquery-autoScroll";
-import { evtFn, wheelFn , initSet, zeroPno } from "../func/jquery-autoScroll";
+import { evtFn, wheelFn, initSet, zeroPno } from "../func/jquery-autoScroll";
 // 드래그 배너 JS 불러오기
 import { dragBanner } from "../func/drag_banner";
 import { FashionIntro } from "../modules/FashionIntro";
 
 // 메인페이지 컨텐츠 컴포넌트
 export function MainCont() {
-
   // 처음 로딩시 스크롤 상단이동 ////////
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  },[]);
-  
+  }, []);
+
   // 메인 페이지 일때만 자동스크롤 기능 적용함
   useEffect(() => {
     // 랜더링 후 한번만 적용!
@@ -28,21 +27,23 @@ export function MainCont() {
     // 반드시 그 이벤트 설정은 JS파일 내부에서 하지 말고
     // 리액트 함수에서 JS함수를 호출하는 형태로 해야
     // 해제 메서드인 removeEventListener가 유효함
-    if($(window).width()>800){
+    if ($(window).width() > 800) {
+      // 스크롤바 없애기
+      $("html,body").css({ overflow: "hidden" });
+
       // 자동스크롤 이벤트 설정하기
       window.addEventListener("wheel", wheelFn);
       // autoScroll();
-  
+
       // 메뉴 + 인디케이터 이벤트 설정함수 호출
       evtFn();
-  
+
       // 초기화 함수호출 : 조건 (모바일 아닐때)
       // 모바일은 가로크기 800px 이하
       initSet();
-  
+
       // 페이지 번호 초기화 호출
       zeroPno();
-
     }
 
     // 드래그 배너 호출
@@ -57,8 +58,8 @@ export function MainCont() {
       // 메인 페이지에만 사용되는 로고 클릭시 상단이동 이벤트 해제
       // 제이쿼리로 특정요소에 걸어준경우 해제는 off(이벤트명)
       $("#logo a").off("click");
-      $(".gnb li").off("click").removeClass('on');
-      $(document).off('keydown');
+      $(".gnb li").off("click").removeClass("on");
+      $(document).off("keydown");
     };
   }, []); ////////////// useEffect /////////////////
 
@@ -75,17 +76,17 @@ export function MainCont() {
 
       {/* 2. 남성패션 페이지 */}
       <section className="page">
-        <FashionIntro cat="men" subcat="etc"/>
+        <FashionIntro cat="men" subcat="etc" />
       </section>
 
       {/* 3. 여성패션 페이지 */}
       <section className="page">
-        <FashionIntro cat="women" subcat="etc"/>
+        <FashionIntro cat="women" subcat="etc" />
       </section>
 
       {/* 4. 스타일패션 페이지 */}
       <section className="page">
-        <FashionIntro cat="style" subcat="etc"/>
+        <FashionIntro cat="style" subcat="etc" />
       </section>
 
       {/* 메인에만 나오는 사이드 인디케이터 */}

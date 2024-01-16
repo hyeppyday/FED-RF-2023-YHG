@@ -42,14 +42,14 @@ function App() {
   // 카트 사용여부 초기값은 로컬스 'cart'가 있으면 1
   // 없으면 0 으로 셋팅해준다!
 
-  let stsVal = 0;
+  let stsVal = false;
   let transVal = null;
   // 카트셋팅에 필요한 데이터를 로컬스에 따라 셋팅함!
   if (localStorage.getItem("cart")) {
     // 로컬스가 있으므로 객체화하기
     transVal = JSON.parse(localStorage.getItem("cart"));
     // 로컬스 객체화 데이터 개수가 0이 아닐때만 상태값 1로 노출하기
-    if (transVal.length !== 0) stsVal = 1;
+    if (transVal.length !== 0) stsVal = true;
   }
   console.log("로컬스있니?", stsVal);
 
