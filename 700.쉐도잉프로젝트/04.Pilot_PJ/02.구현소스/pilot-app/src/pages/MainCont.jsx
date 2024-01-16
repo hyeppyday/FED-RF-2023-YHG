@@ -28,19 +28,22 @@ export function MainCont() {
     // 반드시 그 이벤트 설정은 JS파일 내부에서 하지 말고
     // 리액트 함수에서 JS함수를 호출하는 형태로 해야
     // 해제 메서드인 removeEventListener가 유효함
+    if($(window).width()>800){
+      // 자동스크롤 이벤트 설정하기
+      window.addEventListener("wheel", wheelFn);
+      // autoScroll();
+  
+      // 메뉴 + 인디케이터 이벤트 설정함수 호출
+      evtFn();
+  
+      // 초기화 함수호출 : 조건 (모바일 아닐때)
+      // 모바일은 가로크기 800px 이하
+      initSet();
+  
+      // 페이지 번호 초기화 호출
+      zeroPno();
 
-    // 자동스크롤 이벤트 설정하기
-    window.addEventListener("wheel", wheelFn);
-    // autoScroll();
-
-    // 메뉴 + 인디케이터 이벤트 설정함수 호출
-    evtFn();
-
-    // 최초호출
-    initSet();
-
-    // 페이지 번호 초기화 호출
-    zeroPno();
+    }
 
     // 드래그 배너 호출
     dragBanner();
