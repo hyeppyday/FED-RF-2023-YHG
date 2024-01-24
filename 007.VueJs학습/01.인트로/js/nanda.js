@@ -67,7 +67,11 @@ const vm = new Vue({
     // 이미지 태그를 만들어서 리턴함
     makeimg(val) {
       // val - 이미지 경로명
-      return `<img src="./images/${val}" alt="item"/>`;
+      // 오버시 이미지까지 2개의 이미지를 리턴함!
+      return `
+      <img src="./images/fashion1/${val}.jpg" alt="item"/>
+      <img src="./images/fashion2/${val}.png" alt="item"/>
+      `;
     },
     //정규식함수(숫자 세자리마다 콤마해주는 기능)
     addCommas(x) {
@@ -93,49 +97,55 @@ const vm = new Vue({
       // 2-2. 다양한 가격을 위한 4~20 사이 난수곱 만들기
       let rdm2 = Math.ceil(Math.random() * 17) + 3;
 
-    //   console.log("랜덤1:", rdm1, "랜덤2:", rdm2);
+      //   console.log("랜덤1:", rdm1, "랜덤2:", rdm2);
 
       // 2-3. 뷰인스턴스의 itemData 배열값 넣기
       // this키워드로 접근한다! this.itemData
       this.itemData.push(
-        new GetList(i, goods[rdm1]+i, `fashion1/nanda_${i}.jpg`, 20000 * rdm2)
+        new GetList(i, goods[rdm1] + i, `nanda_${i}`, 20000 * rdm2)
         // 일련번호, 상품명, 상품이미지, 상품가격 순
       );
     } // for ///////////
-    console.log(this.itemData)
+    console.log(this.itemData);
   }, // created
   // [ 뷰 랜더링 완료 단계 : mounted ]
   // -> JS, 제이쿼리 등 DOM에 그려진 후 코딩해야하는 것을
   // 이 파트에 연결 시킨다!
-  mounted:function(){
+  mounted: function () {
     // 랜더링 후 자동실행구역
     // 1. 제목 숨겼다 보이기
-    $('.tit').hide().delay(1000).slideDown(300);
+    $(".tit").hide().delay(1000).slideDown(300);
     // 2. 로고 왼쪽에서 날아오기
-    $('.logo')
-    .css({
-        position:'relative',
-        opacity:0,
-        left:'-100%',
-    })
-    .delay(2000)
-    .animate({
-        opacity:1,
-        left:'0',
-    },800,'easeInOutQuint',()=>{
-        // 등장 후 콜백함수로 스크롤 이동!
+    $(".logo")
+      .css({
+        position: "relative",
+        opacity: 0,
+        left: "-100%",
+      })
+      .delay(2000)
+      .animate(
+        {
+          opacity: 1,
+          left: "0",
+        },
+        800,
+        "easeInOutQuint",
+        () => {
+          // 등장 후 콜백함수로 스크롤 이동!
 
-        // 배너선택
-        const ban = $('.banner');
-        console.log(ban.height());
-    
-        // 3. 스크롤 이동하기
-        $('html,body')
-        .animate({
-            scrollTop:(ban.offset().top+ban.height()+120)+'px'
-        },600,'easeInOutExpo');
-    })
+          // 배너선택
+          const ban = $(".banner");
+          console.log(ban.height());
 
-   
+          // 3. 스크롤 이동하기
+          $("html,body").animate(
+            {
+              scrollTop: ban.offset().top + ban.height() + 120 + "px",
+            },
+            600,
+            "easeInOutExpo"
+          );
+        }
+      );
   }, // mounted
 }); // #vue-app
